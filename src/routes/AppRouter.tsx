@@ -6,6 +6,7 @@ import { PublicRoute } from '../components/PublicRoute';
 import { Login } from '../pages/Login';
 import { Register } from '../pages/Register';
 import { Tasks } from '../pages/Tasks';
+import { TestSummary } from '../pages/TestSummary';
 
 export const AppRouter: React.FC = () => {
   return (
@@ -18,6 +19,15 @@ export const AppRouter: React.FC = () => {
             element={
               <ProtectedRoute>
                 <Tasks />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/test-summary"
+            element={
+              <ProtectedRoute>
+                <TestSummary />
               </ProtectedRoute>
             }
           />
