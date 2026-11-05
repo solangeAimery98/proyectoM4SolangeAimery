@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { Navbar } from '../components/Navbar';
 import { ProtectedRoute } from '../components/ProtectedRoute';
+import { PublicRoute } from '../components/PublicRoute';
 import { Login } from '../pages/Login';
 import { Register } from '../pages/Register';
 import { Tasks } from '../pages/Tasks';
@@ -20,12 +21,28 @@ export const AppRouter: React.FC = () => {
               </ProtectedRoute>
             }
           />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
+
+          <Route
+            path="/login"
+            element={
+              <PublicRoute>
+                <Login />
+              </PublicRoute>
+            }
+          />
+
+          <Route
+            path="/register"
+            element={
+              <PublicRoute>
+                <Register />
+              </PublicRoute>
+            }
+          />
+
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </main>
     </BrowserRouter>
   );
 };
-

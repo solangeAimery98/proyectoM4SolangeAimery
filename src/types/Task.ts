@@ -1,9 +1,12 @@
+import { Timestamp } from 'firebase/firestore';
+
 export interface Task {
-  id?: string;
+  id: string;
   title: string;
-  description?: string;
+  description: string;
   completed: boolean;
-  createdAt?: Date | string | number;
-  userId?: string;
+  createdAt: Timestamp;
+  userId: string;
 }
 
+export type NewTask = Omit<Task, 'id' | 'createdAt'>;

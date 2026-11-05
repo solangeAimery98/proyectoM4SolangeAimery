@@ -7,10 +7,7 @@ interface AuthContextType {
   loading: boolean;
 }
 
-const AuthContext = createContext<AuthContextType>({
-  currentUser: null,
-  loading: true,
-});
+const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [currentUser, setCurrentUser] = useState<FirebaseUser | null>(null);
@@ -21,15 +18,24 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       setCurrentUser(user);
       setLoading(false);
     });
+
     return unsubscribe;
   }, []);
 
   return (
     <AuthContext.Provider value={{ currentUser, loading }}>
-      {!loading && children}
+      {children}
     </AuthContext.Provider>
   );
 };
 
-export const useAuth = () => useContext(AuthContext);
+export const useAuth = () => {
+  const context = useContext(AuthContext);
+
+  if (context === undefined) {
+    throw new Error('useAuth debe utilizarse dentro de un AuthProvider');
+  }
+
+  return context;
+};
 
