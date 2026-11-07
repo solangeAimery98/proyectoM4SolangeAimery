@@ -21,10 +21,14 @@ export const TodoItem: React.FC<TodoItemProps> = ({
   const handleSave = (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!editedTitle.trim()) return;
+    const trimmedTitle = editedTitle.trim();
+    const trimmedDescription = editedDescription.trim();
+
+    if (!trimmedTitle || trimmedTitle.length > 100) return;
+    if (trimmedDescription.length > 500) return;
     if (!task.id) return;
 
-    onEdit(task.id, editedTitle.trim(), editedDescription.trim());
+    onEdit(task.id, trimmedTitle, trimmedDescription);
     setIsEditing(false);
   };
 
@@ -42,6 +46,7 @@ export const TodoItem: React.FC<TodoItemProps> = ({
             type="text"
             value={editedTitle}
             onChange={(e) => setEditedTitle(e.target.value)}
+            maxLength={100}
             required
             aria-label="Título de la tarea"
           />
@@ -50,6 +55,7 @@ export const TodoItem: React.FC<TodoItemProps> = ({
             type="text"
             value={editedDescription}
             onChange={(e) => setEditedDescription(e.target.value)}
+            maxLength={500}
             aria-label="Descripción de la tarea"
           />
 
