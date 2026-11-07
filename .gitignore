@@ -34,3 +34,9 @@ dist-ssr/
 !.env.example
 .vercel
 .env*
+
+# Test coverage reports
+coverage/
+
+# Security audit reports
+audit-report.json
