@@ -27,6 +27,7 @@
     "@types/react-dom": "^18.2.19",
     "@vercel/node": "^29.0.1",
     "@vitejs/plugin-react": "^4.2.1",
+    "@vitest/coverage-v8": "^2.1.9",
     "jsdom": "^31.0.0",
     "typescript": "^5.2.2",
     "vercel": "^65.11.0",

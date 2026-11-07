@@ -1,0 +1,902 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1794018312755" clover="3.2.0">
+  <project timestamp="1794018312756" name="All files">
+    <metrics statements="788" coveredstatements="756" conditionals="185" coveredconditionals="176" methods="53" coveredmethods="48" elements="1026" coveredelements="980" complexity="0" loc="788" ncloc="788" packages="11" files="25" classes="25"/>
+    <package name="api">
+      <metrics statements="152" coveredstatements="152" conditionals="35" coveredconditionals="33" methods="2" coveredmethods="2"/>
+      <file name="send-summary.ts" path="/Users/solangeaimery/Desktop/proyectom4/task-manager/api/send-summary.ts">
+        <metrics statements="152" coveredstatements="152" conditionals="35" coveredconditionals="33" methods="2" coveredmethods="2"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="11" count="17" type="cond" truecount="1" falsecount="0"/>
+        <line num="12" count="17" type="cond" truecount="1" falsecount="0"/>
+        <line num="13" count="8" type="stmt"/>
+        <line num="14" count="8" type="stmt"/>
+        <line num="15" count="8" type="stmt"/>
+        <line num="16" count="8" type="stmt"/>
+        <line num="17" count="8" type="stmt"/>
+        <line num="18" count="8" type="stmt"/>
+        <line num="19" count="8" type="stmt"/>
+        <line num="21" count="8" type="stmt"/>
+        <line num="22" count="17" type="stmt"/>
+        <line num="23" count="17" type="stmt"/>
+        <line num="25" count="12" type="cond" truecount="1" falsecount="0"/>
+        <line num="26" count="12" type="stmt"/>
+        <line num="27" count="12" type="stmt"/>
+        <line num="28" count="12" type="stmt"/>
+        <line num="30" count="12" type="cond" truecount="1" falsecount="0"/>
+        <line num="31" count="1" type="stmt"/>
+        <line num="32" count="1" type="stmt"/>
+        <line num="33" count="1" type="stmt"/>
+        <line num="34" count="1" type="stmt"/>
+        <line num="35" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="38" count="11" type="stmt"/>
+        <line num="40" count="12" type="cond" truecount="1" falsecount="0"/>
+        <line num="41" count="1" type="stmt"/>
+        <line num="43" count="1" type="stmt"/>
+        <line num="44" count="1" type="stmt"/>
+        <line num="45" count="1" type="stmt"/>
+        <line num="46" count="1" type="stmt"/>
+        <line num="47" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="50" count="10" type="stmt"/>
+        <line num="52" count="12" type="cond" truecount="2" falsecount="0"/>
+        <line num="53" count="1" type="stmt"/>
+        <line num="54" count="1" type="stmt"/>
+        <line num="55" count="1" type="stmt"/>
+        <line num="56" count="1" type="stmt"/>
+        <line num="57" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="59" count="9" type="stmt"/>
+        <line num="61" count="12" type="cond" truecount="1" falsecount="0"/>
+        <line num="62" count="1" type="stmt"/>
+        <line num="63" count="1" type="stmt"/>
+        <line num="64" count="1" type="stmt"/>
+        <line num="65" count="1" type="stmt"/>
+        <line num="66" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="69" count="8" type="stmt"/>
+        <line num="71" count="8" type="stmt"/>
+        <line num="72" count="8" type="cond" truecount="1" falsecount="0"/>
+        <line num="73" count="12" type="cond" truecount="1" falsecount="0"/>
+        <line num="74" count="1" type="stmt"/>
+        <line num="76" count="1" type="stmt"/>
+        <line num="77" count="1" type="stmt"/>
+        <line num="78" count="1" type="stmt"/>
+        <line num="79" count="1" type="stmt"/>
+        <line num="80" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="82" count="7" type="stmt"/>
+        <line num="83" count="7" type="stmt"/>
+        <line num="85" count="12" type="cond" truecount="1" falsecount="0"/>
+        <line num="86" count="1" type="stmt"/>
+        <line num="87" count="1" type="stmt"/>
+        <line num="88" count="1" type="stmt"/>
+        <line num="89" count="1" type="stmt"/>
+        <line num="90" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="93" count="6" type="stmt"/>
+        <line num="94" count="6" type="stmt"/>
+        <line num="95" count="6" type="stmt"/>
+        <line num="96" count="6" type="stmt"/>
+        <line num="97" count="6" type="cond" truecount="1" falsecount="0"/>
+        <line num="99" count="5" type="cond" truecount="1" falsecount="0"/>
+        <line num="101" count="5" type="cond" truecount="1" falsecount="0"/>
+        <line num="102" count="5" type="cond" truecount="1" falsecount="0"/>
+        <line num="105" count="5" type="cond" truecount="1" falsecount="0"/>
+        <line num="106" count="4" type="stmt"/>
+        <line num="107" count="4" type="cond" truecount="1" falsecount="0"/>
+        <line num="108" count="10" type="cond" truecount="1" falsecount="0"/>
+        <line num="109" count="3" type="cond" truecount="1" falsecount="0"/>
+        <line num="110" count="7" type="stmt"/>
+        <line num="112" count="10" type="stmt"/>
+        <line num="113" count="10" type="cond" truecount="0" falsecount="1"/>
+        <line num="114" count="10" type="stmt"/>
+        <line num="116" count="10" type="cond" truecount="1" falsecount="0"/>
+        <line num="117" count="7" type="cond" truecount="1" falsecount="0"/>
+        <line num="118" count="3" type="stmt"/>
+        <line num="120" count="10" type="stmt"/>
+        <line num="122" count="10" type="stmt"/>
+        <line num="123" count="10" type="stmt"/>
+        <line num="124" count="10" type="stmt"/>
+        <line num="127" count="4" type="stmt"/>
+        <line num="128" count="4" type="cond" truecount="1" falsecount="0"/>
+        <line num="129" count="1" type="stmt"/>
+        <line num="131" count="12" type="stmt"/>
+        <line num="139" count="12" type="stmt"/>
+        <line num="140" count="12" type="stmt"/>
+        <line num="141" count="12" type="stmt"/>
+        <line num="146" count="12" type="stmt"/>
+        <line num="151" count="12" type="stmt"/>
+        <line num="154" count="12" type="stmt"/>
+        <line num="155" count="12" type="stmt"/>
+        <line num="156" count="12" type="stmt"/>
+        <line num="160" count="12" type="stmt"/>
+        <line num="161" count="12" type="stmt"/>
+        <line num="162" count="12" type="cond" truecount="1" falsecount="0"/>
+        <line num="163" count="10" type="cond" truecount="2" falsecount="1"/>
+        <line num="164" count="10" type="stmt"/>
+        <line num="165" count="12" type="stmt"/>
+        <line num="166" count="12" type="stmt"/>
+        <line num="172" count="12" type="stmt"/>
+        <line num="173" count="12" type="stmt"/>
+        <line num="175" count="12" type="stmt"/>
+        <line num="176" count="12" type="stmt"/>
+        <line num="177" count="12" type="stmt"/>
+        <line num="179" count="12" type="stmt"/>
+        <line num="180" count="12" type="stmt"/>
+        <line num="181" count="12" type="stmt"/>
+        <line num="182" count="12" type="stmt"/>
+        <line num="183" count="12" type="stmt"/>
+        <line num="185" count="12" type="stmt"/>
+        <line num="186" count="12" type="stmt"/>
+        <line num="187" count="12" type="stmt"/>
+        <line num="188" count="12" type="stmt"/>
+        <line num="189" count="12" type="stmt"/>
+        <line num="191" count="12" type="stmt"/>
+        <line num="192" count="12" type="stmt"/>
+        <line num="193" count="12" type="stmt"/>
+        <line num="194" count="12" type="stmt"/>
+        <line num="195" count="12" type="stmt"/>
+        <line num="196" count="12" type="stmt"/>
+        <line num="197" count="12" type="stmt"/>
+        <line num="199" count="12" type="cond" truecount="1" falsecount="0"/>
+        <line num="202" count="4" type="stmt"/>
+        <line num="203" count="4" type="stmt"/>
+        <line num="204" count="4" type="stmt"/>
+        <line num="205" count="4" type="stmt"/>
+        <line num="206" count="4" type="stmt"/>
+        <line num="207" count="4" type="stmt"/>
+        <line num="208" count="4" type="stmt"/>
+        <line num="209" count="4" type="stmt"/>
+        <line num="210" count="4" type="stmt"/>
+        <line num="211" count="4" type="stmt"/>
+        <line num="212" count="4" type="stmt"/>
+        <line num="213" count="4" type="stmt"/>
+        <line num="214" count="12" type="cond" truecount="1" falsecount="0"/>
+        <line num="215" count="2" type="stmt"/>
+        <line num="217" count="2" type="stmt"/>
+        <line num="218" count="2" type="stmt"/>
+        <line num="219" count="2" type="stmt"/>
+        <line num="220" count="2" type="stmt"/>
+        <line num="221" count="2" type="stmt"/>
+        <line num="222" count="12" type="stmt"/>
+      </file>
+    </package>
+    <package name="api.lib">
+      <metrics statements="19" coveredstatements="19" conditionals="6" coveredconditionals="6" methods="0" coveredmethods="0"/>
+      <file name="firebaseAdmin.ts" path="/Users/solangeaimery/Desktop/proyectom4/task-manager/api/lib/firebaseAdmin.ts">
+        <metrics statements="19" coveredstatements="19" conditionals="6" coveredconditionals="6" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="12" count="1" type="stmt"/>
+        <line num="13" count="1" type="stmt"/>
+        <line num="14" count="1" type="stmt"/>
+        <line num="16" count="1" type="cond" truecount="3" falsecount="0"/>
+        <line num="17" count="1" type="stmt"/>
+        <line num="18" count="5" type="cond" truecount="1" falsecount="0"/>
+        <line num="21" count="5" type="stmt"/>
+        <line num="22" count="5" type="cond" truecount="1" falsecount="0"/>
+        <line num="23" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="24" count="4" type="stmt"/>
+        <line num="25" count="4" type="stmt"/>
+        <line num="26" count="4" type="stmt"/>
+        <line num="27" count="4" type="stmt"/>
+        <line num="28" count="4" type="stmt"/>
+        <line num="29" count="4" type="stmt"/>
+        <line num="30" count="4" type="stmt"/>
+        <line num="33" count="1" type="stmt"/>
+        <line num="34" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="src">
+      <metrics statements="17" coveredstatements="0" conditionals="2" coveredconditionals="0" methods="2" coveredmethods="0"/>
+      <file name="App.tsx" path="/Users/solangeaimery/Desktop/proyectom4/task-manager/src/App.tsx">
+        <metrics statements="8" coveredstatements="0" conditionals="1" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <line num="1" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="5" count="0" type="stmt"/>
+        <line num="6" count="0" type="stmt"/>
+        <line num="7" count="0" type="stmt"/>
+        <line num="8" count="0" type="stmt"/>
+        <line num="9" count="0" type="stmt"/>
+        <line num="11" count="0" type="stmt"/>
+        <line num="13" count="0" type="stmt"/>
+      </file>
+      <file name="main.tsx" path="/Users/solangeaimery/Desktop/proyectom4/task-manager/src/main.tsx">
+        <metrics statements="9" coveredstatements="0" conditionals="1" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <line num="1" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="2" count="0" type="stmt"/>
+        <line num="3" count="0" type="stmt"/>
+        <line num="4" count="0" type="stmt"/>
+        <line num="6" count="0" type="stmt"/>
+        <line num="7" count="0" type="stmt"/>
+        <line num="8" count="0" type="stmt"/>
+        <line num="9" count="0" type="stmt"/>
+        <line num="10" count="0" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.components">
+      <metrics statements="182" coveredstatements="182" conditionals="45" coveredconditionals="44" methods="17" coveredmethods="17"/>
+      <file name="Navbar.tsx" path="/Users/solangeaimery/Desktop/proyectom4/task-manager/src/components/Navbar.tsx">
+        <metrics statements="37" coveredstatements="37" conditionals="8" coveredconditionals="8" methods="2" coveredmethods="2"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="6" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="7" count="8" type="stmt"/>
+        <line num="8" count="8" type="stmt"/>
+        <line num="9" count="8" type="stmt"/>
+        <line num="11" count="8" type="cond" truecount="1" falsecount="0"/>
+        <line num="12" count="2" type="stmt"/>
+        <line num="14" count="2" type="stmt"/>
+        <line num="15" count="2" type="cond" truecount="1" falsecount="0"/>
+        <line num="16" count="1" type="stmt"/>
+        <line num="17" count="1" type="stmt"/>
+        <line num="18" count="1" type="stmt"/>
+        <line num="19" count="1" type="stmt"/>
+        <line num="20" count="1" type="stmt"/>
+        <line num="21" count="2" type="stmt"/>
+        <line num="23" count="8" type="stmt"/>
+        <line num="24" count="8" type="stmt"/>
+        <line num="25" count="8" type="stmt"/>
+        <line num="26" count="8" type="stmt"/>
+        <line num="27" count="8" type="stmt"/>
+        <line num="29" count="8" type="stmt"/>
+        <line num="30" count="8" type="cond" truecount="1" falsecount="0"/>
+        <line num="31" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="32" count="7" type="cond" truecount="1" falsecount="0"/>
+        <line num="33" count="6" type="stmt"/>
+        <line num="34" count="6" type="stmt"/>
+        <line num="35" count="6" type="stmt"/>
+        <line num="37" count="6" type="stmt"/>
+        <line num="38" count="6" type="cond" truecount="1" falsecount="0"/>
+        <line num="40" count="1" type="stmt"/>
+        <line num="41" count="1" type="stmt"/>
+        <line num="42" count="1" type="stmt"/>
+        <line num="43" count="1" type="stmt"/>
+        <line num="45" count="8" type="stmt"/>
+        <line num="47" count="8" type="cond" truecount="1" falsecount="0"/>
+        <line num="48" count="8" type="stmt"/>
+        <line num="50" count="8" type="stmt"/>
+      </file>
+      <file name="ProtectedRoute.tsx" path="/Users/solangeaimery/Desktop/proyectom4/task-manager/src/components/ProtectedRoute.tsx">
+        <metrics statements="11" coveredstatements="11" conditionals="5" coveredconditionals="5" methods="1" coveredmethods="1"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="9" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="10" count="9" type="stmt"/>
+        <line num="12" count="9" type="cond" truecount="1" falsecount="0"/>
+        <line num="13" count="2" type="stmt"/>
+        <line num="14" count="2" type="cond" truecount="1" falsecount="0"/>
+        <line num="16" count="7" type="cond" truecount="1" falsecount="0"/>
+        <line num="17" count="3" type="stmt"/>
+        <line num="18" count="3" type="cond" truecount="1" falsecount="0"/>
+        <line num="20" count="4" type="stmt"/>
+        <line num="21" count="4" type="stmt"/>
+      </file>
+      <file name="PublicRoute.tsx" path="/Users/solangeaimery/Desktop/proyectom4/task-manager/src/components/PublicRoute.tsx">
+        <metrics statements="11" coveredstatements="11" conditionals="6" coveredconditionals="6" methods="1" coveredmethods="1"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="9" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="10" count="8" type="stmt"/>
+        <line num="12" count="8" type="cond" truecount="1" falsecount="0"/>
+        <line num="13" count="1" type="stmt"/>
+        <line num="14" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="16" count="8" type="cond" truecount="2" falsecount="0"/>
+        <line num="17" count="3" type="stmt"/>
+        <line num="18" count="3" type="cond" truecount="1" falsecount="0"/>
+        <line num="20" count="4" type="stmt"/>
+        <line num="21" count="4" type="stmt"/>
+      </file>
+      <file name="TodoForm.tsx" path="/Users/solangeaimery/Desktop/proyectom4/task-manager/src/components/TodoForm.tsx">
+        <metrics statements="29" coveredstatements="29" conditionals="6" coveredconditionals="6" methods="4" coveredmethods="4"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="7" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="8" count="188" type="stmt"/>
+        <line num="9" count="188" type="stmt"/>
+        <line num="11" count="188" type="cond" truecount="1" falsecount="0"/>
+        <line num="12" count="5" type="stmt"/>
+        <line num="13" count="5" type="cond" truecount="2" falsecount="0"/>
+        <line num="14" count="4" type="stmt"/>
+        <line num="15" count="4" type="stmt"/>
+        <line num="16" count="4" type="stmt"/>
+        <line num="17" count="5" type="stmt"/>
+        <line num="19" count="188" type="stmt"/>
+        <line num="20" count="188" type="stmt"/>
+        <line num="21" count="188" type="stmt"/>
+        <line num="22" count="188" type="stmt"/>
+        <line num="23" count="188" type="stmt"/>
+        <line num="24" count="188" type="stmt"/>
+        <line num="25" count="188" type="cond" truecount="1" falsecount="0"/>
+        <line num="26" count="188" type="stmt"/>
+        <line num="27" count="188" type="stmt"/>
+        <line num="28" count="188" type="stmt"/>
+        <line num="29" count="188" type="stmt"/>
+        <line num="30" count="188" type="stmt"/>
+        <line num="31" count="188" type="stmt"/>
+        <line num="32" count="188" type="cond" truecount="1" falsecount="0"/>
+        <line num="33" count="188" type="stmt"/>
+        <line num="34" count="188" type="stmt"/>
+        <line num="35" count="188" type="stmt"/>
+        <line num="37" count="188" type="stmt"/>
+      </file>
+      <file name="TodoItem.tsx" path="/Users/solangeaimery/Desktop/proyectom4/task-manager/src/components/TodoItem.tsx">
+        <metrics statements="71" coveredstatements="71" conditionals="16" coveredconditionals="15" methods="8" coveredmethods="8"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="11" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="12" count="122" type="stmt"/>
+        <line num="13" count="122" type="stmt"/>
+        <line num="14" count="122" type="stmt"/>
+        <line num="15" count="122" type="stmt"/>
+        <line num="16" count="122" type="stmt"/>
+        <line num="17" count="122" type="stmt"/>
+        <line num="18" count="122" type="stmt"/>
+        <line num="19" count="122" type="stmt"/>
+        <line num="21" count="122" type="cond" truecount="1" falsecount="0"/>
+        <line num="22" count="3" type="stmt"/>
+        <line num="24" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="25" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="27" count="2" type="stmt"/>
+        <line num="28" count="2" type="stmt"/>
+        <line num="29" count="3" type="stmt"/>
+        <line num="31" count="122" type="cond" truecount="1" falsecount="0"/>
+        <line num="32" count="1" type="stmt"/>
+        <line num="33" count="1" type="stmt"/>
+        <line num="34" count="1" type="stmt"/>
+        <line num="35" count="1" type="stmt"/>
+        <line num="37" count="122" type="stmt"/>
+        <line num="38" count="122" type="cond" truecount="2" falsecount="0"/>
+        <line num="39" count="122" type="cond" truecount="1" falsecount="0"/>
+        <line num="40" count="97" type="stmt"/>
+        <line num="41" count="97" type="stmt"/>
+        <line num="42" count="97" type="stmt"/>
+        <line num="43" count="97" type="stmt"/>
+        <line num="44" count="97" type="cond" truecount="1" falsecount="0"/>
+        <line num="45" count="97" type="stmt"/>
+        <line num="46" count="97" type="stmt"/>
+        <line num="47" count="97" type="stmt"/>
+        <line num="49" count="97" type="stmt"/>
+        <line num="50" count="97" type="stmt"/>
+        <line num="51" count="97" type="stmt"/>
+        <line num="52" count="97" type="cond" truecount="1" falsecount="0"/>
+        <line num="53" count="97" type="stmt"/>
+        <line num="54" count="97" type="stmt"/>
+        <line num="56" count="97" type="stmt"/>
+        <line num="57" count="97" type="stmt"/>
+        <line num="59" count="97" type="stmt"/>
+        <line num="60" count="97" type="cond" truecount="1" falsecount="0"/>
+        <line num="62" count="25" type="stmt"/>
+        <line num="63" count="25" type="stmt"/>
+        <line num="64" count="25" type="stmt"/>
+        <line num="65" count="25" type="stmt"/>
+        <line num="66" count="25" type="stmt"/>
+        <line num="67" count="25" type="cond" truecount="1" falsecount="0"/>
+        <line num="68" count="25" type="stmt"/>
+        <line num="69" count="25" type="stmt"/>
+        <line num="70" count="25" type="stmt"/>
+        <line num="72" count="25" type="stmt"/>
+        <line num="73" count="25" type="stmt"/>
+        <line num="76" count="25" type="stmt"/>
+        <line num="77" count="25" type="stmt"/>
+        <line num="78" count="25" type="stmt"/>
+        <line num="79" count="25" type="cond" truecount="1" falsecount="0"/>
+        <line num="80" count="25" type="stmt"/>
+        <line num="81" count="25" type="stmt"/>
+        <line num="83" count="25" type="stmt"/>
+        <line num="85" count="25" type="stmt"/>
+        <line num="86" count="25" type="stmt"/>
+        <line num="87" count="25" type="cond" truecount="1" falsecount="0"/>
+        <line num="88" count="25" type="stmt"/>
+        <line num="89" count="25" type="stmt"/>
+        <line num="91" count="25" type="stmt"/>
+        <line num="92" count="25" type="stmt"/>
+        <line num="93" count="25" type="stmt"/>
+        <line num="95" count="122" type="stmt"/>
+        <line num="97" count="122" type="stmt"/>
+      </file>
+      <file name="TodoList.tsx" path="/Users/solangeaimery/Desktop/proyectom4/task-manager/src/components/TodoList.tsx">
+        <metrics statements="23" coveredstatements="23" conditionals="4" coveredconditionals="4" methods="1" coveredmethods="1"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="12" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="13" count="12" type="stmt"/>
+        <line num="14" count="12" type="stmt"/>
+        <line num="15" count="12" type="stmt"/>
+        <line num="16" count="12" type="stmt"/>
+        <line num="17" count="12" type="stmt"/>
+        <line num="18" count="12" type="cond" truecount="1" falsecount="0"/>
+        <line num="19" count="2" type="stmt"/>
+        <line num="20" count="2" type="cond" truecount="1" falsecount="0"/>
+        <line num="22" count="10" type="stmt"/>
+        <line num="23" count="10" type="stmt"/>
+        <line num="24" count="10" type="cond" truecount="1" falsecount="0"/>
+        <line num="25" count="14" type="stmt"/>
+        <line num="26" count="14" type="stmt"/>
+        <line num="27" count="14" type="stmt"/>
+        <line num="28" count="14" type="stmt"/>
+        <line num="29" count="14" type="stmt"/>
+        <line num="30" count="14" type="stmt"/>
+        <line num="31" count="14" type="stmt"/>
+        <line num="32" count="10" type="stmt"/>
+        <line num="33" count="10" type="stmt"/>
+        <line num="35" count="10" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.features.auth">
+      <metrics statements="34" coveredstatements="34" conditionals="9" coveredconditionals="9" methods="5" coveredmethods="5"/>
+      <file name="AuthContext.tsx" path="/Users/solangeaimery/Desktop/proyectom4/task-manager/src/features/auth/AuthContext.tsx">
+        <metrics statements="24" coveredstatements="24" conditionals="6" coveredconditionals="6" methods="2" coveredmethods="2"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="12" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="13" count="8" type="stmt"/>
+        <line num="14" count="8" type="stmt"/>
+        <line num="16" count="8" type="cond" truecount="1" falsecount="0"/>
+        <line num="17" count="6" type="cond" truecount="1" falsecount="0"/>
+        <line num="18" count="2" type="stmt"/>
+        <line num="19" count="2" type="stmt"/>
+        <line num="20" count="6" type="stmt"/>
+        <line num="22" count="6" type="stmt"/>
+        <line num="23" count="8" type="stmt"/>
+        <line num="25" count="8" type="stmt"/>
+        <line num="26" count="8" type="stmt"/>
+        <line num="27" count="8" type="stmt"/>
+        <line num="28" count="8" type="stmt"/>
+        <line num="30" count="8" type="stmt"/>
+        <line num="32" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="33" count="12" type="stmt"/>
+        <line num="35" count="12" type="cond" truecount="1" falsecount="0"/>
+        <line num="36" count="4" type="stmt"/>
+        <line num="37" count="4" type="cond" truecount="1" falsecount="0"/>
+        <line num="39" count="8" type="stmt"/>
+        <line num="40" count="8" type="stmt"/>
+      </file>
+      <file name="authService.ts" path="/Users/solangeaimery/Desktop/proyectom4/task-manager/src/features/auth/authService.ts">
+        <metrics statements="10" coveredstatements="10" conditionals="3" coveredconditionals="3" methods="3" coveredmethods="3"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="8" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="9" count="2" type="stmt"/>
+        <line num="10" count="2" type="stmt"/>
+        <line num="12" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="13" count="2" type="stmt"/>
+        <line num="14" count="2" type="stmt"/>
+        <line num="16" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="17" count="2" type="stmt"/>
+        <line num="18" count="2" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.features.tasks">
+      <metrics statements="138" coveredstatements="137" conditionals="35" coveredconditionals="34" methods="9" coveredmethods="9"/>
+      <file name="taskService.ts" path="/Users/solangeaimery/Desktop/proyectom4/task-manager/src/features/tasks/taskService.ts">
+        <metrics statements="40" coveredstatements="40" conditionals="6" coveredconditionals="6" methods="4" coveredmethods="4"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="16" count="1" type="stmt"/>
+        <line num="19" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="20" count="5" type="stmt"/>
+        <line num="21" count="5" type="stmt"/>
+        <line num="22" count="5" type="stmt"/>
+        <line num="23" count="5" type="stmt"/>
+        <line num="24" count="5" type="stmt"/>
+        <line num="25" count="5" type="stmt"/>
+        <line num="26" count="5" type="stmt"/>
+        <line num="27" count="5" type="stmt"/>
+        <line num="29" count="5" type="stmt"/>
+        <line num="30" count="5" type="stmt"/>
+        <line num="31" count="5" type="cond" truecount="1" falsecount="0"/>
+        <line num="32" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="33" count="1" type="stmt"/>
+        <line num="34" count="1" type="stmt"/>
+        <line num="35" count="1" type="stmt"/>
+        <line num="37" count="1" type="stmt"/>
+        <line num="38" count="1" type="stmt"/>
+        <line num="39" count="5" type="stmt"/>
+        <line num="40" count="5" type="stmt"/>
+        <line num="41" count="5" type="stmt"/>
+        <line num="44" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="45" count="3" type="stmt"/>
+        <line num="46" count="3" type="stmt"/>
+        <line num="47" count="3" type="stmt"/>
+        <line num="48" count="3" type="stmt"/>
+        <line num="49" count="3" type="stmt"/>
+        <line num="52" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="53" count="2" type="stmt"/>
+        <line num="54" count="2" type="stmt"/>
+        <line num="55" count="2" type="stmt"/>
+        <line num="56" count="2" type="stmt"/>
+        <line num="58" count="2" type="stmt"/>
+        <line num="59" count="2" type="stmt"/>
+        <line num="62" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="63" count="2" type="stmt"/>
+        <line num="65" count="2" type="stmt"/>
+        <line num="66" count="2" type="stmt"/>
+      </file>
+      <file name="useTasks.ts" path="/Users/solangeaimery/Desktop/proyectom4/task-manager/src/features/tasks/useTasks.ts">
+        <metrics statements="98" coveredstatements="97" conditionals="29" coveredconditionals="28" methods="5" coveredmethods="5"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="12" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="13" count="57" type="stmt"/>
+        <line num="14" count="57" type="stmt"/>
+        <line num="15" count="57" type="stmt"/>
+        <line num="18" count="57" type="cond" truecount="1" falsecount="0"/>
+        <line num="19" count="23" type="cond" truecount="1" falsecount="0"/>
+        <line num="20" count="3" type="stmt"/>
+        <line num="21" count="3" type="stmt"/>
+        <line num="22" count="3" type="stmt"/>
+        <line num="23" count="3" type="cond" truecount="1" falsecount="0"/>
+        <line num="25" count="20" type="stmt"/>
+        <line num="26" count="20" type="stmt"/>
+        <line num="28" count="20" type="stmt"/>
+        <line num="29" count="20" type="stmt"/>
+        <line num="30" count="20" type="cond" truecount="1" falsecount="0"/>
+        <line num="31" count="2" type="stmt"/>
+        <line num="32" count="2" type="stmt"/>
+        <line num="33" count="2" type="stmt"/>
+        <line num="34" count="2" type="stmt"/>
+        <line num="35" count="20" type="cond" truecount="1" falsecount="0"/>
+        <line num="36" count="2" type="cond" truecount="1" falsecount="0"/>
+        <line num="37" count="2" type="stmt"/>
+        <line num="38" count="2" type="stmt"/>
+        <line num="39" count="20" type="stmt"/>
+        <line num="41" count="20" type="stmt"/>
+        <line num="42" count="57" type="stmt"/>
+        <line num="45" count="57" type="cond" truecount="1" falsecount="0"/>
+        <line num="46" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="48" count="3" type="stmt"/>
+        <line num="49" count="3" type="stmt"/>
+        <line num="51" count="3" type="stmt"/>
+        <line num="52" count="3" type="stmt"/>
+        <line num="53" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="54" count="4" type="stmt"/>
+        <line num="55" count="4" type="stmt"/>
+        <line num="56" count="4" type="cond" truecount="1" falsecount="0"/>
+        <line num="57" count="4" type="cond" truecount="1" falsecount="0"/>
+        <line num="58" count="2" type="stmt"/>
+        <line num="59" count="2" type="cond" truecount="1" falsecount="0"/>
+        <line num="60" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="61" count="1" type="stmt"/>
+        <line num="62" count="2" type="stmt"/>
+        <line num="63" count="2" type="stmt"/>
+        <line num="64" count="4" type="stmt"/>
+        <line num="67" count="57" type="cond" truecount="1" falsecount="0"/>
+        <line num="68" count="3" type="stmt"/>
+        <line num="69" count="3" type="stmt"/>
+        <line num="70" count="3" type="cond" truecount="1" falsecount="0"/>
+        <line num="71" count="3" type="cond" truecount="1" falsecount="0"/>
+        <line num="72" count="2" type="stmt"/>
+        <line num="73" count="2" type="cond" truecount="1" falsecount="0"/>
+        <line num="74" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="75" count="1" type="stmt"/>
+        <line num="76" count="2" type="stmt"/>
+        <line num="77" count="2" type="stmt"/>
+        <line num="78" count="3" type="stmt"/>
+        <line num="81" count="57" type="cond" truecount="1" falsecount="0"/>
+        <line num="82" count="2" type="stmt"/>
+        <line num="83" count="2" type="stmt"/>
+        <line num="84" count="2" type="stmt"/>
+        <line num="85" count="2" type="stmt"/>
+        <line num="86" count="2" type="stmt"/>
+        <line num="87" count="2" type="stmt"/>
+        <line num="89" count="2" type="stmt"/>
+        <line num="90" count="2" type="stmt"/>
+        <line num="91" count="2" type="stmt"/>
+        <line num="92" count="2" type="cond" truecount="1" falsecount="0"/>
+        <line num="93" count="1" type="stmt"/>
+        <line num="94" count="1" type="stmt"/>
+        <line num="95" count="1" type="cond" truecount="0" falsecount="1"/>
+        <line num="96" count="0" type="stmt"/>
+        <line num="97" count="1" type="stmt"/>
+        <line num="98" count="1" type="stmt"/>
+        <line num="99" count="1" type="stmt"/>
+        <line num="100" count="2" type="stmt"/>
+        <line num="103" count="57" type="cond" truecount="1" falsecount="0"/>
+        <line num="104" count="3" type="stmt"/>
+        <line num="105" count="3" type="stmt"/>
+        <line num="106" count="3" type="cond" truecount="1" falsecount="0"/>
+        <line num="107" count="3" type="cond" truecount="1" falsecount="0"/>
+        <line num="108" count="2" type="stmt"/>
+        <line num="109" count="2" type="cond" truecount="1" falsecount="0"/>
+        <line num="110" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="111" count="1" type="stmt"/>
+        <line num="112" count="2" type="stmt"/>
+        <line num="113" count="2" type="stmt"/>
+        <line num="114" count="3" type="stmt"/>
+        <line num="116" count="57" type="stmt"/>
+        <line num="117" count="57" type="stmt"/>
+        <line num="118" count="57" type="stmt"/>
+        <line num="119" count="57" type="stmt"/>
+        <line num="120" count="57" type="stmt"/>
+        <line num="121" count="57" type="stmt"/>
+        <line num="122" count="57" type="stmt"/>
+        <line num="123" count="57" type="stmt"/>
+        <line num="124" count="57" type="stmt"/>
+        <line num="125" count="57" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.pages">
+      <metrics statements="168" coveredstatements="168" conditionals="36" coveredconditionals="36" methods="11" coveredmethods="11"/>
+      <file name="Login.tsx" path="/Users/solangeaimery/Desktop/proyectom4/task-manager/src/pages/Login.tsx">
+        <metrics statements="48" coveredstatements="48" conditionals="9" coveredconditionals="9" methods="4" coveredmethods="4"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="6" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="7" count="141" type="stmt"/>
+        <line num="8" count="141" type="stmt"/>
+        <line num="9" count="141" type="stmt"/>
+        <line num="10" count="141" type="stmt"/>
+        <line num="12" count="141" type="stmt"/>
+        <line num="14" count="141" type="cond" truecount="1" falsecount="0"/>
+        <line num="15" count="4" type="stmt"/>
+        <line num="17" count="4" type="stmt"/>
+        <line num="18" count="4" type="stmt"/>
+        <line num="20" count="4" type="stmt"/>
+        <line num="21" count="4" type="cond" truecount="1" falsecount="0"/>
+        <line num="22" count="3" type="stmt"/>
+        <line num="23" count="4" type="cond" truecount="1" falsecount="0"/>
+        <line num="24" count="1" type="stmt"/>
+        <line num="25" count="4" type="stmt"/>
+        <line num="26" count="4" type="stmt"/>
+        <line num="27" count="4" type="stmt"/>
+        <line num="28" count="4" type="stmt"/>
+        <line num="30" count="141" type="stmt"/>
+        <line num="31" count="141" type="stmt"/>
+        <line num="32" count="141" type="stmt"/>
+        <line num="34" count="141" type="cond" truecount="1" falsecount="0"/>
+        <line num="36" count="141" type="stmt"/>
+        <line num="37" count="141" type="stmt"/>
+        <line num="38" count="141" type="stmt"/>
+        <line num="39" count="141" type="stmt"/>
+        <line num="40" count="141" type="stmt"/>
+        <line num="41" count="141" type="cond" truecount="1" falsecount="0"/>
+        <line num="42" count="141" type="stmt"/>
+        <line num="43" count="141" type="stmt"/>
+        <line num="45" count="141" type="stmt"/>
+        <line num="46" count="141" type="stmt"/>
+        <line num="47" count="141" type="stmt"/>
+        <line num="48" count="141" type="stmt"/>
+        <line num="49" count="141" type="cond" truecount="1" falsecount="0"/>
+        <line num="50" count="141" type="stmt"/>
+        <line num="51" count="141" type="stmt"/>
+        <line num="53" count="141" type="stmt"/>
+        <line num="54" count="141" type="cond" truecount="2" falsecount="0"/>
+        <line num="55" count="141" type="stmt"/>
+        <line num="56" count="141" type="stmt"/>
+        <line num="58" count="141" type="stmt"/>
+        <line num="59" count="141" type="stmt"/>
+        <line num="60" count="141" type="stmt"/>
+        <line num="61" count="141" type="stmt"/>
+        <line num="63" count="141" type="stmt"/>
+      </file>
+      <file name="Register.tsx" path="/Users/solangeaimery/Desktop/proyectom4/task-manager/src/pages/Register.tsx">
+        <metrics statements="53" coveredstatements="53" conditionals="12" coveredconditionals="12" methods="4" coveredmethods="4"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="6" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="7" count="160" type="stmt"/>
+        <line num="8" count="160" type="stmt"/>
+        <line num="9" count="160" type="stmt"/>
+        <line num="10" count="160" type="stmt"/>
+        <line num="12" count="160" type="stmt"/>
+        <line num="14" count="160" type="cond" truecount="1" falsecount="0"/>
+        <line num="15" count="5" type="stmt"/>
+        <line num="17" count="5" type="stmt"/>
+        <line num="19" count="5" type="cond" truecount="1" falsecount="0"/>
+        <line num="20" count="1" type="stmt"/>
+        <line num="21" count="1" type="stmt"/>
+        <line num="22" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="24" count="4" type="stmt"/>
+        <line num="26" count="4" type="stmt"/>
+        <line num="27" count="4" type="cond" truecount="1" falsecount="0"/>
+        <line num="28" count="3" type="stmt"/>
+        <line num="29" count="5" type="cond" truecount="1" falsecount="0"/>
+        <line num="30" count="1" type="stmt"/>
+        <line num="31" count="5" type="cond" truecount="1" falsecount="0"/>
+        <line num="32" count="4" type="stmt"/>
+        <line num="33" count="4" type="stmt"/>
+        <line num="34" count="5" type="stmt"/>
+        <line num="36" count="160" type="stmt"/>
+        <line num="37" count="160" type="stmt"/>
+        <line num="38" count="160" type="stmt"/>
+        <line num="40" count="160" type="cond" truecount="1" falsecount="0"/>
+        <line num="42" count="160" type="stmt"/>
+        <line num="43" count="160" type="stmt"/>
+        <line num="44" count="160" type="stmt"/>
+        <line num="45" count="160" type="stmt"/>
+        <line num="46" count="160" type="stmt"/>
+        <line num="47" count="160" type="cond" truecount="1" falsecount="0"/>
+        <line num="48" count="160" type="stmt"/>
+        <line num="49" count="160" type="stmt"/>
+        <line num="51" count="160" type="stmt"/>
+        <line num="52" count="160" type="stmt"/>
+        <line num="53" count="160" type="stmt"/>
+        <line num="54" count="160" type="stmt"/>
+        <line num="55" count="160" type="cond" truecount="1" falsecount="0"/>
+        <line num="56" count="160" type="stmt"/>
+        <line num="57" count="160" type="stmt"/>
+        <line num="58" count="160" type="stmt"/>
+        <line num="60" count="160" type="stmt"/>
+        <line num="61" count="160" type="cond" truecount="2" falsecount="0"/>
+        <line num="62" count="160" type="stmt"/>
+        <line num="63" count="160" type="stmt"/>
+        <line num="65" count="160" type="stmt"/>
+        <line num="66" count="160" type="stmt"/>
+        <line num="67" count="160" type="stmt"/>
+        <line num="68" count="160" type="stmt"/>
+        <line num="70" count="160" type="stmt"/>
+      </file>
+      <file name="Tasks.tsx" path="/Users/solangeaimery/Desktop/proyectom4/task-manager/src/pages/Tasks.tsx">
+        <metrics statements="27" coveredstatements="27" conditionals="4" coveredconditionals="4" methods="1" coveredmethods="1"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="7" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="8" count="8" type="stmt"/>
+        <line num="10" count="8" type="stmt"/>
+        <line num="11" count="8" type="stmt"/>
+        <line num="12" count="8" type="stmt"/>
+        <line num="13" count="8" type="stmt"/>
+        <line num="14" count="8" type="stmt"/>
+        <line num="15" count="8" type="stmt"/>
+        <line num="16" count="8" type="stmt"/>
+        <line num="17" count="8" type="stmt"/>
+        <line num="18" count="8" type="stmt"/>
+        <line num="20" count="8" type="stmt"/>
+        <line num="21" count="8" type="stmt"/>
+        <line num="22" count="8" type="stmt"/>
+        <line num="24" count="8" type="cond" truecount="1" falsecount="0"/>
+        <line num="26" count="8" type="stmt"/>
+        <line num="28" count="8" type="cond" truecount="1" falsecount="0"/>
+        <line num="29" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="31" count="7" type="stmt"/>
+        <line num="32" count="7" type="stmt"/>
+        <line num="33" count="7" type="stmt"/>
+        <line num="34" count="7" type="stmt"/>
+        <line num="35" count="7" type="stmt"/>
+        <line num="36" count="7" type="stmt"/>
+        <line num="38" count="8" type="stmt"/>
+        <line num="40" count="8" type="stmt"/>
+      </file>
+      <file name="TestSummary.tsx" path="/Users/solangeaimery/Desktop/proyectom4/task-manager/src/pages/TestSummary.tsx">
+        <metrics statements="40" coveredstatements="40" conditionals="11" coveredconditionals="11" methods="2" coveredmethods="2"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="4" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="5" count="18" type="stmt"/>
+        <line num="6" count="18" type="stmt"/>
+        <line num="7" count="18" type="stmt"/>
+        <line num="9" count="18" type="cond" truecount="1" falsecount="0"/>
+        <line num="10" count="6" type="cond" truecount="1" falsecount="0"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="12" count="1" type="stmt"/>
+        <line num="13" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="15" count="5" type="stmt"/>
+        <line num="16" count="5" type="stmt"/>
+        <line num="18" count="5" type="stmt"/>
+        <line num="20" count="5" type="stmt"/>
+        <line num="23" count="5" type="stmt"/>
+        <line num="24" count="5" type="stmt"/>
+        <line num="25" count="5" type="stmt"/>
+        <line num="26" count="5" type="stmt"/>
+        <line num="27" count="5" type="stmt"/>
+        <line num="28" count="5" type="stmt"/>
+        <line num="29" count="5" type="cond" truecount="1" falsecount="0"/>
+        <line num="31" count="4" type="stmt"/>
+        <line num="33" count="4" type="stmt"/>
+        <line num="34" count="6" type="cond" truecount="1" falsecount="0"/>
+        <line num="35" count="1" type="stmt"/>
+        <line num="36" count="1" type="stmt"/>
+        <line num="37" count="6" type="cond" truecount="1" falsecount="0"/>
+        <line num="38" count="5" type="stmt"/>
+        <line num="39" count="5" type="stmt"/>
+        <line num="40" count="6" type="stmt"/>
+        <line num="42" count="18" type="stmt"/>
+        <line num="43" count="18" type="stmt"/>
+        <line num="44" count="18" type="stmt"/>
+        <line num="46" count="18" type="cond" truecount="1" falsecount="0"/>
+        <line num="48" count="18" type="stmt"/>
+        <line num="49" count="18" type="cond" truecount="2" falsecount="0"/>
+        <line num="50" count="18" type="stmt"/>
+        <line num="52" count="18" type="cond" truecount="1" falsecount="0"/>
+        <line num="53" count="18" type="stmt"/>
+        <line num="55" count="18" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.routes">
+      <metrics statements="40" coveredstatements="40" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
+      <file name="AppRouter.tsx" path="/Users/solangeaimery/Desktop/proyectom4/task-manager/src/routes/AppRouter.tsx">
+        <metrics statements="40" coveredstatements="40" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="11" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="12" count="7" type="stmt"/>
+        <line num="13" count="7" type="stmt"/>
+        <line num="14" count="7" type="stmt"/>
+        <line num="15" count="7" type="stmt"/>
+        <line num="16" count="7" type="stmt"/>
+        <line num="17" count="7" type="stmt"/>
+        <line num="18" count="7" type="stmt"/>
+        <line num="19" count="7" type="stmt"/>
+        <line num="20" count="7" type="stmt"/>
+        <line num="21" count="7" type="stmt"/>
+        <line num="22" count="7" type="stmt"/>
+        <line num="24" count="7" type="stmt"/>
+        <line num="26" count="7" type="stmt"/>
+        <line num="27" count="7" type="stmt"/>
+        <line num="28" count="7" type="stmt"/>
+        <line num="29" count="7" type="stmt"/>
+        <line num="30" count="7" type="stmt"/>
+        <line num="31" count="7" type="stmt"/>
+        <line num="33" count="7" type="stmt"/>
+        <line num="35" count="7" type="stmt"/>
+        <line num="36" count="7" type="stmt"/>
+        <line num="37" count="7" type="stmt"/>
+        <line num="38" count="7" type="stmt"/>
+        <line num="39" count="7" type="stmt"/>
+        <line num="40" count="7" type="stmt"/>
+        <line num="42" count="7" type="stmt"/>
+        <line num="44" count="7" type="stmt"/>
+        <line num="45" count="7" type="stmt"/>
+        <line num="46" count="7" type="stmt"/>
+        <line num="47" count="7" type="stmt"/>
+        <line num="48" count="7" type="stmt"/>
+        <line num="49" count="7" type="stmt"/>
+        <line num="51" count="7" type="stmt"/>
+        <line num="53" count="7" type="stmt"/>
+        <line num="54" count="7" type="stmt"/>
+        <line num="55" count="7" type="stmt"/>
+        <line num="56" count="7" type="stmt"/>
+        <line num="58" count="7" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.services.firebase">
+      <metrics statements="14" coveredstatements="0" conditionals="3" coveredconditionals="0" methods="3" coveredmethods="0"/>
+      <file name="auth.ts" path="/Users/solangeaimery/Desktop/proyectom4/task-manager/src/services/firebase/auth.ts">
+        <metrics statements="1" coveredstatements="0" conditionals="1" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <line num="1" count="0" type="cond" truecount="0" falsecount="1"/>
+      </file>
+      <file name="config.ts" path="/Users/solangeaimery/Desktop/proyectom4/task-manager/src/services/firebase/config.ts">
+        <metrics statements="12" coveredstatements="0" conditionals="1" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <line num="1" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="5" count="0" type="stmt"/>
+        <line num="6" count="0" type="stmt"/>
+        <line num="7" count="0" type="stmt"/>
+        <line num="8" count="0" type="stmt"/>
+        <line num="9" count="0" type="stmt"/>
+        <line num="10" count="0" type="stmt"/>
+        <line num="11" count="0" type="stmt"/>
+        <line num="12" count="0" type="stmt"/>
+        <line num="14" count="0" type="stmt"/>
+        <line num="15" count="0" type="stmt"/>
+        <line num="16" count="0" type="stmt"/>
+      </file>
+      <file name="firestore.ts" path="/Users/solangeaimery/Desktop/proyectom4/task-manager/src/services/firebase/firestore.ts">
+        <metrics statements="1" coveredstatements="0" conditionals="1" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <line num="1" count="0" type="cond" truecount="0" falsecount="1"/>
+      </file>
+    </package>
+    <package name="src.types">
+      <metrics statements="0" coveredstatements="0" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
+      <file name="Task.ts" path="/Users/solangeaimery/Desktop/proyectom4/task-manager/src/types/Task.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
+      </file>
+      <file name="User.ts" path="/Users/solangeaimery/Desktop/proyectom4/task-manager/src/types/User.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
+      </file>
+    </package>
+    <package name="src.utils">
+      <metrics statements="24" coveredstatements="24" conditionals="11" coveredconditionals="11" methods="1" coveredmethods="1"/>
+      <file name="firebaseErrors.ts" path="/Users/solangeaimery/Desktop/proyectom4/task-manager/src/utils/firebaseErrors.ts">
+        <metrics statements="24" coveredstatements="24" conditionals="11" coveredconditionals="11" methods="1" coveredmethods="1"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="3" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="4" count="11" type="cond" truecount="1" falsecount="0"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="6" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="8" count="10" type="stmt"/>
+        <line num="9" count="11" type="cond" truecount="1" falsecount="0"/>
+        <line num="10" count="2" type="stmt"/>
+        <line num="12" count="11" type="cond" truecount="1" falsecount="0"/>
+        <line num="13" count="1" type="stmt"/>
+        <line num="15" count="11" type="cond" truecount="1" falsecount="0"/>
+        <line num="16" count="1" type="stmt"/>
+        <line num="18" count="11" type="cond" truecount="1" falsecount="0"/>
+        <line num="19" count="1" type="stmt"/>
+        <line num="20" count="11" type="cond" truecount="1" falsecount="0"/>
+        <line num="21" count="2" type="stmt"/>
+        <line num="23" count="11" type="cond" truecount="1" falsecount="0"/>
+        <line num="24" count="1" type="stmt"/>
+        <line num="26" count="11" type="cond" truecount="1" falsecount="0"/>
+        <line num="27" count="1" type="stmt"/>
+        <line num="29" count="11" type="cond" truecount="1" falsecount="0"/>
+        <line num="30" count="1" type="stmt"/>
+        <line num="31" count="11" type="stmt"/>
+        <line num="32" count="11" type="stmt"/>
+      </file>
+    </package>
+  </project>
+</coverage>
