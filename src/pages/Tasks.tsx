@@ -104,6 +104,8 @@ export const Tasks: React.FC = () => {
 
           <TodoList
             tasks={filteredTasks}
+            activeFilter={activeFilter}
+            searchTerm={searchTerm}
             onToggle={toggleTask}
             onDelete={deleteTask}
             onEdit={editTask}
