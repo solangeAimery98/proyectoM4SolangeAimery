@@ -2,9 +2,12 @@ import React, { useMemo, useState } from 'react';
 
 import { useAuth } from '../features/auth/AuthContext';
 import { useTasks } from '../features/tasks/useTasks';
+import { TaskFilter } from '../features/tasks/types/TaskFilter';
 
 import { DashboardHeader } from '../components/dashboard/DashboardHeader';
 import { DashboardSummary } from '../components/dashboard/DashboardSummary';
+import { DashboardFilters } from '../components/dashboard/DashboardFilters';
+
 import { TodoForm } from '../components/TodoForm';
 import { TodoList } from '../components/TodoList';
 
@@ -21,14 +24,17 @@ export const Tasks: React.FC = () => {
     deleteTask,
   } = useTasks(currentUser?.uid);
 
+  // Estados locales del Dashboard
   const [searchTerm, setSearchTerm] = useState('');
+  const [activeFilter, setActiveFilter] = useState<TaskFilter>('all');
 
+  // Nombre del usuario autenticado
   const userName =
     currentUser?.displayName ||
     currentUser?.email?.split('@')[0] ||
     'Usuario';
 
-  // Estadísticas de las tareas
+  // Estadísticas generales de las tareas
   const summary = useMemo(() => {
     const total = tasks.length;
 
@@ -51,22 +57,23 @@ export const Tasks: React.FC = () => {
     };
   }, [tasks]);
 
-  // Búsqueda de tareas
+  // Búsqueda y filtrado de tareas
   const filteredTasks = useMemo(() => {
     const normalizedSearch = searchTerm.trim().toLowerCase();
 
-    if (!normalizedSearch) return tasks;
-
     return tasks.filter((task) => {
-      const title = task.title.toLowerCase();
-      const description = task.description.toLowerCase();
+      const matchesSearch =
+        task.title.toLowerCase().includes(normalizedSearch) ||
+        task.description.toLowerCase().includes(normalizedSearch);
 
-      return (
-        title.includes(normalizedSearch) ||
-        description.includes(normalizedSearch)
-      );
+      const matchesFilter =
+        activeFilter === 'all' ||
+        (activeFilter === 'pending' && !task.completed) ||
+        (activeFilter === 'completed' && task.completed);
+
+      return matchesSearch && matchesFilter;
     });
-  }, [tasks, searchTerm]);
+  }, [tasks, searchTerm, activeFilter]);
 
   return (
     <div className="dashboard-container">
@@ -87,6 +94,11 @@ export const Tasks: React.FC = () => {
       ) : (
         <>
           <DashboardSummary {...summary} />
+
+          <DashboardFilters
+            activeFilter={activeFilter}
+            onFilterChange={setActiveFilter}
+          />
 
           <TodoForm onAdd={addTask} />
 
