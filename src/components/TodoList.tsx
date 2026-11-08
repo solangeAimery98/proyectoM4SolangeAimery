@@ -9,7 +9,11 @@ interface TodoListProps {
   searchTerm: string;
   onToggle: (id: string, completed: boolean) => void;
   onDelete: (id: string) => void;
-  onEdit: (id: string, title: string, description: string) => void;
+  onEdit: (
+    id: string,
+    title: string,
+    description: string
+  ) => Promise<boolean>;
 }
 
 export const TodoList: React.FC<TodoListProps> = ({

@@ -293,157 +293,155 @@ describe('Firestore Security Rules', () => {
         });
     });
 
-    describe('Actualización de tareas', () => {
-        it('permite actualizar una tarea propia', async () => {
-            await seedTask('task-1');
+    it('impide completar una tarea sin registrar su recompensa', async () => {
+        await seedTask('task-1');
 
-            const db = testEnv.authenticatedContext(USER_A).firestore();
+        const db = testEnv.authenticatedContext(USER_A).firestore();
 
-            await assertSucceeds(
-                updateDoc(
-                    doc(db, 'tasks/task-1'),
-                    {
-                        completed: true,
-                    }
-                )
-            );
-        });
-
-        it('impide modificar tareas de otro usuario', async () => {
-            await seedTask('task-1');
-
-            const db = testEnv.authenticatedContext(USER_B).firestore();
-
-            await assertFails(
-                updateDoc(
-                    doc(db, 'tasks/task-1'),
-                    {
-                        completed: true,
-                    }
-                )
-            );
-        });
-
-        it('impide modificar el userId', async () => {
-            await seedTask('task-1');
-
-            const db = testEnv.authenticatedContext(USER_A).firestore();
-
-            await assertFails(
-                updateDoc(
-                    doc(db, 'tasks/task-1'),
-                    {
-                        userId: USER_B,
-                    }
-                )
-            );
-        });
-
-        it('impide modificar createdAt', async () => {
-            await seedTask('task-1');
-
-            const db = testEnv.authenticatedContext(USER_A).firestore();
-
-            await assertFails(
-                updateDoc(
-                    doc(db, 'tasks/task-1'),
-                    {
-                        createdAt: new Date(),
-                    }
-                )
-            );
-        });
-
-        it('rechaza actualizaciones con títulos demasiado largos', async () => {
-            await seedTask('task-1');
-
-            const db = testEnv.authenticatedContext(USER_A).firestore();
-
-            await assertFails(
-                updateDoc(
-                    doc(db, 'tasks/task-1'),
-                    {
-                        title: 'A'.repeat(101),
-                    }
-                )
-            );
-        });
-
-        it('rechaza actualizaciones con descripciones demasiado largas', async () => {
-            await seedTask('task-1');
-
-            const db = testEnv.authenticatedContext(USER_A).firestore();
-
-            await assertFails(
-                updateDoc(
-                    doc(db, 'tasks/task-1'),
-                    {
-                        description: 'A'.repeat(501),
-                    }
-                )
-            );
-        });
-
-        it('impide modificar campos adicionales', async () => {
-            await seedTask('task-1');
-
-            const db = testEnv.authenticatedContext(USER_A).firestore();
-
-            await assertFails(
-                updateDoc(
-                    doc(db, 'tasks/task-1'),
-                    {
-                        isAdmin: true,
-                    }
-                )
-            );
-        });
-
-        it('impide actualizar tareas sin autenticación', async () => {
-            await seedTask('task-1');
-
-            const db = testEnv.unauthenticatedContext().firestore();
-
-            await assertFails(
-                updateDoc(
-                    doc(db, 'tasks/task-1'),
-                    {
-                        completed: true,
-                    }
-                )
-            );
-        });
+        await assertFails(
+            updateDoc(
+                doc(db, 'tasks/task-1'),
+                {
+                    completed: true,
+                }
+            )
+        );
     });
 
-    describe('Eliminación de tareas', () => {
-        it('permite eliminar tareas propias', async () => {
-            await seedTask('task-1');
+    it('impide modificar tareas de otro usuario', async () => {
+        await seedTask('task-1');
 
-            const db = testEnv.authenticatedContext(USER_A).firestore();
+        const db = testEnv.authenticatedContext(USER_B).firestore();
 
-            await assertSucceeds(
-                deleteDoc(doc(db, 'tasks/task-1'))
-            );
-        });
+        await assertFails(
+            updateDoc(
+                doc(db, 'tasks/task-1'),
+                {
+                    completed: true,
+                }
+            )
+        );
+    });
 
-        it('impide eliminar tareas de otro usuario', async () => {
-            await seedTask('task-1');
+    it('impide modificar el userId', async () => {
+        await seedTask('task-1');
 
-            const db = testEnv.authenticatedContext(USER_B).firestore();
+        const db = testEnv.authenticatedContext(USER_A).firestore();
 
-            await assertFails(
-                deleteDoc(doc(db, 'tasks/task-1'))
-            );
-        });
+        await assertFails(
+            updateDoc(
+                doc(db, 'tasks/task-1'),
+                {
+                    userId: USER_B,
+                }
+            )
+        );
+    });
 
-        it('impide eliminar tareas sin autenticación', async () => {
-            await seedTask('task-1');
+    it('impide modificar createdAt', async () => {
+        await seedTask('task-1');
 
-            const db = testEnv.unauthenticatedContext().firestore();
+        const db = testEnv.authenticatedContext(USER_A).firestore();
 
-            await assertFails(
-                deleteDoc(doc(db, 'tasks/task-1'))
-            );
-        });
+        await assertFails(
+            updateDoc(
+                doc(db, 'tasks/task-1'),
+                {
+                    createdAt: new Date(),
+                }
+            )
+        );
+    });
+
+    it('rechaza actualizaciones con títulos demasiado largos', async () => {
+        await seedTask('task-1');
+
+        const db = testEnv.authenticatedContext(USER_A).firestore();
+
+        await assertFails(
+            updateDoc(
+                doc(db, 'tasks/task-1'),
+                {
+                    title: 'A'.repeat(101),
+                }
+            )
+        );
+    });
+
+    it('rechaza actualizaciones con descripciones demasiado largas', async () => {
+        await seedTask('task-1');
+
+        const db = testEnv.authenticatedContext(USER_A).firestore();
+
+        await assertFails(
+            updateDoc(
+                doc(db, 'tasks/task-1'),
+                {
+                    description: 'A'.repeat(501),
+                }
+            )
+        );
+    });
+
+    it('impide modificar campos adicionales', async () => {
+        await seedTask('task-1');
+
+        const db = testEnv.authenticatedContext(USER_A).firestore();
+
+        await assertFails(
+            updateDoc(
+                doc(db, 'tasks/task-1'),
+                {
+                    isAdmin: true,
+                }
+            )
+        );
+    });
+
+    it('impide actualizar tareas sin autenticación', async () => {
+        await seedTask('task-1');
+
+        const db = testEnv.unauthenticatedContext().firestore();
+
+        await assertFails(
+            updateDoc(
+                doc(db, 'tasks/task-1'),
+                {
+                    completed: true,
+                }
+            )
+        );
+    });
+});
+
+describe('Eliminación de tareas', () => {
+    it('permite eliminar tareas propias', async () => {
+        await seedTask('task-1');
+
+        const db = testEnv.authenticatedContext(USER_A).firestore();
+
+        await assertSucceeds(
+            deleteDoc(doc(db, 'tasks/task-1'))
+        );
+    });
+
+    it('impide eliminar tareas de otro usuario', async () => {
+        await seedTask('task-1');
+
+        const db = testEnv.authenticatedContext(USER_B).firestore();
+
+        await assertFails(
+            deleteDoc(doc(db, 'tasks/task-1'))
+        );
+    });
+
+    it('impide eliminar tareas sin autenticación', async () => {
+        await seedTask('task-1');
+
+        const db = testEnv.unauthenticatedContext().firestore();
+
+        await assertFails(
+            deleteDoc(doc(db, 'tasks/task-1'))
+        );
     });
 });
