@@ -1,7 +1,10 @@
 import React, { useMemo, useState } from 'react';
+
 import { useAuth } from '../features/auth/AuthContext';
 import { useTasks } from '../features/tasks/useTasks';
+
 import { DashboardHeader } from '../components/dashboard/DashboardHeader';
+import { DashboardSummary } from '../components/dashboard/DashboardSummary';
 import { TodoForm } from '../components/TodoForm';
 import { TodoList } from '../components/TodoList';
 
@@ -25,6 +28,30 @@ export const Tasks: React.FC = () => {
     currentUser?.email?.split('@')[0] ||
     'Usuario';
 
+  // Estadísticas de las tareas
+  const summary = useMemo(() => {
+    const total = tasks.length;
+
+    const completed = tasks.filter(
+      (task) => task.completed
+    ).length;
+
+    const pending = total - completed;
+
+    const percentage =
+      total > 0
+        ? Math.round((completed / total) * 100)
+        : 0;
+
+    return {
+      total,
+      completed,
+      pending,
+      percentage,
+    };
+  }, [tasks]);
+
+  // Búsqueda de tareas
   const filteredTasks = useMemo(() => {
     const normalizedSearch = searchTerm.trim().toLowerCase();
 
@@ -49,12 +76,18 @@ export const Tasks: React.FC = () => {
         onSearchChange={setSearchTerm}
       />
 
-      {error && <p className="error-message">{error}</p>}
+      {error && (
+        <p className="error-message" role="alert">
+          {error}
+        </p>
+      )}
 
       {loading ? (
         <p>Cargando tareas...</p>
       ) : (
         <>
+          <DashboardSummary {...summary} />
+
           <TodoForm onAdd={addTask} />
 
           <TodoList

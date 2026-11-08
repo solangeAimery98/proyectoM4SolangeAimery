@@ -108,3 +108,116 @@
         max-width: 360px;
     }
 }
+
+/* =========================================
+   DASHBOARD SUMMARY
+========================================= */
+
+.dashboard-summary {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-xl);
+}
+
+.summary-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+    padding: var(--spacing-md);
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-soft);
+}
+
+.summary-card-label {
+    font-size: var(--font-size-xs);
+    color: var(--color-text-secondary);
+    font-weight: 500;
+}
+
+.summary-card-value {
+    font-family: var(--font-display);
+    font-size: var(--font-size-2xl);
+    font-weight: 600;
+    line-height: 1.2;
+    color: var(--color-text-primary);
+}
+
+.summary-card-description {
+    font-size: var(--font-size-xs);
+    color: var(--color-text-muted);
+}
+
+.summary-total {
+    background-color: var(--color-surface);
+}
+
+.summary-pending {
+    background-color: var(--color-cream);
+}
+
+.summary-completed {
+    background-color: var(--color-sage-light);
+}
+
+.summary-progress {
+    grid-column: 1 / -1;
+    padding: var(--spacing-md);
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+}
+
+.summary-progress-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--spacing-sm);
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+}
+
+.summary-progress-header strong {
+    color: var(--color-success-dark);
+    font-weight: 600;
+}
+
+.summary-progress-track {
+    width: 100%;
+    height: 8px;
+    overflow: hidden;
+    background-color: var(--color-surface-secondary);
+    border-radius: var(--radius-full);
+}
+
+.summary-progress-fill {
+    height: 100%;
+    background-color: var(--color-sage);
+    border-radius: inherit;
+    transition: width var(--transition-slow);
+}
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (min-width: 768px) {
+    .dashboard-summary {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: var(--spacing-md);
+    }
+
+    .summary-card {
+        padding: var(--spacing-lg);
+    }
+
+    .summary-card-value {
+        font-size: var(--font-size-3xl);
+    }
+
+    .summary-progress {
+        padding: var(--spacing-lg);
+    }
+}
