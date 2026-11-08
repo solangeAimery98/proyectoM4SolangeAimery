@@ -1,8 +1,15 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { Navbar } from '../components/Navbar';
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Navigate,
+} from 'react-router-dom';
+
 import { ProtectedRoute } from '../components/ProtectedRoute';
 import { PublicRoute } from '../components/PublicRoute';
+import { AppLayout } from '../components/layout/AppLayout';
+
 import { Login } from '../pages/Login';
 import { Register } from '../pages/Register';
 import { Tasks } from '../pages/Tasks';
@@ -11,48 +18,41 @@ import { TestSummary } from '../pages/TestSummary';
 export const AppRouter: React.FC = () => {
   return (
     <BrowserRouter>
-      <Navbar />
-      <main className="main-content">
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <ProtectedRoute>
-                <Tasks />
-              </ProtectedRoute>
-            }
-          />
+      <Routes>
+        {/* Rutas públicas */}
+        <Route
+          path="/login"
+          element={
+            <PublicRoute>
+              <Login />
+            </PublicRoute>
+          }
+        />
 
-          <Route
-            path="/test-summary"
-            element={
-              <ProtectedRoute>
-                <TestSummary />
-              </ProtectedRoute>
-            }
-          />
+        <Route
+          path="/register"
+          element={
+            <PublicRoute>
+              <Register />
+            </PublicRoute>
+          }
+        />
 
-          <Route
-            path="/login"
-            element={
-              <PublicRoute>
-                <Login />
-              </PublicRoute>
-            }
-          />
+        {/* Rutas privadas */}
+        <Route
+          element={
+            <ProtectedRoute>
+              <AppLayout />
+            </ProtectedRoute>
+          }
+        >
+          <Route path="/" element={<Tasks />} />
+          <Route path="/test-summary" element={<TestSummary />} />
+        </Route>
 
-          <Route
-            path="/register"
-            element={
-              <PublicRoute>
-                <Register />
-              </PublicRoute>
-            }
-          />
-
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
-      </main>
+        {/* Ruta no encontrada */}
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
     </BrowserRouter>
   );
 };

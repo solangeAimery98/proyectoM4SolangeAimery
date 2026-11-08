@@ -1,0 +1,110 @@
+/* =========================================
+   DASHBOARD HEADER
+========================================= */
+
+.dashboard-header {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
+}
+
+.dashboard-header-welcome {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+}
+
+.dashboard-eyebrow {
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    color: var(--color-success-dark);
+}
+
+.dashboard-header-welcome h1 {
+    font-family: var(--font-display);
+    font-size: var(--font-size-2xl);
+    font-weight: 600;
+    line-height: 1.2;
+    color: var(--color-text-primary);
+}
+
+.dashboard-header-welcome p {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+}
+
+/* =========================================
+   TASK SEARCH
+========================================= */
+
+.dashboard-search {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    width: 100%;
+    min-height: 48px;
+    padding: 0 var(--spacing-md);
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-soft);
+    transition: border-color var(--transition-fast),
+        box-shadow var(--transition-fast);
+}
+
+.dashboard-search:focus-within {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px var(--color-primary-light);
+}
+
+.dashboard-search-icon {
+    flex-shrink: 0;
+    color: var(--color-text-muted);
+}
+
+.dashboard-search input {
+    width: 100%;
+    min-width: 0;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: var(--color-text-primary);
+    font-size: var(--font-size-sm);
+}
+
+.dashboard-search input::placeholder {
+    color: var(--color-text-muted);
+}
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (min-width: 768px) {
+    .dashboard-header {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        gap: var(--spacing-xl);
+    }
+
+    .dashboard-header-welcome h1 {
+        font-size: var(--font-size-3xl);
+    }
+
+    .dashboard-search {
+        max-width: 320px;
+    }
+}
+
+/* =========================================
+   DESKTOP
+========================================= */
+
+@media (min-width: 1200px) {
+    .dashboard-search {
+        max-width: 360px;
+    }
+}
