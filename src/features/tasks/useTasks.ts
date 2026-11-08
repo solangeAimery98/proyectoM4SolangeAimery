@@ -88,7 +88,7 @@ export const useTasks = (userId?: string) => {
     id: string,
     title: string,
     description: string
-  ) => {
+  ): Promise<boolean> => {
     try {
       setError(null);
 
@@ -96,14 +96,19 @@ export const useTasks = (userId?: string) => {
         title: title.trim(),
         description: description.trim(),
       });
+
+      return true;
     } catch (err: unknown) {
       setError(
         err instanceof Error
           ? err.message
           : 'No se pudo editar la tarea.'
       );
+
+      return false;
     }
   };
+
 
   // Eliminar tarea
   const handleDeleteTask = async (id: string) => {

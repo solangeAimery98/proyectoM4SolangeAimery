@@ -496,3 +496,530 @@
     font-size: 0.9rem;
     line-height: 1.6;
 }
+
+/* =========================================
+   BLOOMY TASK CARDS
+========================================= */
+
+.todo-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.bloomy-task-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    padding: var(--spacing-lg);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    transition: border-color var(--transition-fast),
+        box-shadow var(--transition-fast),
+        background var(--transition-fast);
+}
+
+.bloomy-task-card:hover {
+    border-color: var(--color-primary);
+    box-shadow: var(--shadow-md);
+}
+
+.bloomy-task-main {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-md);
+}
+
+.bloomy-task-checkbox {
+    position: relative;
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    width: 23px;
+    height: 23px;
+    margin-top: 2px;
+    cursor: pointer;
+}
+
+.bloomy-task-checkbox input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+}
+
+.bloomy-task-checkmark {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 23px;
+    height: 23px;
+    color: white;
+    background: transparent;
+    border: 1.5px solid var(--color-border);
+    border-radius: 7px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    transition: background var(--transition-fast),
+        border-color var(--transition-fast);
+}
+
+.bloomy-task-checkbox:hover .bloomy-task-checkmark {
+    border-color: var(--color-primary);
+}
+
+.bloomy-task-checkbox input:checked+.bloomy-task-checkmark {
+    background: var(--color-secondary);
+    border-color: var(--color-secondary);
+}
+
+.bloomy-task-checkbox input:focus-visible+.bloomy-task-checkmark {
+    outline: 3px solid var(--color-primary-light);
+    outline-offset: 3px;
+}
+
+.bloomy-task-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.bloomy-task-title {
+    margin: 0;
+    color: var(--color-text);
+    font-size: 0.95rem;
+    font-weight: 600;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+}
+
+.bloomy-task-description {
+    margin: var(--spacing-xs) 0 0;
+    color: var(--color-text-muted);
+    font-size: 0.83rem;
+    line-height: 1.6;
+    overflow-wrap: anywhere;
+}
+
+.bloomy-task-status {
+    display: inline-block;
+    margin-top: var(--spacing-sm);
+    color: var(--color-secondary);
+    font-size: 0.72rem;
+    font-weight: 600;
+}
+
+.bloomy-task-card.is-completed {
+    background: var(--color-background);
+}
+
+.bloomy-task-card.is-completed .bloomy-task-title {
+    color: var(--color-text-muted);
+    text-decoration: line-through;
+    text-decoration-color: var(--color-secondary);
+}
+
+.bloomy-task-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    padding-top: var(--spacing-sm);
+    border-top: 1px solid var(--color-border);
+}
+
+.bloomy-task-action {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.4rem 0;
+    background: transparent;
+    border: none;
+    font: inherit;
+    font-size: 0.78rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: color var(--transition-fast);
+}
+
+.bloomy-task-action-edit {
+    color: var(--color-text-muted);
+}
+
+.bloomy-task-action-edit:hover {
+    color: var(--color-primary);
+}
+
+.bloomy-task-action-delete {
+    color: var(--color-text-muted);
+}
+
+.bloomy-task-action-delete:hover {
+    color: var(--color-danger);
+}
+
+/* =========================================
+   TASK EDIT FORM
+========================================= */
+
+.bloomy-task-edit-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.bloomy-task-edit-fields {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.bloomy-task-edit-field {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+}
+
+.bloomy-task-edit-field label {
+    color: var(--color-text);
+    font-size: 0.83rem;
+    font-weight: 600;
+}
+
+.bloomy-task-edit-field label span {
+    color: var(--color-text-muted);
+    font-weight: 400;
+}
+
+.bloomy-task-edit-field input,
+.bloomy-task-edit-field textarea {
+    width: 100%;
+    padding: 0.75rem;
+    color: var(--color-text);
+    background: var(--color-background);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    font: inherit;
+    font-size: 0.85rem;
+}
+
+.bloomy-task-edit-field textarea {
+    resize: vertical;
+}
+
+.bloomy-task-edit-field input:focus,
+.bloomy-task-edit-field textarea:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px var(--color-primary-light);
+}
+
+.bloomy-task-edit-actions {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: var(--spacing-sm);
+}
+
+.bloomy-task-button {
+    min-height: 42px;
+    padding: 0.65rem 1rem;
+    border: 1px solid transparent;
+    border-radius: var(--radius-md);
+    font: inherit;
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background var(--transition-fast);
+}
+
+.bloomy-task-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.bloomy-task-button-primary {
+    color: white;
+    background: var(--color-primary);
+}
+
+.bloomy-task-button-primary:hover:not(:disabled) {
+    background: var(--color-primary-hover);
+}
+
+.bloomy-task-button-secondary {
+    color: var(--color-text-muted);
+    background: var(--color-background);
+    border-color: var(--color-border);
+}
+
+.bloomy-task-error {
+    margin: 0;
+    color: var(--color-danger);
+    font-size: 0.8rem;
+}
+
+/* Tablet and desktop */
+
+@media (min-width: 768px) {
+    .bloomy-task-card {
+        padding: var(--spacing-lg) var(--spacing-xl);
+    }
+
+    .bloomy-task-actions {
+        justify-content: flex-end;
+    }
+
+    .bloomy-task-edit-actions {
+        flex-direction: row;
+        justify-content: flex-end;
+    }
+
+    .bloomy-task-button {
+        min-width: 120px;
+    }
+}
+
+/* =========================================
+   BLOOMY TASK CARDS - VISUAL REFINEMENT
+========================================= */
+
+.todo-list {
+    gap: 12px;
+}
+
+/* Tarjetas pendientes */
+
+.bloomy-task-card {
+    gap: 10px;
+    padding: 14px 18px;
+
+    background: #FFF0F4;
+    border: 1px solid #F4DCE4;
+    border-radius: 15px;
+
+    box-shadow:
+        0 3px 8px rgba(112, 75, 88, 0.07),
+        0 6px 16px rgba(112, 75, 88, 0.05);
+
+    transition:
+        background 180ms ease,
+        border-color 180ms ease,
+        box-shadow 180ms ease,
+        transform 180ms ease;
+}
+
+.bloomy-task-card:hover {
+    border-color: #EABBCB;
+
+    box-shadow:
+        0 5px 12px rgba(112, 75, 88, 0.10),
+        0 9px 20px rgba(112, 75, 88, 0.07);
+
+    transform: translateY(-1px);
+}
+
+/* Contenido */
+
+.bloomy-task-main {
+    gap: 12px;
+}
+
+.bloomy-task-title {
+    color: #51464B;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+.bloomy-task-description {
+    margin-top: 4px;
+    color: #82767C;
+    font-size: 0.78rem;
+    line-height: 1.45;
+}
+
+/* Checkbox */
+
+.bloomy-task-checkmark {
+    width: 21px;
+    height: 21px;
+    border: 1.5px solid #D7AAB9;
+    border-radius: 6px;
+}
+
+.bloomy-task-checkbox input:checked+.bloomy-task-checkmark {
+    background: var(--color-sage);
+    border-color: var(--color-sage);
+}
+
+.bloomy-task-checkbox:hover .bloomy-task-checkmark {
+    border-color: var(--color-sage);
+}
+
+/* Acciones */
+
+.bloomy-task-actions {
+    gap: 18px;
+    padding-top: 8px;
+}
+
+.bloomy-task-action {
+    font-size: 0.74rem;
+}
+
+/* =========================================
+   COMPLETED TASKS
+========================================= */
+
+.bloomy-task-card.is-completed {
+    background: #EAE8E9;
+    border-color: #D9D5D7;
+
+    box-shadow:
+        0 3px 8px rgba(70, 65, 68, 0.08),
+        0 5px 12px rgba(70, 65, 68, 0.04);
+}
+
+.bloomy-task-card.is-completed:hover {
+    background: #E5E2E4;
+    border-color: #CEC8CB;
+}
+
+.bloomy-task-card.is-completed .bloomy-task-title {
+    color: #777075;
+    text-decoration: line-through;
+    text-decoration-color: #A39BA0;
+}
+
+.bloomy-task-card.is-completed .bloomy-task-description {
+    color: #817A7E;
+}
+
+.bloomy-task-status {
+    margin-top: 5px;
+    color: #63866B;
+    font-size: 0.7rem;
+}
+
+/* Accesibilidad */
+
+.bloomy-task-checkbox input:focus-visible+.bloomy-task-checkmark {
+    outline-color: var(--color-sage-light);
+}
+
+/* Mobile */
+
+@media (max-width: 767px) {
+    .bloomy-task-card {
+        padding: 12px 14px;
+    }
+
+    .bloomy-task-actions {
+        gap: 15px;
+    }
+}
+
+/* =========================================
+   TASK COMPLETION ANIMATIONS
+========================================= */
+
+.bloomy-task-card {
+    transition:
+        background-color 350ms ease,
+        border-color 350ms ease,
+        box-shadow 350ms ease,
+        transform 200ms ease;
+}
+
+.bloomy-task-card.is-completed {
+    animation: task-completed 350ms ease both;
+}
+
+.bloomy-task-card:not(.is-completed) {
+    animation: task-pending 350ms ease both;
+}
+
+@keyframes task-completed {
+    from {
+        background-color: #FFF0F4;
+        border-color: #F4DCE4;
+    }
+
+    to {
+        background-color: #EAE8E9;
+        border-color: #D9D5D7;
+    }
+}
+
+@keyframes task-pending {
+    from {
+        background-color: #EAE8E9;
+    }
+
+    to {
+        background-color: #FFF0F4;
+    }
+}
+
+/* Animación del checkbox */
+
+.bloomy-task-checkmark {
+    transition:
+        background-color 250ms ease,
+        border-color 250ms ease,
+        transform 250ms ease;
+}
+
+.bloomy-task-checkbox input:checked+.bloomy-task-checkmark {
+    animation: check-pop 250ms ease;
+}
+
+@keyframes check-pop {
+    0% {
+        transform: scale(0.85);
+    }
+
+    65% {
+        transform: scale(1.15);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Aparición del estado completado */
+
+.bloomy-task-status {
+    animation: status-appear 300ms ease both;
+}
+
+@keyframes status-appear {
+    from {
+        opacity: 0;
+        transform: translateY(4px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Accesibilidad: respetar preferencias de movimiento */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .bloomy-task-card,
+    .bloomy-task-card.is-completed,
+    .bloomy-task-card:not(.is-completed),
+    .bloomy-task-checkmark,
+    .bloomy-task-checkbox input:checked+.bloomy-task-checkmark,
+    .bloomy-task-status {
+        animation: none;
+        transition: none;
+    }
+}
