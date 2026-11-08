@@ -42,8 +42,11 @@ export const useTasks = (userId?: string) => {
   }, [userId]);
 
   // Crear tarea
-  const handleAddTask = async (title: string, description?: string) => {
-    if (!userId) return;
+  const handleAddTask = async (
+    title: string,
+    description?: string
+  ): Promise<boolean> => {
+    if (!userId) return false;
 
     try {
       setError(null);
@@ -54,15 +57,18 @@ export const useTasks = (userId?: string) => {
         completed: false,
         userId,
       });
+
+      return true;
     } catch (err: unknown) {
       setError(
         err instanceof Error
           ? err.message
           : 'No se pudo crear la tarea.'
       );
+
+      return false;
     }
   };
-
   // Cambiar estado de una tarea
   const handleToggleTask = async (id: string, completed: boolean) => {
     try {
