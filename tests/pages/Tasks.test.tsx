@@ -93,13 +93,17 @@ describe('Tasks', () => {
         configureGarden();
     });
 
-    it('debe mostrar el saludo y el formulario de tareas', () => {
+    it('debe mostrar el saludo con el email completo y el formulario de tareas', () => {
         render(<Tasks />);
 
         expect(
             screen.getByRole('heading', {
-                name: '¡Hola, test!',
+                name: '¡Hola!',
             })
+        ).toBeInTheDocument();
+
+        expect(
+            screen.getByText('test@email.com')
         ).toBeInTheDocument();
 
         expect(

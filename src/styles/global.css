@@ -128,9 +128,12 @@ ol {
     margin-top: 1rem;
 }
 
-input[type="text"],
-input[type="email"],
-input[type="password"] {
+/* Los estilos antiguos de inputs quedan limitados
+   a los formularios legacy. */
+
+.auth-container input[type="text"],
+.auth-container input[type="email"],
+.auth-container input[type="password"] {
     padding: 0.75rem;
     border: 1px solid #ccc;
     border-radius: 4px;

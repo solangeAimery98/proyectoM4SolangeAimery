@@ -7,18 +7,22 @@ import {
   deleteTask,
 } from './taskService';
 import { completeTaskWithReward } from '../garden/services/gardenService';
+
 export const useTasks = (userId?: string) => {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
   useEffect(() => {
     if (!userId) {
       setTasks([]);
       setLoading(false);
       return;
     }
+
     setLoading(true);
     setError(null);
+
     const unsubscribe = subscribeToTasks(
       userId,
       (updatedTasks) => {
@@ -31,21 +35,26 @@ export const useTasks = (userId?: string) => {
         setLoading(false);
       }
     );
+
     return unsubscribe;
   }, [userId]);
+
   const handleAddTask = async (
     title: string,
     description?: string
   ): Promise<boolean> => {
     if (!userId) return false;
+
     try {
       setError(null);
+
       await addTask({
         title: title.trim(),
         description: description?.trim() ?? '',
         completed: false,
         userId,
       });
+
       return true;
     } catch (err) {
       setError(
@@ -54,18 +63,25 @@ export const useTasks = (userId?: string) => {
       return false;
     }
   };
+
   const handleToggleTask = async (
     id: string,
     completed: boolean
   ): Promise<boolean> => {
     if (!userId) return false;
+
     try {
       setError(null);
+
       if (completed) {
         await completeTaskWithReward(userId, id);
       } else {
-        await updateTask(id, { completed: false });
+        await updateTask(id, {
+          completed: false,
+          completedAt: null,
+        });
       }
+
       return true;
     } catch (err) {
       setError(
@@ -74,6 +90,7 @@ export const useTasks = (userId?: string) => {
       return false;
     }
   };
+
   const handleEditTask = async (
     id: string,
     title: string,
@@ -81,10 +98,12 @@ export const useTasks = (userId?: string) => {
   ): Promise<boolean> => {
     try {
       setError(null);
+
       await updateTask(id, {
         title: title.trim(),
         description: description.trim(),
       });
+
       return true;
     } catch (err) {
       setError(
@@ -93,6 +112,7 @@ export const useTasks = (userId?: string) => {
       return false;
     }
   };
+
   const handleDeleteTask = async (id: string): Promise<void> => {
     try {
       setError(null);
@@ -103,6 +123,7 @@ export const useTasks = (userId?: string) => {
       );
     }
   };
+
   return {
     tasks,
     loading,

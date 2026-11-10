@@ -1,26 +1,29 @@
 /* ==========================================================================
-   BLOOMY LAYOUT STYLES - Mobile First Architecture
-   Paleta: Rosa Pastel, Verde Salvia, Crema y Minimalismo Botánico
+   BLOOMY LAYOUT STYLES
+   Mobile First Architecture
+   Paleta: Rosa Pastel, Rosa Profundo, Verde Salvia y Crema
    ========================================================================== */
 
-/* --------------------------------------------------------------------------
-   1. Root Layout Container (Mobile First)
-   -------------------------------------------------------------------------- */
+/* ==========================================================================
+   1. ROOT LAYOUT
+   ========================================================================== */
+
 .bloomy-app-layout {
-  min-height: 100vh;
+  position: relative;
   display: flex;
   flex-direction: column;
+  min-height: 100vh;
   background-color: var(--color-background);
   color: var(--color-text-primary);
   font-family: var(--font-primary);
-  position: relative;
 }
 
 .bloomy-layout-content-wrapper {
-  flex: 1;
   display: flex;
+  flex: 1;
   flex-direction: column;
   width: 100%;
+  min-width: 0;
 }
 
 .bloomy-main-content {
@@ -28,128 +31,206 @@
   width: 100%;
   max-width: 100%;
   margin: 0 auto;
-  padding: var(--spacing-md) var(--spacing-md) calc(var(--spacing-2xl) + 64px + env(safe-area-inset-bottom, 0px));
-  /* Espacio para evitar superposición con BottomNav en móvil */
+  padding:
+    var(--spacing-md) var(--spacing-md) calc(var(--spacing-2xl) + 64px + env(safe-area-inset-bottom, 0px));
   box-sizing: border-box;
 }
 
-/* --------------------------------------------------------------------------
-   2. Bottom Navigation (Mobile Default)
-   -------------------------------------------------------------------------- */
+/* ==========================================================================
+   2. BOTTOM NAVIGATION — MOBILE
+   ========================================================================== */
+
 .bloomy-bottom-nav {
   position: fixed;
+  z-index: 1000;
+  right: 0;
   bottom: 0;
   left: 0;
-  right: 0;
-  width: 100%;
-  height: calc(64px + env(safe-area-inset-bottom, 0px));
-  box-sizing: border-box;
-  background-color: var(--color-surface);
-  border-top: 1px solid var(--color-border);
-  box-shadow: 0 -4px 20px rgba(41, 37, 43, 0.05);
-  z-index: 1000;
-  padding-bottom: env(safe-area-inset-bottom, 0px);
+
   display: flex;
   align-items: center;
   justify-content: center;
+
+  width: 100%;
+  height: calc(64px + env(safe-area-inset-bottom, 0px));
+
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+
+  box-sizing: border-box;
+
+  background-color: var(--color-surface);
+  border-top: 1px solid var(--color-border);
+  box-shadow: 0 -4px 20px rgba(41, 37, 43, 0.05);
 }
 
 .bloomy-bottom-nav-container {
   display: flex;
   align-items: center;
   justify-content: space-around;
+
   width: 100%;
   max-width: 500px;
   height: 100%;
+
   padding: 0 var(--spacing-sm);
 }
 
 .bloomy-bottom-nav-item {
+  position: relative;
+
   display: flex;
+  flex: 1;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  flex: 1;
+
+  min-width: 44px;
+  min-height: 44px;
   height: 100%;
+
   gap: var(--spacing-xs);
+
   color: var(--color-text-secondary);
   text-decoration: none;
   font-size: var(--font-size-xs);
   font-weight: 600;
-  transition: all var(--transition-fast);
-  position: relative;
+
+  transition:
+    color var(--transition-fast),
+    background-color var(--transition-fast);
 }
 
 .bloomy-bottom-nav-icon {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 32px;
+
+  width: 36px;
   height: 32px;
+
+  color: inherit;
   border-radius: var(--radius-full);
-  transition: all var(--transition-fast);
+
+  transition:
+    background-color var(--transition-normal),
+    color var(--transition-normal),
+    transform var(--transition-normal);
 }
+
+.bloomy-bottom-nav-label {
+  line-height: 1.2;
+  transition: color var(--transition-fast);
+}
+
+/* Hover */
 
 .bloomy-bottom-nav-item:hover {
-  color: var(--color-primary-hover);
+  color: var(--color-primary-deep);
 }
 
+.bloomy-bottom-nav-item:hover .bloomy-bottom-nav-icon {
+  transform: translateY(-2px);
+}
+
+/* Active state */
+
 .bloomy-bottom-nav-item.active {
-  color: var(--color-primary);
-  font-weight: 600;
+  color: var(--color-primary-deep);
+  font-weight: 700;
 }
 
 .bloomy-bottom-nav-item.active .bloomy-bottom-nav-icon {
+  color: var(--color-primary-deep);
   background-color: var(--color-primary-light);
-  color: var(--color-primary);
+  transform: translateY(-1px);
 }
 
 .bloomy-bottom-nav-item.active::after {
-  content: '';
   position: absolute;
   top: 0;
+
   width: 24px;
   height: 3px;
-  background-color: var(--color-primary);
+
+  content: '';
+
+  background-color: var(--color-primary-deep);
   border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+
+  animation: bloomy-nav-indicator 220ms ease both;
 }
 
-/* --------------------------------------------------------------------------
-   3. Sidebar (Oculto en móvil por defecto)
-   -------------------------------------------------------------------------- */
+@keyframes bloomy-nav-indicator {
+  from {
+    opacity: 0;
+    transform: scaleX(0.5);
+  }
+
+  to {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+}
+
+/* Keyboard accessibility */
+
+.bloomy-bottom-nav-item:focus-visible {
+  outline: 2px solid var(--color-primary-deep);
+  outline-offset: -3px;
+  border-radius: var(--radius-md);
+}
+
+/* ==========================================================================
+   3. SIDEBAR — HIDDEN ON MOBILE
+   ========================================================================== */
+
 .bloomy-sidebar {
   display: none;
 }
 
-/* --------------------------------------------------------------------------
-   4. Tablet Breakpoint (>= 768px)
-   -------------------------------------------------------------------------- */
+/* ==========================================================================
+   4. TABLET — 768px
+   ========================================================================== */
+
 @media (min-width: 768px) {
+
+  /* Root layout */
+
   .bloomy-app-layout {
     flex-direction: row;
   }
 
-  /* Ocultar navegación móvil inferior */
+  /* Hide mobile navigation */
+
   .bloomy-bottom-nav {
     display: none;
   }
 
-  /* Mostrar y configurar Sidebar adaptable */
+  /* Sidebar */
+
   .bloomy-sidebar {
-    display: flex;
-    flex-direction: column;
-    width: 220px;
-    height: 100vh;
     position: sticky;
     top: 0;
+
+    display: flex;
     flex-shrink: 0;
+    flex-direction: column;
+
+    width: 220px;
+    height: 100vh;
+
+    padding: var(--spacing-lg) var(--spacing-md);
+
+    box-sizing: border-box;
+
     background-color: var(--color-surface);
     border-right: 1px solid var(--color-border);
     box-shadow: var(--shadow-soft);
-    padding: var(--spacing-lg) var(--spacing-md);
-    box-sizing: border-box;
+
     z-index: 100;
   }
+
+  /* Brand */
 
   .bloomy-sidebar-brand {
     margin-bottom: var(--spacing-xl);
@@ -160,19 +241,28 @@
     display: flex;
     align-items: center;
     gap: var(--spacing-sm);
-    text-decoration: none;
+
     color: var(--color-text-primary);
+    text-decoration: none;
   }
 
   .bloomy-brand-icon-wrapper {
     display: flex;
+    flex-shrink: 0;
     align-items: center;
     justify-content: center;
+
     width: 40px;
     height: 40px;
-    border-radius: var(--radius-md);
+
     background-color: var(--color-cream);
-    flex-shrink: 0;
+    border-radius: var(--radius-md);
+
+    transition: transform var(--transition-normal);
+  }
+
+  .bloomy-brand-link:hover .bloomy-brand-icon-wrapper {
+    transform: rotate(-5deg) scale(1.05);
   }
 
   .bloomy-brand-text {
@@ -181,44 +271,50 @@
   }
 
   .bloomy-brand-name {
+    color: var(--color-primary-deep);
     font-family: var(--font-display);
     font-size: var(--font-size-xl);
     font-weight: 700;
-    color: var(--color-text-primary);
     line-height: 1.1;
     letter-spacing: -0.01em;
   }
 
   .bloomy-brand-tagline {
-    font-size: var(--font-size-xs);
-    color: var(--color-text-muted);
-    font-weight: 400;
     margin-top: 2px;
+
+    color: var(--color-text-muted);
+    font-size: var(--font-size-xs);
+    font-weight: 400;
   }
 
+  /* Sidebar navigation */
+
   .bloomy-sidebar-nav {
-    flex: 1;
     display: flex;
+    flex: 1;
     flex-direction: column;
   }
 
   .bloomy-nav-section-title {
-    font-size: var(--font-size-xs);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--color-text-muted);
-    font-weight: 600;
     margin-bottom: var(--spacing-sm);
     padding-left: var(--spacing-sm);
+
+    color: var(--color-text-muted);
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
   }
 
   .bloomy-sidebar-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
     display: flex;
     flex-direction: column;
     gap: var(--spacing-xs);
+
+    padding: 0;
+    margin: 0;
+
+    list-style: none;
   }
 
   .bloomy-sidebar-list-item {
@@ -229,27 +325,37 @@
     display: flex;
     align-items: center;
     gap: var(--spacing-md);
+
+    min-height: 44px;
     padding: var(--spacing-sm) var(--spacing-md);
-    border-radius: var(--radius-md);
-    text-decoration: none;
+
     color: var(--color-text-secondary);
     font-size: var(--font-size-sm);
     font-weight: 600;
-    transition: all var(--transition-normal);
+    text-decoration: none;
+
+    border-radius: var(--radius-md);
+
+    transition:
+      background-color var(--transition-normal),
+      color var(--transition-normal),
+      transform var(--transition-normal);
   }
 
   .bloomy-sidebar-icon {
     display: flex;
+    flex-shrink: 0;
     align-items: center;
     justify-content: center;
+
     color: inherit;
-    flex-shrink: 0;
+
     transition: transform var(--transition-fast);
   }
 
   .bloomy-sidebar-nav-item:hover {
+    color: var(--color-primary-deep);
     background-color: var(--color-surface-secondary);
-    color: var(--color-primary-hover);
   }
 
   .bloomy-sidebar-nav-item:hover .bloomy-sidebar-icon {
@@ -257,19 +363,26 @@
   }
 
   .bloomy-sidebar-nav-item.active {
+    color: var(--color-primary-deep);
     background-color: var(--color-primary-light);
-    color: var(--color-text-primary);
-    font-weight: 600;
+    font-weight: 700;
   }
 
   .bloomy-sidebar-nav-item.active .bloomy-sidebar-icon {
-    color: var(--color-primary);
+    color: var(--color-primary-deep);
   }
 
-  /* Footer en Sidebar */
+  .bloomy-sidebar-nav-item:focus-visible {
+    outline: 2px solid var(--color-primary-deep);
+    outline-offset: 2px;
+  }
+
+  /* Sidebar footer */
+
   .bloomy-sidebar-footer {
     margin-top: auto;
     padding-top: var(--spacing-md);
+
     border-top: 1px solid var(--color-border);
   }
 
@@ -283,108 +396,148 @@
     display: flex;
     align-items: center;
     gap: var(--spacing-sm);
+
     padding: var(--spacing-xs);
+
     overflow: hidden;
   }
 
   .bloomy-user-avatar {
-    width: 34px;
-    height: 34px;
-    border-radius: var(--radius-full);
-    background-color: var(--color-sage-light);
-    color: var(--color-success-dark);
     display: flex;
+    flex-shrink: 0;
     align-items: center;
     justify-content: center;
-    font-weight: 600;
-    font-size: var(--font-size-sm);
-    flex-shrink: 0;
+
+    width: 34px;
+    height: 34px;
+
+    color: var(--color-success-dark);
+    background-color: var(--color-sage-light);
+
     border: 1px solid var(--color-sage);
+    border-radius: var(--radius-full);
+
+    font-size: var(--font-size-sm);
+    font-weight: 600;
   }
 
   .bloomy-user-details {
     display: flex;
     flex-direction: column;
-    overflow: hidden;
+
     min-width: 0;
+    overflow: hidden;
   }
 
   .bloomy-user-email {
+    overflow: hidden;
+
+    color: var(--color-text-primary);
     font-size: var(--font-size-xs);
     font-weight: 500;
-    color: var(--color-text-primary);
+
     white-space: nowrap;
-    overflow: hidden;
     text-overflow: ellipsis;
   }
 
   .bloomy-user-status {
-    font-size: 0.7rem;
     color: var(--color-success);
+    font-size: 0.7rem;
     font-weight: 500;
   }
+
+  /* Logout */
 
   .bloomy-btn-logout {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: var(--spacing-xs);
+
     width: 100%;
+    min-height: 44px;
     padding: var(--spacing-xs) var(--spacing-sm);
+
+    color: var(--color-text-secondary);
     background-color: transparent;
+
     border: 1px solid var(--color-border);
     border-radius: var(--radius-sm);
-    color: var(--color-text-secondary);
+
     font-size: var(--font-size-xs);
     font-weight: 600;
-    transition: all var(--transition-fast);
+
+    transition:
+      background-color var(--transition-fast),
+      border-color var(--transition-fast),
+      color var(--transition-fast);
   }
 
   .bloomy-btn-logout:hover {
+    color: var(--color-error);
     background-color: var(--color-surface-secondary);
     border-color: var(--color-error);
-    color: var(--color-error);
   }
+
+  .bloomy-btn-logout:focus-visible,
+  .bloomy-btn-auth-link:focus-visible {
+    outline: 2px solid var(--color-primary-deep);
+    outline-offset: 2px;
+  }
+
+  /* Authentication link */
 
   .bloomy-btn-auth-link {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: var(--spacing-xs);
+
     width: 100%;
+    min-height: 44px;
     padding: var(--spacing-sm);
+
+    color: var(--color-primary-deep);
     background-color: var(--color-primary-light);
-    color: var(--color-primary);
+
     border-radius: var(--radius-sm);
+
     font-size: var(--font-size-xs);
     font-weight: 600;
     text-decoration: none;
-    transition: background-color var(--transition-fast);
+
+    transition:
+      background-color var(--transition-fast),
+      color var(--transition-fast);
   }
 
   .bloomy-btn-auth-link:hover {
-    background-color: var(--color-primary);
     color: var(--color-text-inverse);
+    background-color: var(--color-primary-deep);
   }
 
   .bloomy-logout-error {
-    font-size: var(--font-size-xs);
-    color: var(--color-error);
-    text-align: center;
     margin-top: var(--spacing-xs);
+
+    color: var(--color-error);
+    font-size: var(--font-size-xs);
+    text-align: center;
   }
 
-  /* Main content en Tablet */
+  /* Main content */
+
   .bloomy-main-content {
-    padding: var(--spacing-xl);
     max-width: 860px;
+    padding: var(--spacing-xl);
   }
 }
 
-/* --------------------------------------------------------------------------
-   5. Desktop Breakpoint (>= 1024px)
-   -------------------------------------------------------------------------- */
+/* ==========================================================================
+   5. DESKTOP — 1024px
+   ========================================================================== */
+
 @media (min-width: 1024px) {
+
   .bloomy-sidebar {
     width: 260px;
     padding: var(--spacing-xl) var(--spacing-lg);
@@ -395,12 +548,33 @@
   }
 
   .bloomy-sidebar-nav-item {
-    font-size: var(--font-size-base);
     padding: var(--spacing-sm) var(--spacing-md);
+    font-size: var(--font-size-base);
   }
 
   .bloomy-main-content {
-    padding: var(--spacing-2xl);
     max-width: 1100px;
+    padding: var(--spacing-2xl);
+  }
+}
+
+/* ==========================================================================
+   6. REDUCED MOTION
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .bloomy-bottom-nav-item,
+  .bloomy-bottom-nav-icon,
+  .bloomy-sidebar-nav-item,
+  .bloomy-sidebar-icon,
+  .bloomy-brand-icon-wrapper,
+  .bloomy-btn-logout,
+  .bloomy-btn-auth-link {
+    transition: none;
+  }
+
+  .bloomy-bottom-nav-item.active::after {
+    animation: none;
   }
 }

@@ -33,10 +33,10 @@ export const Tasks: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [activeFilter, setActiveFilter] = useState<TaskFilter>('all');
 
-  // Nombre del usuario autenticado.
+  // Email completo del usuario autenticado.
   const userName =
+    currentUser?.email ||
     currentUser?.displayName ||
-    currentUser?.email?.split('@')[0] ||
     'Usuario';
 
   // Estadísticas generales de las tareas.

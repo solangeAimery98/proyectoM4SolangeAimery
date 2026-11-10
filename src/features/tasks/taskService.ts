@@ -15,7 +15,6 @@ import { Task, NewTask } from '../../types/Task';
 
 const TASKS_COLLECTION = 'tasks';
 
-// Suscripción en tiempo real a las tareas de un usuario
 export const subscribeToTasks = (
   userId: string,
   onTasks: (tasks: Task[]) => void,
@@ -40,7 +39,6 @@ export const subscribeToTasks = (
   );
 };
 
-// Crear una tarea
 export const addTask = async (task: NewTask) => {
   return await addDoc(collection(db, TASKS_COLLECTION), {
     ...task,
@@ -48,17 +46,17 @@ export const addTask = async (task: NewTask) => {
   });
 };
 
-// Actualizar una tarea
 export const updateTask = async (
   id: string,
-  updates: Partial<Pick<Task, 'title' | 'description' | 'completed'>>
+  updates: Partial<
+    Pick<Task, 'title' | 'description' | 'completed' | 'completedAt'>
+  >
 ) => {
   const taskRef = doc(db, TASKS_COLLECTION, id);
 
   return await updateDoc(taskRef, updates);
 };
 
-// Eliminar una tarea
 export const deleteTask = async (id: string) => {
   const taskRef = doc(db, TASKS_COLLECTION, id);
 

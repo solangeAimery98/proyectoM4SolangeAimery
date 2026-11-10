@@ -1,215 +1,223 @@
 rules_version = '2';
 
 service cloud.firestore {
-  match /databases/{database}/documents {
+match /databases/{database}/documents {
 
-    // =========================================
-    // TASKS
-    // =========================================
-    match /tasks/{taskId} {
-
-      function isOwner() {
-        return request.auth != null
-          && resource.data.userId == request.auth.uid;
-      }
-
-      function isValidTask() {
-        return request.resource.data.title is string
-          && request.resource.data.title.size() > 0
-          && request.resource.data.title.size() <= 100
-          && request.resource.data.title
-            == request.resource.data.title.trim()
-          && request.resource.data.description is string
-          && request.resource.data.description.size() <= 500
-          && request.resource.data.completed is bool
-          && request.resource.data.userId == request.auth.uid;
-      }
-
-      function hasExistingReward() {
-        return exists(
-          /databases/$(database)/documents/users/$(request.auth.uid)/gardenRewards/$(taskId)
-        );
-      }
-
-      function hasNewValidReward() {
-        let rewardPath =
-          /databases/$(database)/documents/users/$(request.auth.uid)/gardenRewards/$(taskId);
-
-        let progressPath =
-          /databases/$(database)/documents/users/$(request.auth.uid)/garden/progress;
-
-        return existsAfter(rewardPath)
-          && getAfter(rewardPath).data.taskId == taskId
-          && getAfter(rewardPath).data.points == 10
-          && existsAfter(progressPath)
-          && getAfter(progressPath).data.lastRewardTaskId == taskId;
-      }
-
-      allow read: if isOwner();
-
-      allow create: if request.auth != null
-        && request.resource.data.keys().hasAll([
-          'title',
-          'description',
-          'completed',
-          'userId',
-          'createdAt'
-        ])
-        && request.resource.data.keys().hasOnly([
-          'title',
-          'description',
-          'completed',
-          'userId',
-          'createdAt'
-        ])
-        && request.resource.data.userId == request.auth.uid
-        && request.resource.data.title is string
-        && request.resource.data.title.size() > 0
-        && request.resource.data.title.size() <= 100
-        && request.resource.data.title
-          == request.resource.data.title.trim()
-        && request.resource.data.description is string
-        && request.resource.data.description.size() <= 500
-        && request.resource.data.completed is bool
-        && request.resource.data.completed == false
-        && request.resource.data.createdAt == request.time;
-
-      allow update: if isOwner()
-        && request.resource.data.diff(resource.data)
-          .affectedKeys()
-          .hasOnly(['title', 'description', 'completed'])
-        && isValidTask()
-        && (
-          // Edición o desmarcado.
-          request.resource.data.completed == resource.data.completed
-          || request.resource.data.completed == false
-
-          // Nueva recompensa o recompensa previamente registrada.
-          || (
-            resource.data.completed == false
-            && request.resource.data.completed == true
-            && (
-              hasExistingReward()
-              || hasNewValidReward()
-            )
-          )
-        );
-
-      allow delete: if isOwner();
-    }
-
-    // =========================================
-    // USERS / GARDEN
-    // =========================================
-    match /users/{userId}/garden/progress {
-
-      function isGardenOwner() {
-        return request.auth != null
-          && request.auth.uid == userId;
-      }
-
-      function hasValidRewardAfter() {
-        let rewardPath =
-          /databases/$(database)/documents/users/$(userId)/gardenRewards/$(request.resource.data.lastRewardTaskId);
-
-        let taskPath =
-          /databases/$(database)/documents/tasks/$(request.resource.data.lastRewardTaskId);
-
-        return !exists(rewardPath)
-          && existsAfter(rewardPath)
-          && getAfter(rewardPath).data.taskId == request.resource.data.lastRewardTaskId
-          && getAfter(rewardPath).data.points == 10
-          && existsAfter(taskPath)
-          && getAfter(taskPath).data.userId == userId
-          && getAfter(taskPath).data.completed == true;
-      }
-
-      allow read: if isGardenOwner();
-
-      allow create: if isGardenOwner()
-        && request.resource.data.keys().hasAll([
-          'growthPoints',
-          'totalWaterings',
-          'lastRewardTaskId',
-          'updatedAt'
-        ])
-        && request.resource.data.keys().hasOnly([
-          'growthPoints',
-          'totalWaterings',
-          'lastRewardTaskId',
-          'updatedAt'
-        ])
-        && request.resource.data.growthPoints == 10
-        && request.resource.data.totalWaterings == 1
-        && request.resource.data.lastRewardTaskId is string
-        && request.resource.data.updatedAt == request.time
-        && hasValidRewardAfter();
-
-      allow update: if isGardenOwner()
-        && request.resource.data.diff(resource.data)
-          .affectedKeys()
-          .hasOnly([
-            'growthPoints',
-            'totalWaterings',
-            'lastRewardTaskId',
-            'updatedAt'
-          ])
-        && request.resource.data.growthPoints
-          == resource.data.growthPoints + 10
-        && request.resource.data.totalWaterings
-          == resource.data.totalWaterings + 1
-        && request.resource.data.lastRewardTaskId is string
-        && request.resource.data.updatedAt == request.time
-        && hasValidRewardAfter();
-
-      allow delete: if false;
-    }
-
-    // =========================================
-    // GARDEN REWARDS
-    // =========================================
-    match /users/{userId}/gardenRewards/{taskId} {
-
-      function isRewardOwner() {
-        return request.auth != null
-          && request.auth.uid == userId;
-      }
-
-      function isValidReward() {
-        let taskPath =
-          /databases/$(database)/documents/tasks/$(taskId);
-
-        let progressPath =
-          /databases/$(database)/documents/users/$(userId)/garden/progress;
-
-        return exists(taskPath)
-          && get(taskPath).data.userId == userId
-          && get(taskPath).data.completed == false
-          && existsAfter(taskPath)
-          && getAfter(taskPath).data.completed == true
-          && existsAfter(progressPath)
-          && getAfter(progressPath).data.lastRewardTaskId == taskId;
-      }
-
-      allow read: if isRewardOwner();
-
-      allow create: if isRewardOwner()
-        && request.resource.data.keys().hasAll([
-          'taskId',
-          'points',
-          'createdAt'
-        ])
-        && request.resource.data.keys().hasOnly([
-          'taskId',
-          'points',
-          'createdAt'
-        ])
-        && request.resource.data.taskId == taskId
-        && request.resource.data.points == 10
-        && request.resource.data.createdAt == request.time
-        && isValidReward();
-
-      allow update, delete: if false;
-    }
+// =========================================
+// TASKS
+// =========================================
+match /tasks/{taskId} {
+function isOwner() {
+  return request.auth != null
+    && resource.data.userId == request.auth.uid;
+}
+  function isValidTask() {
+    return request.resource.data.title is string
+      && request.resource.data.title.size() > 0
+      && request.resource.data.title.size() <= 100
+      && request.resource.data.title
+        == request.resource.data.title.trim()
+      && request.resource.data.description is string
+      && request.resource.data.description.size() <= 500
+      && request.resource.data.completed is bool
+      && request.resource.data.userId == request.auth.uid;
   }
+  function hasValidCompletionTimestamp() {
+    return (
+      // La tarea continúa completada:
+      // la fecha original no puede modificarse.
+      request.resource.data.completed == true
+      && resource.data.completed == true
+      && request.resource.data.get('completedAt', null)
+        == resource.data.get('completedAt', null)
+    ) || (
+      // Primera finalización o nueva finalización:
+      // debe utilizar la fecha del servidor.
+      request.resource.data.completed == true
+      && resource.data.completed == false
+      && request.resource.data.completedAt == request.time
+    ) || (
+      // Se desmarca una tarea:
+      // completedAt debe quedar en null.
+      request.resource.data.completed == false
+      && resource.data.completed == true
+      && request.resource.data.get('completedAt', null) == null
+    ) || (
+      // La tarea continúa pendiente:
+      // no se permite modificar su fecha.
+      request.resource.data.completed == false
+      && resource.data.completed == false
+      && request.resource.data.get('completedAt', null)
+        == resource.data.get('completedAt', null)
+    );
+  }
+  function hasExistingReward() {
+    return exists(
+      /databases/$(database)/documents/users/$(request.auth.uid)/gardenRewards/$(taskId)
+    );
+  }
+  function hasNewValidReward() {
+    let rewardPath =
+      /databases/$(database)/documents/users/$(request.auth.uid)/gardenRewards/$(taskId);
+    let progressPath =
+      /databases/$(database)/documents/users/$(request.auth.uid)/garden/progress;
+    return existsAfter(rewardPath)
+      && getAfter(rewardPath).data.taskId == taskId
+      && getAfter(rewardPath).data.points == 10
+      && existsAfter(progressPath)
+      && getAfter(progressPath).data.lastRewardTaskId == taskId;
+  }
+  allow read: if isOwner();
+  allow create: if request.auth != null
+    && request.resource.data.keys().hasAll([
+      'title',
+      'description',
+      'completed',
+      'userId',
+      'createdAt'
+    ])
+    && request.resource.data.keys().hasOnly([
+      'title',
+      'description',
+      'completed',
+      'userId',
+      'createdAt'
+    ])
+    && request.resource.data.userId == request.auth.uid
+    && request.resource.data.title is string
+    && request.resource.data.title.size() > 0
+    && request.resource.data.title.size() <= 100
+    && request.resource.data.title
+      == request.resource.data.title.trim()
+    && request.resource.data.description is string
+    && request.resource.data.description.size() <= 500
+    && request.resource.data.completed is bool
+    && request.resource.data.completed == false
+    && request.resource.data.createdAt == request.time;
+  allow update: if isOwner()
+    && request.resource.data.diff(resource.data)
+      .affectedKeys()
+      .hasOnly([
+        'title',
+        'description',
+        'completed',
+        'completedAt'
+      ])
+    && isValidTask()
+    && hasValidCompletionTimestamp()
+    && (
+      // Edición o desmarcado.
+      request.resource.data.completed == resource.data.completed
+      || request.resource.data.completed == false
+      // Nueva recompensa o recompensa previamente registrada.
+      || (
+        resource.data.completed == false
+        && request.resource.data.completed == true
+        && (
+          hasExistingReward()
+          || hasNewValidReward()
+        )
+      )
+    );
+  allow delete: if isOwner();
+}
+// =========================================
+// USERS / GARDEN
+// =========================================
+match /users/{userId}/garden/progress {
+  function isGardenOwner() {
+    return request.auth != null
+      && request.auth.uid == userId;
+  }
+  function hasValidRewardAfter() {
+    let rewardPath =
+      /databases/$(database)/documents/users/$(userId)/gardenRewards/$(request.resource.data.lastRewardTaskId);
+    let taskPath =
+      /databases/$(database)/documents/tasks/$(request.resource.data.lastRewardTaskId);
+    return !exists(rewardPath)
+      && existsAfter(rewardPath)
+      && getAfter(rewardPath).data.taskId == request.resource.data.lastRewardTaskId
+      && getAfter(rewardPath).data.points == 10
+      && existsAfter(taskPath)
+      && getAfter(taskPath).data.userId == userId
+      && getAfter(taskPath).data.completed == true;
+  }
+  allow read: if isGardenOwner();
+  allow create: if isGardenOwner()
+    && request.resource.data.keys().hasAll([
+      'growthPoints',
+      'totalWaterings',
+      'lastRewardTaskId',
+      'updatedAt'
+    ])
+    && request.resource.data.keys().hasOnly([
+      'growthPoints',
+      'totalWaterings',
+      'lastRewardTaskId',
+      'updatedAt'
+    ])
+    && request.resource.data.growthPoints == 10
+    && request.resource.data.totalWaterings == 1
+    && request.resource.data.lastRewardTaskId is string
+    && request.resource.data.updatedAt == request.time
+    && hasValidRewardAfter();
+  allow update: if isGardenOwner()
+    && request.resource.data.diff(resource.data)
+      .affectedKeys()
+      .hasOnly([
+        'growthPoints',
+        'totalWaterings',
+        'lastRewardTaskId',
+        'updatedAt'
+      ])
+    && request.resource.data.growthPoints
+      == resource.data.growthPoints + 10
+    && request.resource.data.totalWaterings
+      == resource.data.totalWaterings + 1
+    && request.resource.data.lastRewardTaskId is string
+    && request.resource.data.updatedAt == request.time
+    && hasValidRewardAfter();
+  allow delete: if false;
+}
+// =========================================
+// GARDEN REWARDS
+// =========================================
+match /users/{userId}/gardenRewards/{taskId} {
+  function isRewardOwner() {
+    return request.auth != null
+      && request.auth.uid == userId;
+  }
+  function isValidReward() {
+    let taskPath =
+      /databases/$(database)/documents/tasks/$(taskId);
+    let progressPath =
+      /databases/$(database)/documents/users/$(userId)/garden/progress;
+    return exists(taskPath)
+      && get(taskPath).data.userId == userId
+      && get(taskPath).data.completed == false
+      && existsAfter(taskPath)
+      && getAfter(taskPath).data.completed == true
+      && existsAfter(progressPath)
+      && getAfter(progressPath).data.lastRewardTaskId == taskId;
+  }
+  allow read: if isRewardOwner();
+  allow create: if isRewardOwner()
+    && request.resource.data.keys().hasAll([
+      'taskId',
+      'points',
+      'createdAt'
+    ])
+    && request.resource.data.keys().hasOnly([
+      'taskId',
+      'points',
+      'createdAt'
+    ])
+    && request.resource.data.taskId == taskId
+    && request.resource.data.points == 10
+    && request.resource.data.createdAt == request.time
+    && isValidReward();
+  allow update, delete: if false;
+}
+
+}
 }

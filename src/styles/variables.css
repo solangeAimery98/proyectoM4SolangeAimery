@@ -1,72 +1,55 @@
 :root {
-    /* ==============================
-     BRAND COLORS
-  ============================== */
+    /* =========================================
+       COLORS — BLOOMY IDENTITY
+    ========================================= */
 
+    /* Primary pink */
     --color-primary: #EFA0B8;
     --color-primary-hover: #E58DAA;
     --color-primary-light: #FCE5EB;
 
-    /* ==============================
-     BACKGROUNDS
-  ============================== */
+    /* Deep pink — Brand identity */
+    --color-primary-deep: #91445F;
 
+    /* Backgrounds */
     --color-background: #FFF9F7;
     --color-surface: #FFFFFF;
     --color-surface-secondary: #FFF3F0;
 
-    /* ==============================
-     BOTANICAL COLORS
-  ============================== */
-
+    /* Botanical palette */
     --color-sage: #B9D3A8;
     --color-sage-light: #E7F0E2;
+
+    /* Semantic colors */
     --color-success: #65BD68;
     --color-success-dark: #438D4D;
-
-    /* ==============================
-     ACCENT COLORS
-  ============================== */
-
     --color-lavender: #E9DDF5;
     --color-cream: #FFF3E8;
 
-    /* ==============================
-     TEXT COLORS
-  ============================== */
-
+    /* Text */
     --color-text-primary: #29252B;
     --color-text-secondary: #817780;
     --color-text-muted: #AAA1A8;
     --color-text-inverse: #FFFFFF;
 
-    /* ==============================
-     FEEDBACK COLORS
-  ============================== */
-
+    /* Feedback */
     --color-error: #D96B78;
     --color-warning: #E8B86D;
     --color-info: #8CAFC5;
 
-    /* ==============================
-     BORDERS
-  ============================== */
-
+    /* Borders */
     --color-border: #F0E7E8;
     --color-border-strong: #E5D7DB;
 
-    /* ==============================
-     TYPOGRAPHY
-  ============================== */
+    /* =========================================
+       TYPOGRAPHY
+    ========================================= */
 
     --font-primary: 'Plus Jakarta Sans', sans-serif;
     --font-display: 'Fredoka', sans-serif;
     --font-heading: 'Lora', serif;
 
-    /* ==============================
-     FONT SIZES
-  ============================== */
-
+    /* Font sizes */
     --font-size-xs: 0.75rem;
     --font-size-sm: 0.875rem;
     --font-size-base: 1rem;
@@ -75,9 +58,9 @@
     --font-size-2xl: 1.5rem;
     --font-size-3xl: 1.875rem;
 
-    /* ==============================
-     SPACING
-  ============================== */
+    /* =========================================
+       SPACING
+    ========================================= */
 
     --spacing-xs: 0.25rem;
     --spacing-sm: 0.5rem;
@@ -86,9 +69,9 @@
     --spacing-xl: 2rem;
     --spacing-2xl: 3rem;
 
-    /* ==============================
-     BORDER RADIUS
-  ============================== */
+    /* =========================================
+       BORDER RADIUS
+    ========================================= */
 
     --radius-sm: 0.5rem;
     --radius-md: 0.875rem;
@@ -96,17 +79,17 @@
     --radius-xl: 1.75rem;
     --radius-full: 9999px;
 
-    /* ==============================
-     SHADOWS
-  ============================== */
+    /* =========================================
+       SHADOWS
+    ========================================= */
 
     --shadow-soft: 0 4px 16px rgba(41, 37, 43, 0.04);
     --shadow-card: 0 8px 24px rgba(41, 37, 43, 0.06);
     --shadow-hover: 0 12px 28px rgba(41, 37, 43, 0.09);
 
-    /* ==============================
-     TRANSITIONS
-  ============================== */
+    /* =========================================
+       TRANSITIONS
+    ========================================= */
 
     --transition-fast: 150ms ease;
     --transition-normal: 250ms ease;

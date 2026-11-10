@@ -11,7 +11,8 @@
     "test:run": "vitest run",
     "test:watch": "vitest",
     "test:security": "vitest run --config vitest.security.config.ts",
-    "test:all": "npm run test:run && npm run test:security"
+    "test:garden": "vitest run --config vitest.garden.config.ts",
+    "test:all": "npm run test:run && npm run test:security && npm run test:garden"
   },
   "dependencies": {
     "@aws-sdk/client-ses": "^3.1162.0",

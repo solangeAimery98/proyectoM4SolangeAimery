@@ -115,6 +115,7 @@ export const completeTaskWithReward = async (
         // 4. Actualizar el estado de la tarea.
         transaction.update(taskRef, {
             completed: true,
+            completedAt: serverTimestamp(),
         });
 
         // Si ya recibió una recompensa anteriormente,

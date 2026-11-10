@@ -82,7 +82,7 @@ afterAll(async () => {
 
 describe('gardenService - Integración con Firestore', () => {
 
-    it('otorga 10 puntos al completar una tarea por primera vez', async () => {
+    it('otorga 10 puntos y registra la fecha al completar una tarea por primera vez', async () => {
         await seedTask('task-1');
 
         const db = testEnv.authenticatedContext(USER_A).firestore();
@@ -110,6 +110,7 @@ describe('gardenService - Integración con Firestore', () => {
         );
 
         expect(taskSnapshot.data()?.completed).toBe(true);
+        expect(taskSnapshot.data()?.completedAt).toBeTruthy();
 
         expect(rewardSnapshot.exists()).toBe(true);
         expect(rewardSnapshot.data()?.points).toBe(10);
@@ -128,13 +129,30 @@ describe('gardenService - Integración con Firestore', () => {
 
         await completeTaskWithReward(USER_A, 'task-1', db);
 
-        // Desmarcamos la tarea.
+        // Guardamos la fecha de la primera finalización.
+        const firstTaskSnapshot = await getDoc(
+            doc(db, 'tasks', 'task-1')
+        );
+
+        const firstCompletedAt = firstTaskSnapshot.data()?.completedAt;
+
+        expect(firstCompletedAt).toBeTruthy();
+
+        // Desmarcamos la tarea y eliminamos su fecha de finalización.
         await updateDoc(
             doc(db, 'tasks', 'task-1'),
             {
                 completed: false,
+                completedAt: null,
             }
         );
+
+        const uncheckedTaskSnapshot = await getDoc(
+            doc(db, 'tasks', 'task-1')
+        );
+
+        expect(uncheckedTaskSnapshot.data()?.completed).toBe(false);
+        expect(uncheckedTaskSnapshot.data()?.completedAt).toBeNull();
 
         // La volvemos a completar.
         const result = await completeTaskWithReward(
@@ -147,6 +165,10 @@ describe('gardenService - Integración con Firestore', () => {
             rewarded: false,
         });
 
+        const finalTaskSnapshot = await getDoc(
+            doc(db, 'tasks', 'task-1')
+        );
+
         const progressSnapshot = await getDoc(
             doc(db, 'users', USER_A, 'garden', 'progress')
         );
@@ -155,6 +177,14 @@ describe('gardenService - Integración con Firestore', () => {
             doc(db, 'users', USER_A, 'gardenRewards', 'task-1')
         );
 
+        // La tarea vuelve a estar completada con una nueva fecha.
+        expect(finalTaskSnapshot.data()?.completed).toBe(true);
+        expect(finalTaskSnapshot.data()?.completedAt).toBeTruthy();
+
+        expect(finalTaskSnapshot.data()?.completedAt)
+            .not.toEqual(firstCompletedAt);
+
+        // La recompensa continúa siendo única.
         expect(progressSnapshot.data()?.growthPoints).toBe(10);
         expect(progressSnapshot.data()?.totalWaterings).toBe(1);
 
@@ -167,17 +197,20 @@ describe('gardenService - Integración con Firestore', () => {
 
         const db = testEnv.authenticatedContext(USER_A).firestore();
 
+        // Firestore debe rechazar la operación porque USER_A
+        // no tiene permiso para leer ni modificar la tarea.
         await expect(
             completeTaskWithReward(USER_A, 'task-1', db)
-        ).rejects.toThrow(
-            'No tenés permiso para modificar esta tarea.'
-        );
+        ).rejects.toThrow();
 
-        const taskSnapshot = await getDoc(
-            doc(db, 'tasks', 'task-1')
-        );
+        // Verificamos el estado real sin aplicar las reglas.
+        await testEnv.withSecurityRulesDisabled(async (context) => {
+            const taskSnapshot = await getDoc(
+                doc(context.firestore(), 'tasks', 'task-1')
+            );
 
-        expect(taskSnapshot.data()?.completed).toBe(false);
+            expect(taskSnapshot.data()?.completed).toBe(false);
+        });
 
         const progressSnapshot = await getDoc(
             doc(db, 'users', USER_A, 'garden', 'progress')
@@ -198,9 +231,14 @@ describe('gardenService - Integración con Firestore', () => {
             doc(db, 'tasks', 'task-1')
         );
 
-        const taskSnapshot = await getDoc(
-            doc(db, 'tasks', 'task-1')
-        );
+        // Verificamos la eliminación sin aplicar reglas de seguridad.
+        await testEnv.withSecurityRulesDisabled(async (context) => {
+            const taskSnapshot = await getDoc(
+                doc(context.firestore(), 'tasks', 'task-1')
+            );
+
+            expect(taskSnapshot.exists()).toBe(false);
+        });
 
         const progressSnapshot = await getDoc(
             doc(db, 'users', USER_A, 'garden', 'progress')
@@ -209,8 +247,6 @@ describe('gardenService - Integración con Firestore', () => {
         const rewardSnapshot = await getDoc(
             doc(db, 'users', USER_A, 'gardenRewards', 'task-1')
         );
-
-        expect(taskSnapshot.exists()).toBe(false);
 
         expect(progressSnapshot.data()?.growthPoints).toBe(10);
         expect(progressSnapshot.data()?.totalWaterings).toBe(1);
