@@ -2,11 +2,14 @@ import React, { useMemo, useState } from 'react';
 
 import { useAuth } from '../features/auth/AuthContext';
 import { useTasks } from '../features/tasks/useTasks';
+import { useGardenProgress } from '../features/garden/hooks/useGardenProgress';
 import { TaskFilter } from '../features/tasks/types/TaskFilter';
 
 import { DashboardHeader } from '../components/dashboard/DashboardHeader';
 import { DashboardSummary } from '../components/dashboard/DashboardSummary';
 import { DashboardFilters } from '../components/dashboard/DashboardFilters';
+
+import { GardenPanel } from '../components/garden/GardenPanel';
 
 import { TodoForm } from '../components/TodoForm';
 import { TodoList } from '../components/TodoList';
@@ -24,17 +27,19 @@ export const Tasks: React.FC = () => {
     deleteTask,
   } = useTasks(currentUser?.uid);
 
-  // Estados locales del Dashboard
+  const garden = useGardenProgress(currentUser?.uid);
+
+  // Estados locales del Dashboard.
   const [searchTerm, setSearchTerm] = useState('');
   const [activeFilter, setActiveFilter] = useState<TaskFilter>('all');
 
-  // Nombre del usuario autenticado
+  // Nombre del usuario autenticado.
   const userName =
     currentUser?.displayName ||
     currentUser?.email?.split('@')[0] ||
     'Usuario';
 
-  // Estadísticas generales de las tareas
+  // Estadísticas generales de las tareas.
   const summary = useMemo(() => {
     const total = tasks.length;
 
@@ -57,7 +62,7 @@ export const Tasks: React.FC = () => {
     };
   }, [tasks]);
 
-  // Búsqueda y filtrado de tareas
+  // Búsqueda y filtrado de tareas.
   const filteredTasks = useMemo(() => {
     const normalizedSearch = searchTerm.trim().toLowerCase();
 
@@ -95,21 +100,40 @@ export const Tasks: React.FC = () => {
         <>
           <DashboardSummary {...summary} />
 
-          <DashboardFilters
-            activeFilter={activeFilter}
-            onFilterChange={setActiveFilter}
-          />
+          <div className="dashboard-workspace">
+            <aside className="dashboard-garden-column">
+              <GardenPanel
+                level={garden.level}
+                stage={garden.stage}
+                growthPoints={garden.progress.growthPoints}
+                totalWaterings={garden.progress.totalWaterings}
+                levelProgress={garden.levelProgress}
+                loading={garden.loading}
+                error={garden.error}
+              />
+            </aside>
 
-          <TodoForm onAdd={addTask} />
+            <section
+              className="dashboard-tasks-column"
+              aria-label="Gestión de tareas"
+            >
+              <DashboardFilters
+                activeFilter={activeFilter}
+                onFilterChange={setActiveFilter}
+              />
 
-          <TodoList
-            tasks={filteredTasks}
-            activeFilter={activeFilter}
-            searchTerm={searchTerm}
-            onToggle={toggleTask}
-            onDelete={deleteTask}
-            onEdit={editTask}
-          />
+              <TodoForm onAdd={addTask} />
+
+              <TodoList
+                tasks={filteredTasks}
+                activeFilter={activeFilter}
+                searchTerm={searchTerm}
+                onToggle={toggleTask}
+                onDelete={deleteTask}
+                onEdit={editTask}
+              />
+            </section>
+          </div>
         </>
       )}
     </div>

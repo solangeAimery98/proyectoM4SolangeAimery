@@ -1,0 +1,396 @@
+/* =========================================
+   BLOOMY GARDEN PANEL
+========================================= */
+
+.garden-panel {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+    padding: var(--spacing-lg);
+
+    background: linear-gradient(160deg,
+            #FFFFFF 0%,
+            #FFF8F6 100%);
+
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-card);
+}
+
+/* Header */
+
+.garden-panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--spacing-sm);
+}
+
+.garden-eyebrow {
+    display: block;
+    margin-bottom: var(--spacing-xs);
+
+    color: var(--color-success-dark);
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+    letter-spacing: 0.12em;
+}
+
+.garden-panel-header h2 {
+    margin: 0;
+
+    color: var(--color-text-primary);
+    font-family: var(--font-heading);
+    font-size: var(--font-size-2xl);
+    font-weight: 700;
+}
+
+.garden-level-badge {
+    padding: 7px 12px;
+
+    color: #A65E78;
+    background: var(--color-primary-light);
+
+    border-radius: var(--radius-full);
+
+    font-family: var(--font-display);
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+/* Plant */
+
+.garden-plant-container {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 210px;
+    overflow: hidden;
+
+    background: radial-gradient(ellipse at center,
+            #F8E8E9 0%,
+            #FFF6F1 65%,
+            transparent 100%);
+
+    border-radius: var(--radius-lg);
+}
+
+.garden-plant-background {
+    position: absolute;
+
+    width: 170px;
+    height: 170px;
+
+    background: var(--color-sage-light);
+    opacity: 0.55;
+
+    border-radius: 50%;
+}
+
+.garden-plant {
+    position: relative;
+    z-index: 1;
+
+    width: 190px;
+    max-width: 100%;
+    height: auto;
+
+    overflow: visible;
+
+    animation: garden-plant-appear 600ms ease both;
+}
+
+@keyframes garden-plant-appear {
+    from {
+        opacity: 0;
+        transform: translateY(12px) scale(0.94);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Stage information */
+
+.garden-stage-info {
+    text-align: center;
+}
+
+.garden-stage-info h3 {
+    margin: 0 0 var(--spacing-xs);
+
+    color: var(--color-text-primary);
+    font-family: var(--font-heading);
+    font-size: var(--font-size-xl);
+    font-weight: 700;
+}
+
+.garden-stage-info p {
+    max-width: 280px;
+    margin: 0 auto;
+
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-sm);
+    font-weight: 400;
+    line-height: 1.6;
+}
+
+/* Progress */
+
+.garden-progress-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.garden-progress-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--spacing-sm);
+
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-xs);
+}
+
+.garden-progress-header strong {
+    color: var(--color-success-dark);
+    font-family: var(--font-display);
+    font-weight: 600;
+}
+
+.garden-progress-track {
+    width: 100%;
+    height: 9px;
+    overflow: hidden;
+
+    background: #E9EDE5;
+    border-radius: var(--radius-full);
+}
+
+.garden-progress-fill {
+    height: 100%;
+
+    background: linear-gradient(90deg,
+            #B9D3A8,
+            #8EB88A);
+
+    border-radius: inherit;
+
+    transition: width var(--transition-slow);
+}
+
+.garden-progress-caption {
+    margin: 0;
+
+    color: var(--color-text-muted);
+    font-size: var(--font-size-xs);
+    font-weight: 400;
+    line-height: 1.5;
+}
+
+/* Stats */
+
+.garden-stats {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--spacing-xs);
+}
+
+.garden-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+
+    padding: 7px 10px;
+
+    background: var(--color-sage-light);
+    border-radius: var(--radius-md);
+}
+
+.garden-stat-icon {
+    color: var(--color-success-dark);
+    font-size: 0.85rem;
+    line-height: 1;
+}
+
+.garden-stat strong {
+    color: var(--color-text-primary);
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    font-weight: 600;
+    line-height: 1.1;
+}
+
+.garden-stat>span:last-child {
+    color: var(--color-text-secondary);
+    font-size: 0.7rem;
+    font-weight: 500;
+    line-height: 1;
+}
+
+/* States */
+
+.garden-loading,
+.garden-error {
+    margin: 0;
+    padding: var(--spacing-lg);
+
+    text-align: center;
+    font-size: var(--font-size-sm);
+}
+
+.garden-loading {
+    color: var(--color-text-secondary);
+}
+
+.garden-error {
+    color: var(--color-error);
+}
+
+/* Accessibility */
+
+@media (prefers-reduced-motion: reduce) {
+    .garden-plant {
+        animation: none;
+    }
+
+    .garden-progress-fill {
+        transition: none;
+    }
+}
+
+/* Tablet */
+
+@media (min-width: 768px) {
+    .garden-panel {
+        padding: var(--spacing-xl);
+    }
+
+    .garden-plant-container {
+        min-height: 230px;
+    }
+
+    .garden-plant {
+        width: 205px;
+    }
+}
+
+/* =========================================
+   GARDEN REWARD ANIMATIONS
+========================================= */
+
+/* Crecimiento de la planta */
+
+.garden-plant-container.is-growing .garden-plant {
+    animation: garden-grow 850ms ease both;
+}
+
+@keyframes garden-grow {
+    0% {
+        transform: scale(1);
+    }
+
+    35% {
+        transform: scale(1.09) translateY(-5px);
+    }
+
+    65% {
+        transform: scale(0.98) translateY(2px);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Gotas de agua */
+
+.garden-plant-container.is-growing::before,
+.garden-plant-container.is-growing::after {
+    content: '';
+
+    position: absolute;
+    z-index: 2;
+
+    width: 9px;
+    height: 12px;
+
+    background: #91B8C8;
+    border-radius: 50% 50% 50% 0;
+
+    opacity: 0;
+
+    transform: rotate(-45deg);
+
+    animation: garden-water-drop 700ms ease both;
+}
+
+.garden-plant-container.is-growing::before {
+    top: 35%;
+    left: 23%;
+}
+
+.garden-plant-container.is-growing::after {
+    top: 48%;
+    right: 23%;
+
+    animation-delay: 120ms;
+}
+
+@keyframes garden-water-drop {
+    0% {
+        opacity: 0;
+        transform: translateY(-8px) rotate(-45deg) scale(0.7);
+    }
+
+    35% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(20px) rotate(-45deg) scale(0.9);
+    }
+}
+
+/* Subida de nivel */
+
+.garden-level-badge.is-level-up {
+    animation: garden-level-up 650ms ease both;
+}
+
+@keyframes garden-level-up {
+    0% {
+        transform: scale(1);
+    }
+
+    45% {
+        transform: scale(1.15);
+        background-color: var(--color-sage-light);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Accesibilidad */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .garden-plant-container.is-growing .garden-plant,
+    .garden-plant-container.is-growing::before,
+    .garden-plant-container.is-growing::after,
+    .garden-level-badge.is-level-up {
+        animation: none;
+    }
+}

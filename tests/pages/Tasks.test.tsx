@@ -3,8 +3,11 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { Tasks } from '../../src/pages/Tasks';
+
 import { useAuth } from '../../src/features/auth/AuthContext';
 import { useTasks } from '../../src/features/tasks/useTasks';
+import { useGardenProgress } from '../../src/features/garden/hooks/useGardenProgress';
+
 import type { Task } from '../../src/types/Task';
 
 const mocks = vi.hoisted(() => ({
@@ -22,8 +25,13 @@ vi.mock('../../src/features/tasks/useTasks', () => ({
     useTasks: vi.fn(),
 }));
 
+vi.mock('../../src/features/garden/hooks/useGardenProgress', () => ({
+    useGardenProgress: vi.fn(),
+}));
+
 const mockedUseAuth = vi.mocked(useAuth);
 const mockedUseTasks = vi.mocked(useTasks);
+const mockedUseGardenProgress = vi.mocked(useGardenProgress);
 
 const mockTask: Task = {
     id: 'task-1',
@@ -47,6 +55,28 @@ const configureTasks = (overrides = {}) => {
     } as ReturnType<typeof useTasks>);
 };
 
+const configureGarden = (overrides = {}) => {
+    mockedUseGardenProgress.mockReturnValue({
+        progress: {
+            growthPoints: 10,
+            totalWaterings: 1,
+            lastRewardTaskId: 'task-1',
+            updatedAt: null,
+        },
+        level: 1,
+        stage: 'sprout',
+        levelProgress: {
+            current: 10,
+            percentage: 20,
+            pointsToNextLevel: 40,
+            isMaxLevel: false,
+        },
+        loading: false,
+        error: null,
+        ...overrides,
+    } as ReturnType<typeof useGardenProgress>);
+};
+
 describe('Tasks', () => {
     beforeEach(() => {
         vi.clearAllMocks();
@@ -60,6 +90,7 @@ describe('Tasks', () => {
         });
 
         configureTasks();
+        configureGarden();
     });
 
     it('debe mostrar el saludo y el formulario de tareas', () => {
@@ -140,6 +171,36 @@ describe('Tasks', () => {
         render(<Tasks />);
 
         expect(mockedUseTasks).toHaveBeenCalledWith('user-123');
+    });
+
+    it('debe pasar el UID del usuario autenticado al hook del jardín', () => {
+        render(<Tasks />);
+
+        expect(
+            mockedUseGardenProgress
+        ).toHaveBeenCalledWith('user-123');
+    });
+
+    it('debe mostrar el nivel y los puntos del jardín', () => {
+        render(<Tasks />);
+
+        expect(
+            screen.getByRole('heading', {
+                name: 'Mi jardín',
+            })
+        ).toBeInTheDocument();
+
+        expect(
+            screen.getByText('Nivel 1')
+        ).toBeInTheDocument();
+
+        expect(
+            screen.getByText('10')
+        ).toBeInTheDocument();
+
+        expect(
+            screen.getByText('Riegos')
+        ).toBeInTheDocument();
     });
 
     it('debe conectar el formulario con la función addTask', async () => {

@@ -39,17 +39,22 @@ export const BottomNavigation: React.FC<BottomNavigationProps> = ({
       <div className="bloomy-bottom-nav-container">
         {items.map((item) => (
           <NavLink
+            key={item.to}
             to={item.to}
             end={item.to === '/'}
             className={({ isActive }) =>
               `bloomy-bottom-nav-item ${isActive ? 'active' : ''}`
             }
-
           >
             {item.icon && (
-              <span className="bloomy-bottom-nav-icon">{item.icon}</span>
+              <span className="bloomy-bottom-nav-icon">
+                {item.icon}
+              </span>
             )}
-            <span className="bloomy-bottom-nav-label">{item.label}</span>
+
+            <span className="bloomy-bottom-nav-label">
+              {item.label}
+            </span>
           </NavLink>
         ))}
       </div>
@@ -58,4 +63,3 @@ export const BottomNavigation: React.FC<BottomNavigationProps> = ({
 };
 
 export default BottomNavigation;
-

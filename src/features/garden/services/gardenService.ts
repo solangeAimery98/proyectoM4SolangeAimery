@@ -78,7 +78,6 @@ export const completeTaskWithReward = async (
     );
 
     return runTransaction(firestore, async (transaction) => {
-
         // 1. Leer la tarea.
         const taskSnapshot = await transaction.get(taskRef);
 
