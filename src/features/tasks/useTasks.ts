@@ -1,30 +1,24 @@
 import { useState, useEffect } from 'react';
-
 import { Task } from '../../types/Task';
-
 import {
   subscribeToTasks,
   addTask,
   updateTask,
   deleteTask,
 } from './taskService';
-
+import { completeTaskWithReward } from '../garden/services/gardenService';
 export const useTasks = (userId?: string) => {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-
-  // Suscripción a los cambios de Firestore
   useEffect(() => {
     if (!userId) {
       setTasks([]);
       setLoading(false);
       return;
     }
-
     setLoading(true);
     setError(null);
-
     const unsubscribe = subscribeToTasks(
       userId,
       (updatedTasks) => {
@@ -37,53 +31,49 @@ export const useTasks = (userId?: string) => {
         setLoading(false);
       }
     );
-
     return unsubscribe;
   }, [userId]);
-
-  // Crear tarea
   const handleAddTask = async (
     title: string,
     description?: string
   ): Promise<boolean> => {
     if (!userId) return false;
-
     try {
       setError(null);
-
       await addTask({
         title: title.trim(),
         description: description?.trim() ?? '',
         completed: false,
         userId,
       });
-
       return true;
-    } catch (err: unknown) {
+    } catch (err) {
       setError(
-        err instanceof Error
-          ? err.message
-          : 'No se pudo crear la tarea.'
+        err instanceof Error ? err.message : 'No se pudo crear la tarea.'
       );
-
       return false;
     }
   };
-  // Cambiar estado de una tarea
-  const handleToggleTask = async (id: string, completed: boolean) => {
+  const handleToggleTask = async (
+    id: string,
+    completed: boolean
+  ): Promise<boolean> => {
+    if (!userId) return false;
     try {
       setError(null);
-      await updateTask(id, { completed });
-    } catch (err: unknown) {
+      if (completed) {
+        await completeTaskWithReward(userId, id);
+      } else {
+        await updateTask(id, { completed: false });
+      }
+      return true;
+    } catch (err) {
       setError(
-        err instanceof Error
-          ? err.message
-          : 'No se pudo actualizar la tarea.'
+        err instanceof Error ? err.message : 'No se pudo actualizar la tarea.'
       );
+      return false;
     }
   };
-
-  // Editar título y descripción
   const handleEditTask = async (
     id: string,
     title: string,
@@ -91,39 +81,28 @@ export const useTasks = (userId?: string) => {
   ): Promise<boolean> => {
     try {
       setError(null);
-
       await updateTask(id, {
         title: title.trim(),
         description: description.trim(),
       });
-
       return true;
-    } catch (err: unknown) {
+    } catch (err) {
       setError(
-        err instanceof Error
-          ? err.message
-          : 'No se pudo editar la tarea.'
+        err instanceof Error ? err.message : 'No se pudo editar la tarea.'
       );
-
       return false;
     }
   };
-
-
-  // Eliminar tarea
-  const handleDeleteTask = async (id: string) => {
+  const handleDeleteTask = async (id: string): Promise<void> => {
     try {
       setError(null);
       await deleteTask(id);
-    } catch (err: unknown) {
+    } catch (err) {
       setError(
-        err instanceof Error
-          ? err.message
-          : 'No se pudo eliminar la tarea.'
+        err instanceof Error ? err.message : 'No se pudo eliminar la tarea.'
       );
     }
   };
-
   return {
     tasks,
     loading,

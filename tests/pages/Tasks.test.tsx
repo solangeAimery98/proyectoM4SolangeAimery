@@ -62,17 +62,25 @@ describe('Tasks', () => {
         configureTasks();
     });
 
-    it('debe renderizar el título y el formulario de tareas', () => {
+    it('debe mostrar el saludo y el formulario de tareas', () => {
         render(<Tasks />);
 
-        expect(screen.getByText('Mis Tareas')).toBeInTheDocument();
-
         expect(
-            screen.getByPlaceholderText('Nueva tarea...')
+            screen.getByRole('heading', {
+                name: '¡Hola, test!',
+            })
         ).toBeInTheDocument();
 
         expect(
-            screen.getByPlaceholderText('Descripción (opcional)...')
+            screen.getByRole('textbox', {
+                name: 'Nombre de la tarea',
+            })
+        ).toBeInTheDocument();
+
+        expect(
+            screen.getByRole('textbox', {
+                name: 'Descripción (opcional)',
+            })
         ).toBeInTheDocument();
     });
 
@@ -81,7 +89,9 @@ describe('Tasks', () => {
 
         render(<Tasks />);
 
-        expect(screen.getByText('Cargando tareas...')).toBeInTheDocument();
+        expect(
+            screen.getByText('Cargando tareas...')
+        ).toBeInTheDocument();
 
         expect(
             screen.queryByText('Estudiar React')
@@ -91,9 +101,13 @@ describe('Tasks', () => {
     it('debe mostrar la lista cuando termina la carga', () => {
         render(<Tasks />);
 
-        expect(screen.getByText('Estudiar React')).toBeInTheDocument();
+        expect(
+            screen.getByText('Estudiar React')
+        ).toBeInTheDocument();
 
-        expect(screen.getByText('Repasar componentes')).toBeInTheDocument();
+        expect(
+            screen.getByText('Repasar componentes')
+        ).toBeInTheDocument();
     });
 
     it('debe mostrar el estado vacío cuando no existen tareas', () => {
@@ -102,8 +116,10 @@ describe('Tasks', () => {
         render(<Tasks />);
 
         expect(
-            screen.getByText('No hay tareas pendientes.')
-        ).toBeInTheDocument();
+            screen.getByRole('status')
+        ).toHaveTextContent(
+            'Todavía no tenés tareas. ¡Creá la primera!'
+        );
     });
 
     it('debe mostrar un mensaje cuando existe un error', () => {
@@ -114,8 +130,10 @@ describe('Tasks', () => {
         render(<Tasks />);
 
         expect(
-            screen.getByText('No se pudieron cargar las tareas.')
-        ).toBeInTheDocument();
+            screen.getByRole('alert')
+        ).toHaveTextContent(
+            'No se pudieron cargar las tareas.'
+        );
     });
 
     it('debe pasar el UID del usuario autenticado a useTasks', () => {
@@ -130,12 +148,16 @@ describe('Tasks', () => {
         render(<Tasks />);
 
         await user.type(
-            screen.getByPlaceholderText('Nueva tarea...'),
+            screen.getByRole('textbox', {
+                name: 'Nombre de la tarea',
+            }),
             'Nueva tarea'
         );
 
         await user.click(
-            screen.getByRole('button', { name: /agregar/i })
+            screen.getByRole('button', {
+                name: 'Agregar tarea',
+            })
         );
 
         expect(mocks.addTask).toHaveBeenCalledWith(
@@ -149,7 +171,11 @@ describe('Tasks', () => {
 
         render(<Tasks />);
 
-        await user.click(screen.getByRole('checkbox'));
+        await user.click(
+            screen.getByRole('checkbox', {
+                name: 'Completar Estudiar React',
+            })
+        );
 
         expect(mocks.toggleTask).toHaveBeenCalledWith(
             'task-1',
@@ -157,7 +183,9 @@ describe('Tasks', () => {
         );
 
         await user.click(
-            screen.getByRole('button', { name: /eliminar/i })
+            screen.getByRole('button', {
+                name: 'Eliminar Estudiar React',
+            })
         );
 
         expect(mocks.deleteTask).toHaveBeenCalledWith('task-1');

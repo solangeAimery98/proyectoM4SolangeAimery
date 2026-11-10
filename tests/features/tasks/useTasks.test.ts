@@ -7,19 +7,22 @@ import {
     updateTask,
     deleteTask,
 } from '../../../src/features/tasks/taskService';
+import { completeTaskWithReward } from '../../../src/features/garden/services/gardenService';
 import { Task } from '../../../src/types/Task';
-// Simulamos las funciones del servicio de tareas
 vi.mock('../../../src/features/tasks/taskService', () => ({
     subscribeToTasks: vi.fn(),
     addTask: vi.fn(),
     updateTask: vi.fn(),
     deleteTask: vi.fn(),
 }));
+vi.mock('../../../src/features/garden/services/gardenService', () => ({
+    completeTaskWithReward: vi.fn(),
+}));
 const mockedSubscribeToTasks = vi.mocked(subscribeToTasks);
 const mockedAddTask = vi.mocked(addTask);
 const mockedUpdateTask = vi.mocked(updateTask);
 const mockedDeleteTask = vi.mocked(deleteTask);
-// Tarea de ejemplo para los tests
+const mockedCompleteTaskWithReward = vi.mocked(completeTaskWithReward);
 const mockTask: Task = {
     id: 'task-1',
     title: 'Estudiar TypeScript',
@@ -35,6 +38,7 @@ describe('useTasks', () => {
         mockedAddTask.mockResolvedValue({ id: 'new-task' } as never);
         mockedUpdateTask.mockResolvedValue(undefined);
         mockedDeleteTask.mockResolvedValue(undefined);
+        mockedCompleteTaskWithReward.mockResolvedValue({ rewarded: true });
     });
     it('no debe suscribirse a Firestore si no hay userId', () => {
         renderHook(() => useTasks());
@@ -98,14 +102,40 @@ describe('useTasks', () => {
         });
         expect(mockedAddTask).not.toHaveBeenCalled();
     });
-    it('debe completar o descompletar una tarea', async () => {
+    it('debe completar una tarea utilizando el servicio de recompensas', async () => {
         const { result } = renderHook(() => useTasks('user-1'));
+        let success = false;
         await act(async () => {
-            await result.current.toggleTask('task-1', true);
+            success = await result.current.toggleTask('task-1', true);
+        });
+        expect(mockedCompleteTaskWithReward).toHaveBeenCalledWith(
+            'user-1',
+            'task-1'
+        );
+        expect(mockedUpdateTask).not.toHaveBeenCalled();
+        expect(success).toBe(true);
+    });
+    it('debe descompletar una tarea sin generar recompensas', async () => {
+        const { result } = renderHook(() => useTasks('user-1'));
+        let success = false;
+        await act(async () => {
+            success = await result.current.toggleTask('task-1', false);
         });
         expect(mockedUpdateTask).toHaveBeenCalledWith('task-1', {
-            completed: true,
+            completed: false,
         });
+        expect(mockedCompleteTaskWithReward).not.toHaveBeenCalled();
+        expect(success).toBe(true);
+    });
+    it('no debe completar tareas si no hay userId', async () => {
+        const { result } = renderHook(() => useTasks());
+        let success = true;
+        await act(async () => {
+            success = await result.current.toggleTask('task-1', true);
+        });
+        expect(mockedCompleteTaskWithReward).not.toHaveBeenCalled();
+        expect(mockedUpdateTask).not.toHaveBeenCalled();
+        expect(success).toBe(false);
     });
     it('debe editar una tarea normalizando sus campos', async () => {
         const { result } = renderHook(() => useTasks('user-1'));
@@ -159,13 +189,29 @@ describe('useTasks', () => {
         });
         expect(result.current.error).toBe('No se pudo crear');
     });
-    it('debe guardar el error si falla la actualización de una tarea', async () => {
-        mockedUpdateTask.mockRejectedValue(new Error('No se pudo actualizar'));
+    it('debe guardar el error si falla la recompensa al completar una tarea', async () => {
+        mockedCompleteTaskWithReward.mockRejectedValue(
+            new Error('No se pudo actualizar')
+        );
         const { result } = renderHook(() => useTasks('user-1'));
+        let success = true;
         await act(async () => {
-            await result.current.toggleTask('task-1', true);
+            success = await result.current.toggleTask('task-1', true);
         });
         expect(result.current.error).toBe('No se pudo actualizar');
+        expect(success).toBe(false);
+    });
+    it('debe manejar errores al descompletar una tarea', async () => {
+        mockedUpdateTask.mockRejectedValue(
+            new Error('No se pudo descompletar')
+        );
+        const { result } = renderHook(() => useTasks('user-1'));
+        let success = true;
+        await act(async () => {
+            success = await result.current.toggleTask('task-1', false);
+        });
+        expect(result.current.error).toBe('No se pudo descompletar');
+        expect(success).toBe(false);
     });
     it('debe guardar el error si falla la eliminación de una tarea', async () => {
         mockedDeleteTask.mockRejectedValue(new Error('No se pudo eliminar'));
@@ -175,7 +221,6 @@ describe('useTasks', () => {
         });
         expect(result.current.error).toBe('No se pudo eliminar');
     });
-    // Nuevos tests
     it('debe mostrar un mensaje predeterminado cuando la suscripción falla sin mensaje', async () => {
         mockedSubscribeToTasks.mockImplementation(
             (_userId, _onTasks, onError) => {
@@ -200,8 +245,8 @@ describe('useTasks', () => {
             'No se pudo crear la tarea.'
         );
     });
-    it('debe manejar errores desconocidos al actualizar una tarea', async () => {
-        mockedUpdateTask.mockRejectedValue('Error desconocido');
+    it('debe manejar errores desconocidos al completar una tarea', async () => {
+        mockedCompleteTaskWithReward.mockRejectedValue('Error desconocido');
         const { result } = renderHook(() => useTasks('user-1'));
         await act(async () => {
             await result.current.toggleTask('task-1', true);
