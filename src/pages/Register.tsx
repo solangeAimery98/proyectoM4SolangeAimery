@@ -18,6 +18,16 @@ export const Register: React.FC = () => {
 
     setError(null);
 
+    if (!email.trim()) {
+      setError('Ingresá tu correo electrónico.');
+      return;
+    }
+
+    if (!password) {
+      setError('Ingresá una contraseña.');
+      return;
+    }
+
     if (password.length < 6) {
       setError('La contraseña debe tener al menos 6 caracteres.');
       return;
@@ -33,6 +43,16 @@ export const Register: React.FC = () => {
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(e.target.value);
+    setError(null);
+  };
+
+  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPassword(e.target.value);
+    setError(null);
   };
 
   return (
@@ -139,7 +159,11 @@ export const Register: React.FC = () => {
             </div>
           )}
 
-          <form onSubmit={handleSubmit} className="auth-form">
+          <form
+            onSubmit={handleSubmit}
+            className="auth-form"
+            noValidate
+          >
 
             <div className="auth-field">
 
@@ -152,9 +176,8 @@ export const Register: React.FC = () => {
                 type="email"
                 placeholder="nombre@correo.com"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={handleEmailChange}
                 autoComplete="email"
-                required
                 disabled={loading}
               />
 
@@ -171,15 +194,13 @@ export const Register: React.FC = () => {
                 type="password"
                 placeholder="Creá una contraseña"
                 value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={handlePasswordChange}
                 autoComplete="new-password"
-                required
-                minLength={6}
                 disabled={loading}
               />
 
               <span className="auth-field-hint">
-                Mínimo 6 caracteres.
+                Mínimo 6 caracteres
               </span>
 
             </div>
