@@ -1,0 +1,346 @@
+/* ==========================================================================
+   BLOOMY SUMMARY
+   Mobile First
+   ========================================================================== */
+
+
+/* ==========================================================================
+   1. PAGE STRUCTURE
+   ========================================================================== */
+
+.summary-page {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xl);
+}
+
+.summary-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    min-width: 0;
+}
+
+.summary-section-heading {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+}
+
+.summary-section-heading h2 {
+    color: var(--color-primary-deep);
+    font-family: var(--font-heading);
+    font-size: var(--font-size-xl);
+    font-weight: 700;
+}
+
+.summary-section-heading p {
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-sm);
+    line-height: 1.5;
+}
+
+
+/* ==========================================================================
+   2. STATISTICS
+   ========================================================================== */
+
+.summary-page .dashboard-summary {
+    margin-bottom: 0;
+}
+
+
+/* ==========================================================================
+   3. WEEKLY ACTIVITY
+   ========================================================================== */
+
+.weekly-activity {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    align-items: center;
+    gap: 4px;
+    min-width: 0;
+    padding: 20px 10px;
+    background: linear-gradient(160deg, #FFFFFF 0%, #FFF8F6 100%);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-card);
+}
+
+.weekly-activity-day {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    min-width: 0;
+    padding: 8px 0;
+    border-radius: var(--radius-lg);
+    transition: background-color var(--transition-fast);
+}
+
+.weekly-activity-count {
+    color: var(--color-text-secondary);
+    font-family: var(--font-display);
+    font-size: 0.8rem;
+    font-weight: 600;
+    line-height: 1;
+}
+
+.weekly-activity-marker {
+    display: block;
+    flex-shrink: 0;
+    max-width: 100%;
+    max-height: 36px;
+    background: #DCE9D7;
+    border: 2px solid #DCE9D7;
+    border-radius: 50%;
+    transition:
+        background-color var(--transition-normal),
+        border-color var(--transition-normal),
+        transform var(--transition-normal);
+}
+
+.weekly-activity-day:has(.weekly-activity-count:not(:empty)) .weekly-activity-marker {
+    background: #A7C69A;
+}
+
+.weekly-activity-day.is-today {
+    background: #FFF0F4;
+}
+
+.weekly-activity-day.is-today .weekly-activity-count {
+    color: var(--color-primary-deep);
+    font-weight: 700;
+}
+
+.weekly-activity-day.is-today .weekly-activity-marker {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(145, 68, 95, 0.10);
+}
+
+.weekly-activity-label {
+    color: var(--color-text-secondary);
+    font-size: 0.68rem;
+    font-weight: 500;
+    text-transform: capitalize;
+    white-space: nowrap;
+}
+
+.weekly-activity-day.is-today .weekly-activity-label {
+    color: var(--color-primary-deep);
+    font-weight: 700;
+}
+
+
+/* ==========================================================================
+   4. GARDEN
+   ========================================================================== */
+
+.summary-page .garden-panel {
+    width: 100%;
+    height: 100%;
+}
+
+
+/* ==========================================================================
+   5. EMAIL REPORT
+   ========================================================================== */
+
+.summary-email-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-md);
+    width: 100%;
+    min-width: 0;
+    padding: var(--spacing-lg);
+    text-align: center;
+    background: linear-gradient(135deg,
+            #FFF0F4 0%,
+            #FFF8F6 55%,
+            #FFFFFF 100%);
+    border: 1px solid #F4DCE4;
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-soft);
+    transition:
+        box-shadow var(--transition-normal),
+        border-color var(--transition-normal);
+}
+
+/* Email icon */
+
+.summary-email-card>span {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    width: 46px;
+    height: 46px;
+    color: var(--color-primary-deep);
+    background: #FFFFFF;
+    border: 1px solid #F4DCE4;
+    border-radius: var(--radius-md);
+    font-size: 1.35rem;
+}
+
+/* Description and email */
+
+.summary-email-card p {
+    width: 100%;
+    margin: 0;
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-sm);
+    line-height: 1.6;
+    text-align: center;
+    overflow-wrap: anywhere;
+}
+
+.summary-email-card p strong {
+    color: var(--color-primary-deep);
+    font-weight: 600;
+}
+
+/* Send button */
+
+.summary-email-card button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: auto;
+    min-width: 170px;
+    min-height: 40px;
+    padding: 10px 20px;
+    color: #FFFFFF;
+    background: var(--color-primary-deep);
+    border: 1px solid var(--color-primary-deep);
+    border-radius: var(--radius-full);
+    font-family: var(--font-primary);
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+    cursor: pointer;
+    transition:
+        background-color var(--transition-fast),
+        border-color var(--transition-fast),
+        box-shadow var(--transition-fast),
+        transform var(--transition-fast),
+        opacity var(--transition-fast);
+}
+
+.summary-email-card button:hover:not(:disabled) {
+    background: #78364E;
+    border-color: #78364E;
+    box-shadow: 0 5px 14px rgba(145, 68, 95, 0.20);
+    transform: translateY(-2px);
+}
+
+.summary-email-card button:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+.summary-email-card button:focus-visible {
+    outline: 3px solid rgba(145, 68, 95, 0.30);
+    outline-offset: 4px;
+}
+
+.summary-email-card button:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+/* Success message */
+
+.summary-email-card p[role="status"] {
+    width: 100%;
+    padding: 12px 14px;
+    color: var(--color-success-dark);
+    background: #EDF6EA;
+    border: 1px solid #D8EAD2;
+    border-radius: var(--radius-md);
+    font-size: var(--font-size-sm);
+    line-height: 1.5;
+}
+
+/* Error message */
+
+.summary-email-card p[role="alert"] {
+    width: 100%;
+    padding: 12px 14px;
+    color: #A94452;
+    background: #FFF0F1;
+    border: 1px solid #F4D6DA;
+    border-radius: var(--radius-md);
+    font-size: var(--font-size-sm);
+    line-height: 1.5;
+}
+
+
+/* ==========================================================================
+   6. TABLET
+   ========================================================================== */
+
+@media (min-width: 768px) {
+
+    .summary-page {
+        gap: var(--spacing-2xl);
+    }
+
+    .summary-section-heading h2 {
+        font-size: var(--font-size-2xl);
+    }
+
+    .weekly-activity {
+        gap: var(--spacing-md);
+        padding: var(--spacing-xl);
+    }
+
+    .weekly-activity-day {
+        gap: 12px;
+        padding: 12px 4px;
+    }
+
+    .weekly-activity-label {
+        font-size: var(--font-size-xs);
+    }
+
+    .summary-email-card {
+        padding: var(--spacing-xl);
+    }
+}
+
+
+/* ==========================================================================
+   7. DESKTOP
+   ========================================================================== */
+
+@media (min-width: 1200px) {
+
+    .summary-page {
+        gap: var(--spacing-2xl);
+    }
+
+    .summary-email-card {
+        max-width: 100%;
+    }
+}
+
+
+/* ==========================================================================
+   8. ACCESSIBILITY
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .weekly-activity-day,
+    .weekly-activity-marker,
+    .summary-email-card,
+    .summary-email-card button {
+        transition: none;
+    }
+
+    .summary-email-card button:hover:not(:disabled) {
+        transform: none;
+    }
+
+}

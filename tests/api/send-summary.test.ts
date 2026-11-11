@@ -1,12 +1,18 @@
 import { describe, it, expect, beforeEach, vi, afterEach } from 'vitest';
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 
-// Mocks disponibles antes de cargar los módulos
+// Mocks disponibles antes de cargar los módulos.
 const mocks = vi.hoisted(() => ({
     verifyIdToken: vi.fn(),
     collection: vi.fn(),
     where: vi.fn(),
     get: vi.fn(),
+
+    doc: vi.fn(),
+    userCollection: vi.fn(),
+    gardenCollection: vi.fn(),
+    gardenGet: vi.fn(),
+
     send: vi.fn(),
     sendEmailCommand: vi.fn(),
 }));
@@ -91,6 +97,7 @@ const mockTasks = [
 ];
 
 const configureFirestore = (tasks = mockTasks) => {
+    // Consulta de tareas.
     mocks.get.mockResolvedValue({
         docs: tasks.map((task) => ({
             data: () => task,
@@ -101,8 +108,42 @@ const configureFirestore = (tasks = mockTasks) => {
         get: mocks.get,
     });
 
-    mocks.collection.mockReturnValue({
-        where: mocks.where,
+    // Consulta del documento de progreso del jardín.
+    mocks.gardenGet.mockResolvedValue({
+        exists: true,
+        data: () => ({
+            growthPoints: 130,
+            totalWaterings: 13,
+        }),
+    });
+
+    mocks.doc.mockReturnValue({
+        get: mocks.gardenGet,
+    });
+
+    mocks.gardenCollection.mockReturnValue({
+        doc: mocks.doc,
+    });
+
+    mocks.userCollection.mockReturnValue({
+        collection: mocks.gardenCollection,
+    });
+
+    // Diferenciar las colecciones tasks y users.
+    mocks.collection.mockImplementation((collectionName: string) => {
+        if (collectionName === 'tasks') {
+            return {
+                where: mocks.where,
+            };
+        }
+
+        if (collectionName === 'users') {
+            return {
+                doc: mocks.userCollection,
+            };
+        }
+
+        throw new Error(`Colección inesperada: ${collectionName}`);
     });
 };
 
@@ -227,16 +268,35 @@ describe('send-summary API', () => {
 
         expect(res.statusCode).toBe(200);
 
-        expect(res.body).toEqual({
+        expect(res.body).toMatchObject({
             success: true,
             message: 'Resumen enviado correctamente.',
             user: {
                 uid: 'user-123',
                 email: 'user@test.com',
             },
-            taskCount: 3,
-            pendingCount: 2,
-            completedCount: 1,
+            tasks: {
+                total: 3,
+                pending: 2,
+                completed: 1,
+                completionPercentage: 33,
+            },
+            garden: {
+                growthPoints: 130,
+                totalWaterings: 13,
+                level: 3,
+                stage: 'growth',
+                stageName: 'Crecimiento',
+                levelProgress: {
+                    current: 130,
+                    percentage: 30,
+                    pointsToNextLevel: 70,
+                    isMaxLevel: false,
+                },
+            },
+            weeklyActivity: {
+                completedTasks: 0,
+            },
             messageId: 'message-123',
         });
 
@@ -265,15 +325,18 @@ describe('send-summary API', () => {
 
         expect(res.body).toMatchObject({
             success: true,
-            taskCount: 0,
-            pendingCount: 0,
-            completedCount: 0,
+            tasks: {
+                total: 0,
+                pending: 0,
+                completed: 0,
+                completionPercentage: 0,
+            },
         });
 
         const emailInput = mocks.sendEmailCommand.mock.calls[0][0];
 
         expect(emailInput.Message.Body.Html.Data).toContain(
-            'No tenés tareas registradas.'
+            '¡No tenés tareas pendientes!'
         );
     });
 
@@ -335,7 +398,7 @@ describe('send-summary API', () => {
         expect(res.statusCode).toBe(500);
         expect(res.body).toEqual({
             success: false,
-            message: 'No se pudo generar o enviar el resumen de tareas.',
+            message: 'No se pudo generar o enviar el resumen de Bloomy.',
         });
 
         expect(mocks.send).not.toHaveBeenCalled();
@@ -352,7 +415,7 @@ describe('send-summary API', () => {
         expect(res.statusCode).toBe(500);
         expect(res.body).toEqual({
             success: false,
-            message: 'No se pudo generar o enviar el resumen de tareas.',
+            message: 'No se pudo generar o enviar el resumen de Bloomy.',
         });
     });
 });

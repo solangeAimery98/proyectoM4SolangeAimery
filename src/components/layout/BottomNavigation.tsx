@@ -21,7 +21,7 @@ const DEFAULT_BOTTOM_NAV_ITEMS: NavItem[] = [
     icon: <TasksIcon size={22} />,
   },
   {
-    to: '/test-summary',
+    to: '/summary',
     label: 'Resumen',
     icon: <SummaryIcon size={22} />,
   },

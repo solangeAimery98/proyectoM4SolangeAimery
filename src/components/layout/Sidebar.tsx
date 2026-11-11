@@ -30,7 +30,7 @@ const DEFAULT_SIDEBAR_ITEMS: NavItem[] = [
     icon: <TasksIcon size={20} />,
   },
   {
-    to: '/test-summary',
+    to: '/summary',
     label: 'Resumen',
     icon: <SummaryIcon size={20} />,
   },

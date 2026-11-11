@@ -1,4 +1,5 @@
 import React from 'react';
+
 import {
   BrowserRouter,
   Routes,
@@ -13,13 +14,15 @@ import { AppLayout } from '../components/layout/AppLayout';
 import { Login } from '../pages/Login';
 import { Register } from '../pages/Register';
 import { Tasks } from '../pages/Tasks';
-import { TestSummary } from '../pages/TestSummary';
+import Summary from '../pages/Summary';
 
 export const AppRouter: React.FC = () => {
   return (
     <BrowserRouter>
       <Routes>
+
         {/* Rutas públicas */}
+
         <Route
           path="/login"
           element={
@@ -39,6 +42,7 @@ export const AppRouter: React.FC = () => {
         />
 
         {/* Rutas privadas */}
+
         <Route
           element={
             <ProtectedRoute>
@@ -47,11 +51,16 @@ export const AppRouter: React.FC = () => {
           }
         >
           <Route path="/" element={<Tasks />} />
-          <Route path="/test-summary" element={<TestSummary />} />
+          <Route path="/summary" element={<Summary />} />
         </Route>
 
         {/* Ruta no encontrada */}
-        <Route path="*" element={<Navigate to="/" replace />} />
+
+        <Route
+          path="*"
+          element={<Navigate to="/" replace />}
+        />
+
       </Routes>
     </BrowserRouter>
   );

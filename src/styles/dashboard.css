@@ -17,47 +17,27 @@
    ========================================================================== */
 
 .dashboard-mobile-brand {
-
     display: flex;
-
     align-items: center;
-
     justify-content: center;
-
     width: 100%;
-
     margin-bottom: var(--spacing-md);
-
     background: var(--color-cream);
-
 }
 
 .dashboard-mobile-brand-link {
-
     display: flex;
-
     align-items: center;
-
     justify-content: center;
-
     gap: 12px;
-
     width: 100%;
-
     min-height: 76px;
-
     padding: 10px 16px;
-
     color: var(--color-primary-deep);
-
     background: transparent;
-
     border: none;
-
     border-radius: 0;
-
     text-decoration: none;
-
 }
 
 .dashboard-mobile-brand-link:hover {
@@ -70,25 +50,15 @@
 }
 
 .dashboard-mobile-brand-icon {
-
     display: flex;
-
     align-items: center;
-
     justify-content: center;
-
     width: 46px;
-
     height: 46px;
-
     flex-shrink: 0;
-
     background: #FFF9F7;
-
     border-radius: var(--radius-lg);
-
     transition: transform var(--transition-normal);
-
 }
 
 .dashboard-mobile-brand-link:hover .dashboard-mobile-brand-icon {
@@ -96,17 +66,11 @@
 }
 
 .dashboard-mobile-brand-name {
-
     color: var(--color-primary-deep);
-
     font-family: var(--font-display);
-
     font-size: 1.55rem;
-
     font-weight: 700;
-
     letter-spacing: -0.02em;
-
 }
 
 /* ==========================================================================
@@ -117,7 +81,6 @@
     display: flex;
     flex-direction: column;
     gap: var(--spacing-md);
-
     margin-bottom: var(--spacing-xl);
 }
 
@@ -159,16 +122,13 @@
     display: flex;
     align-items: center;
     gap: var(--spacing-sm);
-
     width: 100%;
     min-height: 48px;
     padding: 0 var(--spacing-md);
-
     background-color: var(--color-surface);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-soft);
-
     transition:
         border-color var(--transition-fast),
         box-shadow var(--transition-fast);
@@ -188,12 +148,10 @@
     width: 100%;
     min-width: 0;
     padding: 0;
-
     color: var(--color-text-primary);
     background: transparent;
     border: none;
     outline: none;
-
     font-size: var(--font-size-sm);
 }
 
@@ -209,7 +167,6 @@
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: var(--spacing-sm);
-
     margin-bottom: var(--spacing-lg);
 }
 
@@ -217,11 +174,9 @@
     display: flex;
     flex-direction: column;
     gap: 3px;
-
     min-width: 0;
     min-height: 88px;
     padding: 12px 14px;
-
     background-color: var(--color-surface);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-md);
@@ -265,10 +220,8 @@
 
 .summary-progress {
     grid-column: 1 / -1;
-
     min-width: 0;
     padding: 12px 14px;
-
     background-color: var(--color-surface);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-md);
@@ -280,9 +233,7 @@
     align-items: center;
     justify-content: space-between;
     gap: var(--spacing-sm);
-
     margin-bottom: var(--spacing-sm);
-
     color: var(--color-text-secondary);
     font-size: var(--font-size-sm);
 }
@@ -297,17 +248,14 @@
     width: 100%;
     height: 8px;
     overflow: hidden;
-
     background-color: var(--color-surface-secondary);
     border-radius: var(--radius-full);
 }
 
 .summary-progress-fill {
     height: 100%;
-
     background-color: var(--color-sage);
     border-radius: inherit;
-
     transition: width var(--transition-slow);
 }
 
@@ -342,13 +290,10 @@
     display: flex;
     align-items: center;
     gap: var(--spacing-xs);
-
     width: 100%;
     min-width: 0;
-
     margin-bottom: var(--spacing-sm);
     padding: 3px 0;
-
     overflow-x: auto;
     scrollbar-width: none;
     -webkit-overflow-scrolling: touch;
@@ -363,21 +308,16 @@
     flex-shrink: 0;
     align-items: center;
     justify-content: center;
-
     min-width: 44px;
     min-height: 44px;
     padding: 0 var(--spacing-md);
-
     color: var(--color-text-secondary);
     background-color: var(--color-surface);
-
     border: 1px solid var(--color-border);
     border-radius: var(--radius-full);
-
     font-size: var(--font-size-sm);
     font-weight: 600;
     white-space: nowrap;
-
     transition:
         background-color var(--transition-fast),
         color var(--transition-fast),
@@ -414,10 +354,8 @@
     display: flex;
     flex-direction: column;
     gap: var(--spacing-lg);
-
     padding: var(--spacing-md);
     margin-bottom: var(--spacing-md);
-
     background: var(--color-surface);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-xl);
@@ -440,7 +378,6 @@
 
 .dashboard-task-form-heading h2 {
     margin: var(--spacing-xs) 0;
-
     color: var(--color-text-primary);
     font-family: var(--font-heading);
     font-size: 1.25rem;
@@ -449,7 +386,6 @@
 
 .dashboard-task-form-heading p {
     margin: 0;
-
     color: var(--color-text-muted);
     font-size: 0.875rem;
     font-weight: 400;
@@ -461,14 +397,11 @@
     flex-shrink: 0;
     align-items: center;
     justify-content: center;
-
     width: 38px;
     height: 38px;
-
     color: var(--color-primary-deep);
     background: var(--color-primary-light);
     border-radius: var(--radius-full);
-
     font-size: 1.5rem;
 }
 
@@ -500,16 +433,12 @@
     width: 100%;
     min-height: 44px;
     padding: 0.8rem 0.9rem;
-
     color: var(--color-text-primary);
     background: var(--color-background);
-
     border: 1px solid var(--color-border);
     border-radius: var(--radius-md);
-
     font: inherit;
     font-size: 0.875rem;
-
     transition:
         border-color var(--transition-fast),
         box-shadow var(--transition-fast);
@@ -541,14 +470,12 @@
 
 .dashboard-task-form-counter {
     align-self: flex-end;
-
     color: var(--color-text-muted);
     font-size: 0.7rem;
 }
 
 .dashboard-task-form-error {
     margin: 0;
-
     color: var(--color-error);
     font-size: 0.8rem;
 }
@@ -557,9 +484,7 @@
     display: flex;
     flex-direction: column;
     gap: var(--spacing-md);
-
     padding-top: var(--spacing-md);
-
     border-top: 1px solid var(--color-border);
 }
 
@@ -577,23 +502,17 @@
     align-items: center;
     justify-content: center;
     gap: var(--spacing-sm);
-
     width: 100%;
     min-height: 46px;
     padding: 0.75rem 1.25rem;
-
     color: var(--color-text-inverse);
     background: var(--color-primary-deep);
-
     border: none;
     border-radius: var(--radius-md);
-
     font: inherit;
     font-size: 0.875rem;
     font-weight: 600;
-
     cursor: pointer;
-
     transition:
         background-color var(--transition-fast),
         transform var(--transition-fast),
@@ -625,11 +544,8 @@
     align-items: center;
     justify-content: center;
     gap: 1rem;
-
     padding: 3rem 1.5rem;
-
     text-align: center;
-
     background: var(--color-surface);
     border: 1px dashed var(--color-border);
     border-radius: var(--radius-xl);
@@ -643,7 +559,6 @@
 .dashboard-empty-state p {
     max-width: 320px;
     margin: 0;
-
     color: var(--color-text-muted);
     font-size: 0.9rem;
     line-height: 1.6;
@@ -657,10 +572,8 @@
     display: flex;
     flex-direction: column;
     gap: 12px;
-
     padding: 0;
     margin: 0;
-
     list-style: none;
 }
 
@@ -672,18 +585,14 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
-
     min-width: 0;
     padding: 12px 14px;
-
     background: #FFF0F4;
     border: 1px solid #F4DCE4;
     border-radius: 15px;
-
     box-shadow:
         0 3px 8px rgba(112, 75, 88, 0.07),
         0 6px 16px rgba(112, 75, 88, 0.05);
-
     transition:
         background-color var(--transition-normal),
         border-color var(--transition-normal),
@@ -693,7 +602,6 @@
 
 .bloomy-task-card:hover {
     border-color: #EABBCB;
-
     box-shadow:
         0 5px 12px rgba(112, 75, 88, 0.10),
         0 9px 20px rgba(112, 75, 88, 0.07);
@@ -703,7 +611,6 @@
     display: flex;
     align-items: flex-start;
     gap: 12px;
-
     min-width: 0;
 }
 
@@ -713,25 +620,20 @@
 
 .bloomy-task-checkbox {
     position: relative;
-
     display: flex;
     flex-shrink: 0;
     align-items: center;
     justify-content: center;
-
     width: 44px;
     height: 44px;
     margin: -10px 0 -10px -10px;
-
     cursor: pointer;
 }
 
 .bloomy-task-checkbox input {
     position: absolute;
-
     width: 1px;
     height: 1px;
-
     opacity: 0;
 }
 
@@ -739,19 +641,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
-
     width: 23px;
     height: 23px;
-
     color: white;
     background: transparent;
-
     border: 1.5px solid #D7AAB9;
     border-radius: 6px;
-
     font-size: 0.85rem;
     font-weight: 700;
-
     transition:
         background-color var(--transition-fast),
         border-color var(--transition-fast),
@@ -799,34 +696,27 @@
 
 .bloomy-task-title {
     margin: 0;
-
     color: #51464B;
     font-size: 0.9rem;
     font-weight: 600;
     line-height: 1.4;
-
     overflow-wrap: anywhere;
 }
 
 .bloomy-task-description {
     margin: 4px 0 0;
-
     color: #82767C;
     font-size: 0.78rem;
     line-height: 1.45;
-
     overflow-wrap: anywhere;
 }
 
 .bloomy-task-status {
     display: inline-block;
-
     margin-top: 5px;
-
     color: #63866B;
     font-size: 0.7rem;
     font-weight: 600;
-
     animation: status-appear 300ms ease both;
 }
 
@@ -849,11 +739,9 @@
 .bloomy-task-card.is-completed {
     background: #EAE8E9;
     border-color: #D9D5D7;
-
     box-shadow:
         0 3px 8px rgba(70, 65, 68, 0.08),
         0 5px 12px rgba(70, 65, 68, 0.04);
-
     animation: task-completed 350ms ease both;
 }
 
@@ -906,9 +794,7 @@
     display: flex;
     align-items: center;
     gap: var(--spacing-md);
-
     padding-top: var(--spacing-sm);
-
     border-top: 1px solid var(--color-border);
 }
 
@@ -917,21 +803,16 @@
     align-items: center;
     justify-content: center;
     gap: 0.35rem;
-
     min-width: 44px;
     min-height: 44px;
     padding: 0 4px;
-
     color: var(--color-text-secondary);
     background: transparent;
     border: none;
-
     font: inherit;
     font-size: 0.78rem;
     font-weight: 600;
-
     cursor: pointer;
-
     transition:
         color var(--transition-fast),
         background-color var(--transition-fast);
@@ -989,13 +870,10 @@
     width: 100%;
     min-height: 44px;
     padding: 0.75rem;
-
     color: var(--color-text-primary);
     background: var(--color-background);
-
     border: 1px solid var(--color-border);
     border-radius: var(--radius-md);
-
     font: inherit;
     font-size: 0.85rem;
 }
@@ -1020,16 +898,12 @@
 .bloomy-task-button {
     min-height: 44px;
     padding: 0.65rem 1rem;
-
     border: 1px solid transparent;
     border-radius: var(--radius-md);
-
     font: inherit;
     font-size: 0.82rem;
     font-weight: 600;
-
     cursor: pointer;
-
     transition:
         background-color var(--transition-fast),
         color var(--transition-fast),
@@ -1066,7 +940,6 @@
 
 .bloomy-task-error {
     margin: 0;
-
     color: var(--color-error);
     font-size: 0.8rem;
 }
@@ -1081,11 +954,11 @@
         display: none;
     }
 
+    /* El encabezado permanece vertical para evitar superposiciones. */
     .dashboard-header {
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-        gap: var(--spacing-xl);
+        flex-direction: column;
+        align-items: stretch;
+        gap: var(--spacing-md);
     }
 
     .dashboard-header-welcome h1 {
@@ -1093,7 +966,8 @@
     }
 
     .dashboard-search {
-        max-width: 320px;
+        width: 100%;
+        max-width: 100%;
     }
 
     .dashboard-summary {
@@ -1181,7 +1055,6 @@
     .dashboard-garden-column {
         position: sticky;
         top: var(--spacing-xl);
-
         grid-column: 2;
         grid-row: 1;
     }
@@ -1198,14 +1071,27 @@
 
 @media (min-width: 1200px) {
 
+    /* En desktop hay espacio suficiente para distribuir en horizontal. */
+    .dashboard-header {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        gap: var(--spacing-xl);
+    }
+
+    .dashboard-header-welcome {
+        flex: 1;
+    }
+
     .dashboard-search {
+        width: 360px;
         max-width: 360px;
+        flex-shrink: 0;
     }
 
     .dashboard-workspace {
         grid-template-columns:
             minmax(0, 1fr) 310px;
-
         gap: var(--spacing-xl);
     }
 }
