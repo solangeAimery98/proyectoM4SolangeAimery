@@ -8,7 +8,7 @@ import { onAuthStateChanged } from 'firebase/auth';
 
 import type { User as FirebaseUser } from 'firebase/auth';
 
-// Simulamos Firebase Auth
+// Simulamos Firebase Auth.
 const authMocks = vi.hoisted(() => ({
     onAuthStateChanged: vi.fn(),
 }));
@@ -93,6 +93,42 @@ describe('AuthContext', () => {
             expect(result.current.currentUser).toBeNull();
             expect(result.current.loading).toBe(false);
         });
+    });
+
+    it('debe actualizar la sesión cuando Firebase detecta un cambio de usuario', async () => {
+        const mockUser = {
+            uid: 'user-1',
+            email: 'test@email.com',
+        } as FirebaseUser;
+
+        let authCallback: ((user: FirebaseUser | null) => void) | undefined;
+
+        mockedOnAuthStateChanged.mockImplementation(
+            (_auth, callback) => {
+                authCallback = callback;
+                return vi.fn();
+            }
+        );
+
+        const { result } = renderHook(() => useAuth(), {
+            wrapper: createWrapper(),
+        });
+
+        // Firebase detecta un usuario autenticado.
+        await act(async () => {
+            authCallback?.(mockUser);
+        });
+
+        expect(result.current.currentUser).toBe(mockUser);
+        expect(result.current.loading).toBe(false);
+
+        // Firebase detecta que el usuario cerró sesión.
+        await act(async () => {
+            authCallback?.(null);
+        });
+
+        expect(result.current.currentUser).toBeNull();
+        expect(result.current.loading).toBe(false);
     });
 
     it('debe suscribirse a los cambios de autenticación', () => {
