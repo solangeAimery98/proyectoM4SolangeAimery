@@ -7,5 +7,13 @@ export default defineConfig({
     environment: 'jsdom',
     setupFiles: './tests/setup.ts',
     clearMocks: true,
+
+    include: [
+      'tests/**/*.{test,spec}.?(c|m)[jt]s?(x)',
+    ],
+
+    exclude: [
+      'tests/security/**',
+    ],
   },
 });
