@@ -1,11 +1,14 @@
 import { useState, useEffect } from 'react';
+
 import { Task } from '../../types/Task';
+
 import {
   subscribeToTasks,
   addTask,
   updateTask,
   deleteTask,
 } from './taskService';
+
 import { completeTaskWithReward } from '../garden/services/gardenService';
 
 export const useTasks = (userId?: string) => {
@@ -14,14 +17,16 @@ export const useTasks = (userId?: string) => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    // Evitamos conservar datos de una sesión anterior.
+    setTasks([]);
+    setError(null);
+
     if (!userId) {
-      setTasks([]);
       setLoading(false);
       return;
     }
 
     setLoading(true);
-    setError(null);
 
     const unsubscribe = subscribeToTasks(
       userId,
@@ -31,7 +36,10 @@ export const useTasks = (userId?: string) => {
         setError(null);
       },
       (err) => {
-        setError(err.message || 'No se pudieron cargar las tareas.');
+        setError(
+          err.message || 'No se pudieron cargar las tareas.'
+        );
+
         setLoading(false);
       }
     );
@@ -58,8 +66,11 @@ export const useTasks = (userId?: string) => {
       return true;
     } catch (err) {
       setError(
-        err instanceof Error ? err.message : 'No se pudo crear la tarea.'
+        err instanceof Error
+          ? err.message
+          : 'No se pudo crear la tarea.'
       );
+
       return false;
     }
   };
@@ -85,8 +96,11 @@ export const useTasks = (userId?: string) => {
       return true;
     } catch (err) {
       setError(
-        err instanceof Error ? err.message : 'No se pudo actualizar la tarea.'
+        err instanceof Error
+          ? err.message
+          : 'No se pudo actualizar la tarea.'
       );
+
       return false;
     }
   };
@@ -96,6 +110,8 @@ export const useTasks = (userId?: string) => {
     title: string,
     description: string
   ): Promise<boolean> => {
+    if (!userId) return false;
+
     try {
       setError(null);
 
@@ -107,19 +123,29 @@ export const useTasks = (userId?: string) => {
       return true;
     } catch (err) {
       setError(
-        err instanceof Error ? err.message : 'No se pudo editar la tarea.'
+        err instanceof Error
+          ? err.message
+          : 'No se pudo editar la tarea.'
       );
+
       return false;
     }
   };
 
-  const handleDeleteTask = async (id: string): Promise<void> => {
+  const handleDeleteTask = async (
+    id: string
+  ): Promise<void> => {
+    if (!userId) return;
+
     try {
       setError(null);
+
       await deleteTask(id);
     } catch (err) {
       setError(
-        err instanceof Error ? err.message : 'No se pudo eliminar la tarea.'
+        err instanceof Error
+          ? err.message
+          : 'No se pudo eliminar la tarea.'
       );
     }
   };

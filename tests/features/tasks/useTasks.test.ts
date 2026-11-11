@@ -199,6 +199,23 @@ describe('useTasks', () => {
         });
     });
 
+    it('no debe editar tareas si no hay userId', async () => {
+        const { result } = renderHook(() => useTasks());
+
+        let success = true;
+
+        await act(async () => {
+            success = await result.current.editTask(
+                'task-1',
+                'Nuevo título',
+                'Nueva descripción'
+            );
+        });
+
+        expect(mockedUpdateTask).not.toHaveBeenCalled();
+        expect(success).toBe(false);
+    });
+
     it('debe eliminar una tarea', async () => {
         const { result } = renderHook(() => useTasks('user-1'));
 
@@ -207,6 +224,16 @@ describe('useTasks', () => {
         });
 
         expect(mockedDeleteTask).toHaveBeenCalledWith('task-1');
+    });
+
+    it('no debe eliminar tareas si no hay userId', async () => {
+        const { result } = renderHook(() => useTasks());
+
+        await act(async () => {
+            await result.current.deleteTask('task-1');
+        });
+
+        expect(mockedDeleteTask).not.toHaveBeenCalled();
     });
 
     it('debe cancelar la suscripción al desmontar el hook', () => {
@@ -241,6 +268,54 @@ describe('useTasks', () => {
             expect(result.current.tasks).toEqual([]);
             expect(result.current.loading).toBe(false);
         });
+    });
+
+    it('debe limpiar las tareas anteriores cuando cambia de usuario', () => {
+        const secondUserTask: Task = {
+            ...mockTask,
+            id: 'task-2',
+            title: 'Tarea del usuario 2',
+            userId: 'user-2',
+        };
+
+        const subscriptionCallbacks: Record<
+            string,
+            (tasks: Task[]) => void
+        > = {};
+
+        mockedSubscribeToTasks.mockImplementation(
+            (userId, onTasks) => {
+                subscriptionCallbacks[userId] = onTasks;
+                return vi.fn();
+            }
+        );
+
+        const { result, rerender } = renderHook(
+            ({ userId }) => useTasks(userId),
+            { initialProps: { userId: 'user-1' } }
+        );
+
+        act(() => {
+            subscriptionCallbacks['user-1']([mockTask]);
+        });
+
+        expect(result.current.tasks).toEqual([mockTask]);
+
+        rerender({ userId: 'user-2' });
+
+        expect(result.current.tasks).toEqual([]);
+
+        expect(mockedSubscribeToTasks).toHaveBeenLastCalledWith(
+            'user-2',
+            expect.any(Function),
+            expect.any(Function)
+        );
+
+        act(() => {
+            subscriptionCallbacks['user-2']([secondUserTask]);
+        });
+
+        expect(result.current.tasks).toEqual([secondUserTask]);
     });
 
     it('debe guardar el error si falla la creación de una tarea', async () => {
