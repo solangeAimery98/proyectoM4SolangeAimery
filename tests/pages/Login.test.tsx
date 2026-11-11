@@ -43,15 +43,15 @@ describe('Login', () => {
         renderLogin();
 
         expect(
-            screen.getByPlaceholderText('Correo electrónico')
+            screen.getByLabelText('Correo electrónico')
         ).toBeInTheDocument();
 
         expect(
-            screen.getByPlaceholderText('Contraseña')
+            screen.getByLabelText('Contraseña')
         ).toBeInTheDocument();
 
         expect(
-            screen.getByRole('button', { name: 'Entrar' })
+            screen.getByRole('button', { name: /Iniciar sesión/ })
         ).toBeInTheDocument();
     });
 
@@ -60,8 +60,8 @@ describe('Login', () => {
 
         renderLogin();
 
-        const emailInput = screen.getByPlaceholderText('Correo electrónico');
-        const passwordInput = screen.getByPlaceholderText('Contraseña');
+        const emailInput = screen.getByLabelText('Correo electrónico');
+        const passwordInput = screen.getByLabelText('Contraseña');
 
         await user.type(emailInput, 'test@email.com');
         await user.type(passwordInput, 'password123');
@@ -80,16 +80,18 @@ describe('Login', () => {
         renderLogin();
 
         await user.type(
-            screen.getByPlaceholderText('Correo electrónico'),
+            screen.getByLabelText('Correo electrónico'),
             'test@email.com'
         );
 
         await user.type(
-            screen.getByPlaceholderText('Contraseña'),
+            screen.getByLabelText('Contraseña'),
             'password123'
         );
 
-        await user.click(screen.getByRole('button', { name: 'Entrar' }));
+        await user.click(
+            screen.getByRole('button', { name: /Iniciar sesión/ })
+        );
 
         await waitFor(() => {
             expect(mockedLoginUser).toHaveBeenCalledWith(
@@ -109,16 +111,18 @@ describe('Login', () => {
         renderLogin();
 
         await user.type(
-            screen.getByPlaceholderText('Correo electrónico'),
+            screen.getByLabelText('Correo electrónico'),
             'test@email.com'
         );
 
         await user.type(
-            screen.getByPlaceholderText('Contraseña'),
+            screen.getByLabelText('Contraseña'),
             'password123'
         );
 
-        await user.click(screen.getByRole('button', { name: 'Entrar' }));
+        await user.click(
+            screen.getByRole('button', { name: /Iniciar sesión/ })
+        );
 
         await waitFor(() => {
             expect(mockNavigate).toHaveBeenCalledWith('/');
@@ -138,16 +142,18 @@ describe('Login', () => {
         renderLogin();
 
         await user.type(
-            screen.getByPlaceholderText('Correo electrónico'),
+            screen.getByLabelText('Correo electrónico'),
             'test@email.com'
         );
 
         await user.type(
-            screen.getByPlaceholderText('Contraseña'),
+            screen.getByLabelText('Contraseña'),
             'wrongpassword'
         );
 
-        await user.click(screen.getByRole('button', { name: 'Entrar' }));
+        await user.click(
+            screen.getByRole('button', { name: /Iniciar sesión/ })
+        );
 
         expect(await screen.findByRole('alert')).toHaveTextContent(
             'El correo o la contraseña son incorrectos.'
@@ -171,19 +177,21 @@ describe('Login', () => {
         renderLogin();
 
         await user.type(
-            screen.getByPlaceholderText('Correo electrónico'),
+            screen.getByLabelText('Correo electrónico'),
             'test@email.com'
         );
 
         await user.type(
-            screen.getByPlaceholderText('Contraseña'),
+            screen.getByLabelText('Contraseña'),
             'password123'
         );
 
-        await user.click(screen.getByRole('button', { name: 'Entrar' }));
+        await user.click(
+            screen.getByRole('button', { name: /Iniciar sesión/ })
+        );
 
         expect(
-            screen.getByRole('button', { name: 'Ingresando...' })
+            screen.getByRole('button', { name: /Ingresando/ })
         ).toBeDisabled();
 
         resolveLogin({} as Awaited<ReturnType<typeof loginUser>>);

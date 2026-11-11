@@ -43,15 +43,15 @@ describe('Register', () => {
         renderRegister();
 
         expect(
-            screen.getByPlaceholderText('Correo electrónico')
+            screen.getByLabelText('Correo electrónico')
         ).toBeInTheDocument();
 
         expect(
-            screen.getByPlaceholderText('Contraseña')
+            screen.getByLabelText('Contraseña')
         ).toBeInTheDocument();
 
         expect(
-            screen.getByRole('button', { name: 'Crear cuenta' })
+            screen.getByRole('button', { name: /Crear mi cuenta/ })
         ).toBeInTheDocument();
     });
 
@@ -60,8 +60,8 @@ describe('Register', () => {
 
         renderRegister();
 
-        const emailInput = screen.getByPlaceholderText('Correo electrónico');
-        const passwordInput = screen.getByPlaceholderText('Contraseña');
+        const emailInput = screen.getByLabelText('Correo electrónico');
+        const passwordInput = screen.getByLabelText('Contraseña');
 
         await user.type(emailInput, 'test@email.com');
         await user.type(passwordInput, 'password123');
@@ -80,16 +80,18 @@ describe('Register', () => {
         renderRegister();
 
         await user.type(
-            screen.getByPlaceholderText('Correo electrónico'),
+            screen.getByLabelText('Correo electrónico'),
             'test@email.com'
         );
 
         await user.type(
-            screen.getByPlaceholderText('Contraseña'),
+            screen.getByLabelText('Contraseña'),
             'password123'
         );
 
-        await user.click(screen.getByRole('button', { name: 'Crear cuenta' }));
+        await user.click(
+            screen.getByRole('button', { name: /Crear mi cuenta/ })
+        );
 
         await waitFor(() => {
             expect(mockedRegisterUser).toHaveBeenCalledWith(
@@ -109,16 +111,18 @@ describe('Register', () => {
         renderRegister();
 
         await user.type(
-            screen.getByPlaceholderText('Correo electrónico'),
+            screen.getByLabelText('Correo electrónico'),
             'test@email.com'
         );
 
         await user.type(
-            screen.getByPlaceholderText('Contraseña'),
+            screen.getByLabelText('Contraseña'),
             'password123'
         );
 
-        await user.click(screen.getByRole('button', { name: 'Crear cuenta' }));
+        await user.click(
+            screen.getByRole('button', { name: /Crear mi cuenta/ })
+        );
 
         await waitFor(() => {
             expect(mockNavigate).toHaveBeenCalledWith('/');
@@ -131,16 +135,18 @@ describe('Register', () => {
         renderRegister();
 
         await user.type(
-            screen.getByPlaceholderText('Correo electrónico'),
+            screen.getByLabelText('Correo electrónico'),
             'test@email.com'
         );
 
         await user.type(
-            screen.getByPlaceholderText('Contraseña'),
+            screen.getByLabelText('Contraseña'),
             '12345'
         );
 
-        await user.click(screen.getByRole('button', { name: 'Crear cuenta' }));
+        await user.click(
+            screen.getByRole('button', { name: /Crear mi cuenta/ })
+        );
 
         expect(await screen.findByRole('alert')).toHaveTextContent(
             'La contraseña debe tener al menos 6 caracteres.'
@@ -162,16 +168,18 @@ describe('Register', () => {
         renderRegister();
 
         await user.type(
-            screen.getByPlaceholderText('Correo electrónico'),
+            screen.getByLabelText('Correo electrónico'),
             'test@email.com'
         );
 
         await user.type(
-            screen.getByPlaceholderText('Contraseña'),
+            screen.getByLabelText('Contraseña'),
             'password123'
         );
 
-        await user.click(screen.getByRole('button', { name: 'Crear cuenta' }));
+        await user.click(
+            screen.getByRole('button', { name: /Crear mi cuenta/ })
+        );
 
         expect(await screen.findByRole('alert')).toHaveTextContent(
             'Este correo electrónico ya tiene una cuenta.'
@@ -195,19 +203,21 @@ describe('Register', () => {
         renderRegister();
 
         await user.type(
-            screen.getByPlaceholderText('Correo electrónico'),
+            screen.getByLabelText('Correo electrónico'),
             'test@email.com'
         );
 
         await user.type(
-            screen.getByPlaceholderText('Contraseña'),
+            screen.getByLabelText('Contraseña'),
             'password123'
         );
 
-        await user.click(screen.getByRole('button', { name: 'Crear cuenta' }));
+        await user.click(
+            screen.getByRole('button', { name: /Crear mi cuenta/ })
+        );
 
         expect(
-            screen.getByRole('button', { name: 'Creando cuenta...' })
+            screen.getByRole('button', { name: /Creando cuenta/ })
         ).toBeDisabled();
 
         resolveRegister({} as Awaited<ReturnType<typeof registerUser>>);
