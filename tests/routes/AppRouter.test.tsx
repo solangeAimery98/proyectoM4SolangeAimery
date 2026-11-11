@@ -16,8 +16,8 @@ vi.mock('../../src/pages/Tasks', () => ({
     Tasks: () => <h1>Página de tareas</h1>,
 }));
 
-vi.mock('../../src/pages/TestSummary', () => ({
-    TestSummary: () => <h1>Resumen de tareas</h1>,
+vi.mock('../../src/pages/Summary', () => ({
+    default: () => <h1>Resumen de actividades</h1>,
 }));
 
 vi.mock('../../src/pages/Login', () => ({
@@ -44,9 +44,11 @@ describe('AppRouter', () => {
         render(<AppRouter />);
 
         await waitFor(() => {
-            expect(screen.getByRole('heading', {
-                name: 'Página de login',
-            })).toBeInTheDocument();
+            expect(
+                screen.getByRole('heading', {
+                    name: 'Página de login',
+                })
+            ).toBeInTheDocument();
         });
     });
 
@@ -62,7 +64,9 @@ describe('AppRouter', () => {
         render(<AppRouter />);
 
         expect(
-            screen.getByRole('heading', { name: 'Página de tareas' })
+            screen.getByRole('heading', {
+                name: 'Página de tareas',
+            })
         ).toBeInTheDocument();
     });
 
@@ -83,13 +87,15 @@ describe('AppRouter', () => {
             loading: false,
         });
 
-        window.history.pushState({}, '', '/test-summary');
+        window.history.pushState({}, '', '/summary');
 
         render(<AppRouter />);
 
         await waitFor(() => {
             expect(
-                screen.getByRole('heading', { name: 'Página de login' })
+                screen.getByRole('heading', {
+                    name: 'Página de login',
+                })
             ).toBeInTheDocument();
         });
     });
@@ -103,12 +109,14 @@ describe('AppRouter', () => {
             loading: false,
         });
 
-        window.history.pushState({}, '', '/test-summary');
+        window.history.pushState({}, '', '/summary');
 
         render(<AppRouter />);
 
         expect(
-            screen.getByRole('heading', { name: 'Resumen de tareas' })
+            screen.getByRole('heading', {
+                name: 'Resumen de actividades',
+            })
         ).toBeInTheDocument();
     });
 
@@ -123,7 +131,9 @@ describe('AppRouter', () => {
         render(<AppRouter />);
 
         expect(
-            screen.getByRole('heading', { name: 'Página de registro' })
+            screen.getByRole('heading', {
+                name: 'Página de registro',
+            })
         ).toBeInTheDocument();
     });
 
@@ -142,7 +152,9 @@ describe('AppRouter', () => {
 
         await waitFor(() => {
             expect(
-                screen.getByRole('heading', { name: 'Página de tareas' })
+                screen.getByRole('heading', {
+                    name: 'Página de tareas',
+                })
             ).toBeInTheDocument();
         });
     });
