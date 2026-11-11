@@ -90,10 +90,17 @@
 
   gap: var(--spacing-xs);
 
+  padding: 0;
+  border: none;
+  background: transparent;
+
   color: var(--color-text-secondary);
   text-decoration: none;
+  font-family: inherit;
   font-size: var(--font-size-xs);
   font-weight: 600;
+
+  cursor: pointer;
 
   transition:
     color var(--transition-fast),
