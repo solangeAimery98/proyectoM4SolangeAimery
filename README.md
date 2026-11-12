@@ -1,26 +1,28 @@
-🌸 Bloomy — Make your days bloom
+🌸 Bloomy
+
+Make your days bloom.
 
 Bloomy es una aplicación web de gestión de tareas que combina productividad y gamificación. Permite organizar actividades, realizar un seguimiento del progreso personal y cultivar un jardín virtual que crece a medida que se completan objetivos.
 
 Cada pequeña tarea es un paso para hacer florecer tu día. 🌱
 
 <p align="center">
-  <strong>Make your days bloom.</strong>
+  <a href="https://task-manager-delta-sandy.vercel.app/">
+    <strong>🌷 VISITAR BLOOMY</strong>
+  </a>
 </p>
 
 ⸻
 
-🌷 Demo
+🌷 Demostración
 
-Aplicación en producción:
-https://task-manager-delta-sandy.vercel.app
+Envío de resumen de productividad por email
 
-Repositorio:
-GitHub — Bloomy
+Bloomy permite generar y enviar un resumen de productividad mediante una API serverless integrada con AWS Simple Email Service (SES).
 
-Demostración del envío de resumen por email
-
-La aplicación permite generar y enviar un resumen de productividad mediante una función serverless integrada con AWS SES.
+<p align="center">
+  <img src="docs/evidencias/demo-envio-email.gif" alt="Demostración del envío de resumen por email en Bloomy" width="850">
+</p>
 
 ⸻
 
@@ -33,16 +35,18 @@ La aplicación permite generar y enviar un resumen de productividad mediante una
 * Autenticación mediante Firebase Authentication.
 * Persistencia de sesión.
 * Protección de rutas privadas y públicas.
+* Manejo de errores de autenticación.
 
 📝 Gestión de tareas
 
 * Crear nuevas tareas.
 * Editar tareas existentes.
 * Eliminar tareas.
-* Marcar tareas como completadas y pendientes.
+* Marcar tareas como completadas o pendientes.
 * Búsqueda de tareas.
 * Filtrado por estado.
-* Actualización en tiempo real mediante Firestore.
+* Sincronización en tiempo real mediante Cloud Firestore.
+* Persistencia de información por usuario.
 
 🌱 Jardín virtual y gamificación
 
@@ -50,8 +54,9 @@ Bloomy incorpora un sistema de progresión que transforma las tareas completadas
 
 * Cada tarea completada por primera vez otorga 10 puntos.
 * Los puntos se acumulan para desbloquear nuevos niveles.
-* El progreso se conserva entre sesiones.
-* Completar nuevamente una tarea ya recompensada no genera puntos adicionales.
+* El progreso del jardín se conserva entre sesiones.
+* Una tarea que ya otorgó puntos no vuelve a recompensarse al completarla nuevamente.
+* La finalización de tareas y la acreditación de recompensas se realizan mediante una transacción de Firestore.
 
 El jardín cuenta con cinco niveles de crecimiento:
 
@@ -69,26 +74,25 @@ La sección de resumen permite visualizar:
 * Total de tareas creadas.
 * Tareas pendientes.
 * Tareas completadas.
-* Progreso de productividad.
+* Progreso general.
 * Actividad semanal.
 * Nivel y progreso del jardín.
 
-También permite solicitar el envío del resumen por correo electrónico.
-
 📧 Envío de resumen por email
 
-La funcionalidad de envío utiliza una API serverless desplegada en Vercel e integrada con AWS Simple Email Service (SES).
+La aplicación permite solicitar el envío de un resumen de productividad mediante una función serverless.
 
-El flujo incluye:
+El flujo de funcionamiento incluye:
 
 1. Autenticación del usuario mediante Firebase Authentication.
-2. Verificación del token de acceso en el backend.
-3. Consulta de los datos del usuario en Firestore.
-4. Generación del resumen de productividad.
-5. Construcción del contenido HTML y texto del correo.
-6. Envío mediante AWS SES.
+2. Envío del token de acceso al backend.
+3. Verificación del token mediante Firebase Admin SDK.
+4. Consulta de las tareas y los datos del jardín del usuario en Firestore.
+5. Generación de estadísticas y actividad semanal.
+6. Construcción del contenido HTML y texto del correo.
+7. Envío mediante AWS SES.
 
-La integración se encuentra desplegada y probada en el entorno de producción, utilizando el modo sandbox de AWS SES.
+La integración está desplegada y probada en producción utilizando el entorno sandbox de AWS SES.
 
 ⸻
 
@@ -120,11 +124,22 @@ Testing
 * jsdom
 * Firebase Rules Unit Testing
 
+Herramientas
+
+* Git
+* GitHub
+* Vercel
+* Firebase Emulator Suite
+* Visual Studio Code
+* Antigravity
+
 ⸻
 
 🏗️ Arquitectura del proyecto
 
-El proyecto utiliza una arquitectura organizada por funcionalidades y responsabilidades, separando componentes visuales, lógica de negocio, servicios y configuración.
+El proyecto utiliza una arquitectura organizada por funcionalidades y responsabilidades, separando la interfaz visual, la lógica de negocio, los servicios y la configuración.
+
+Estructura de carpetas
 
 task-manager/
 │
@@ -152,6 +167,8 @@ task-manager/
 │   │   ├── garden/
 │   │   └── tasks/
 │   │
+│   ├── hooks/
+│   │
 │   ├── pages/
 │   ├── routes/
 │   ├── services/
@@ -159,6 +176,7 @@ task-manager/
 │   ├── styles/
 │   ├── types/
 │   ├── utils/
+│   │
 │   ├── App.tsx
 │   ├── index.css
 │   └── main.tsx
@@ -172,21 +190,25 @@ task-manager/
 ├── firestore.rules
 ├── index.html
 ├── package.json
+├── package-lock.json
 ├── tsconfig.json
 ├── vercel.json
 └── README.md
 
 Organización de responsabilidades
 
-* components: componentes reutilizables de interfaz.
-* features: lógica y servicios organizados por funcionalidad.
-* pages: páginas principales de la aplicación.
-* routes: configuración de navegación y rutas.
-* services: integración con servicios externos.
-* types: definiciones de tipos e interfaces.
-* utils: funciones auxiliares.
-* api: endpoints serverless y servicios administrativos.
-* tests: pruebas unitarias, de componentes, API y seguridad.
+Directorio	Responsabilidad
+components/	Componentes reutilizables de interfaz.
+features/	Lógica y servicios organizados por funcionalidad.
+hooks/	Hooks personalizados de React.
+pages/	Páginas principales de la aplicación.
+routes/	Configuración de navegación y rutas.
+services/	Integración con servicios externos.
+styles/	Estilos y sistema visual.
+types/	Interfaces y definiciones de TypeScript.
+utils/	Funciones auxiliares.
+api/	Endpoints serverless y servicios administrativos.
+tests/	Pruebas unitarias, de componentes, API y seguridad.
 
 ⸻
 
@@ -194,10 +216,10 @@ Organización de responsabilidades
 
 Requisitos previos
 
-* Node.js
-* npm
+* Node.js.
+* npm.
 * Una cuenta de Firebase.
-* Configuración de AWS SES para utilizar el envío de correos.
+* Una cuenta de AWS para configurar SES.
 
 1. Clonar el repositorio
 
@@ -205,7 +227,7 @@ git clone https://github.com/solangeAimery98/proyectoM4SolangeAimery.git
 
 2. Ingresar al proyecto
 
-cd task-manager
+cd proyectoM4SolangeAimery
 
 3. Instalar dependencias
 
@@ -215,7 +237,7 @@ npm install
 
 Crear un archivo .env en la raíz del proyecto.
 
-Las variables necesarias para el frontend son:
+Variables necesarias para Firebase en el frontend:
 
 VITE_FIREBASE_API_KEY=
 VITE_FIREBASE_AUTH_DOMAIN=
@@ -224,7 +246,7 @@ VITE_FIREBASE_STORAGE_BUCKET=
 VITE_FIREBASE_MESSAGING_SENDER_ID=
 VITE_FIREBASE_APP_ID=
 
-Para el backend también se requieren:
+Variables necesarias para Firebase Admin y AWS SES en el backend:
 
 FIREBASE_PROJECT_ID=
 FIREBASE_CLIENT_EMAIL=
@@ -234,35 +256,35 @@ AWS_SECRET_ACCESS_KEY=
 AWS_REGION=
 SES_FROM_EMAIL=
 
-Las credenciales privadas deben mantenerse secretas y nunca deben publicarse en el repositorio.
+Importante: las credenciales privadas deben mantenerse protegidas. No deben publicarse en GitHub ni incluirse en el código del frontend.
 
 5. Ejecutar en desarrollo
 
 npm run dev
 
-La aplicación estará disponible en la dirección local indicada por Vite.
+Vite proporcionará la dirección local para acceder a la aplicación.
 
 ⸻
 
 🧪 Testing
 
-El proyecto cuenta con pruebas para verificar el comportamiento de sus principales funcionalidades.
+El proyecto incorpora pruebas para verificar el funcionamiento de sus principales funcionalidades y la seguridad de los datos.
 
-Ejecutar los tests principales
+Tests principales
 
 npm run test:run
 
-Ejecutar los tests de seguridad de Firestore
+Tests de seguridad de Firestore
 
-npm run test:security
-
-Requiere tener disponible el emulador de Firestore.
-
-Para iniciarlo:
+Primero, iniciar el emulador:
 
 npx firebase emulators:start --only firestore
 
-Ejecutar los tests del sistema de jardín
+En otra terminal, ejecutar:
+
+npm run test:security
+
+Tests del sistema de jardín
 
 npm run test:garden
 
@@ -270,37 +292,44 @@ Ejecutar todas las suites
 
 npm run test:all
 
+El comando ejecuta las suites principales, de seguridad y del sistema de jardín. Para la suite de seguridad debe estar disponible el emulador de Firestore.
+
 ⸻
 
 🔒 Seguridad
 
-La aplicación implementa diferentes mecanismos para proteger los datos y las operaciones de los usuarios:
+Bloomy incorpora mecanismos de seguridad tanto en el frontend como en el backend.
+
+Entre ellos:
 
 * Autenticación mediante Firebase Authentication.
 * Protección de rutas privadas.
-* Verificación de tokens en el backend.
-* Filtrado de datos por identificador de usuario.
-* Reglas de seguridad de Firestore.
-* Validación de los datos recibidos.
-* Restricción de campos y operaciones permitidas.
-* Uso de variables de entorno para credenciales privadas.
+* Verificación de tokens de autenticación en el backend.
+* Aislamiento de datos mediante el identificador único de usuario.
+* Reglas de seguridad personalizadas para Firestore.
+* Validación de datos y campos permitidos.
+* Control de operaciones sobre tareas y recompensas.
+* Uso de variables de entorno para proteger credenciales privadas.
 
-Cada usuario puede acceder únicamente a sus propios datos.
+Las reglas de Firestore restringen el acceso a los datos y validan las operaciones permitidas para cada usuario.
 
 ⸻
 
-☁️ Deploy
+☁️ Deploy y servicios en producción
 
 La aplicación está desplegada en Vercel.
 
-Los servicios utilizados en producción son:
+Servicios utilizados:
 
-* Vercel para el frontend y las funciones serverless.
-* Firebase Authentication para la gestión de usuarios.
-* Cloud Firestore para persistencia de datos.
-* AWS SES para el envío de correos electrónicos.
+Servicio	Función
+Vercel	Hosting y funciones serverless.
+Firebase Authentication	Gestión de usuarios y autenticación.
+Cloud Firestore	Persistencia y sincronización de datos.
+AWS SES	Envío de resúmenes por correo electrónico.
 
-La aplicación utiliza variables de entorno configuradas en Vercel para separar las credenciales públicas del frontend de las credenciales privadas del backend.
+Las variables de entorno se configuran en Vercel para mantener separadas las credenciales públicas del frontend y las credenciales privadas del backend.
+
+Aplicación: Bloomy — Producción
 
 ⸻
 
@@ -308,11 +337,20 @@ La aplicación utiliza variables de entorno configuradas en Vercel para separar 
 
 Durante el desarrollo se utilizaron herramientas de inteligencia artificial como apoyo en distintas etapas del proyecto.
 
-Su utilización incluyó asistencia en arquitectura, implementación, organización del código, diseño visual, debugging, testing y documentación.
+Su utilización incluyó asistencia en:
 
-Las herramientas utilizadas y sus intervenciones se detallan en:
+* Planificación y arquitectura.
+* Implementación de funcionalidades.
+* Diseño y organización de componentes.
+* Revisión y debugging.
+* Testing.
+* Documentación técnica.
 
-Documentación de uso de IA
+Las herramientas utilizadas incluyeron ChatGPT, Claude Code y Antigravity.
+
+La documentación de su participación, los procesos asistidos y las evidencias correspondientes se encuentran en:
+
+docs/ia/
 
 ⸻
 
@@ -322,14 +360,14 @@ Bloomy utiliza una identidad visual inspirada en el minimalismo botánico.
 
 Su diseño busca transmitir calma, crecimiento y organización mediante:
 
-* Colores pastel.
+* Una paleta de colores pastel.
 * Tonos rosa, crema y verde salvia.
-* Tipografía combinada para jerarquizar contenidos.
-* Elementos botánicos.
-* Interfaz responsive.
-* Componentes visuales simples y reutilizables.
+* Tipografías que combinan elegancia y modernidad.
+* Detalles botánicos.
+* Componentes visuales minimalistas.
+* Diseño responsive para dispositivos móviles y escritorio.
 
-El diseño está pensado para ofrecer una experiencia clara y agradable tanto en dispositivos móviles como en escritorio.
+La experiencia está pensada para ofrecer una interfaz clara, agradable y funcional.
 
 ⸻
 
@@ -339,4 +377,8 @@ Solange Aimery
 
 Proyecto desarrollado como parte del Proyecto Integrador 4 de Henry.
 
-Bloomy — Make your days bloom. 🌸
+⸻
+
+<p align="center">
+  🌸 <strong>Bloomy — Make your days bloom.</strong> 🌸
+</p>
