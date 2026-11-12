@@ -135,40 +135,35 @@ Herramientas
 
 ⸻
 
-🏗️ Arquitectura del proyecto
+## 🏗️ Arquitectura del proyecto
 
 El proyecto utiliza una arquitectura organizada por funcionalidades y responsabilidades, separando la interfaz visual, la lógica de negocio, los servicios y la configuración.
 
-Estructura de carpetas
+### Estructura de carpetas
 
+```text
 task-manager/
-│
 ├── api/
 │   ├── lib/
 │   │   └── firebaseAdmin.ts
 │   └── send-summary.ts
-│
 ├── docs/
 │   ├── evidencias/
 │   │   └── demo-envio-email.gif
 │   └── ia/
-│
+│       └── README.md
 ├── public/
 │   └── favicon.svg
-│
 ├── src/
 │   ├── components/
 │   │   ├── dashboard/
 │   │   ├── garden/
 │   │   └── layout/
-│   │
 │   ├── features/
 │   │   ├── auth/
 │   │   ├── garden/
 │   │   └── tasks/
-│   │
 │   ├── hooks/
-│   │
 │   ├── pages/
 │   ├── routes/
 │   ├── services/
@@ -176,17 +171,14 @@ task-manager/
 │   ├── styles/
 │   ├── types/
 │   ├── utils/
-│   │
 │   ├── App.tsx
 │   ├── index.css
 │   └── main.tsx
-│
 ├── tests/
 │   ├── api/
 │   ├── features/
 │   ├── security/
 │   └── ...
-│
 ├── firestore.rules
 ├── index.html
 ├── package.json
@@ -194,25 +186,26 @@ task-manager/
 ├── tsconfig.json
 ├── vercel.json
 └── README.md
+```
 
-Organización de responsabilidades
+### Organización de responsabilidades
 
-Directorio	Responsabilidad
-components/	Componentes reutilizables de interfaz.
-features/	Lógica y servicios organizados por funcionalidad.
-hooks/	Hooks personalizados de React.
-pages/	Páginas principales de la aplicación.
-routes/	Configuración de navegación y rutas.
-services/	Integración con servicios externos.
-styles/	Estilos y sistema visual.
-types/	Interfaces y definiciones de TypeScript.
-utils/	Funciones auxiliares.
-api/	Endpoints serverless y servicios administrativos.
-tests/	Pruebas unitarias, de componentes, API y seguridad.
+| Directorio | Responsabilidad |
+|---|---|
+| `components/` | Componentes reutilizables de interfaz. |
+| `features/` | Lógica y servicios organizados por funcionalidad. |
+| `hooks/` | Hooks personalizados de React. |
+| `pages/` | Páginas principales de la aplicación. |
+| `routes/` | Configuración de navegación y rutas. |
+| `services/` | Integración con servicios externos. |
+| `styles/` | Estilos y sistema visual. |
+| `types/` | Interfaces y definiciones de TypeScript. |
+| `utils/` | Funciones auxiliares. |
+| `api/` | Endpoints serverless y servicios administrativos. |
+| `tests/` | Pruebas unitarias, de componentes, API y seguridad. |
+🚀 Instalación y ejecución local
 
 ⸻
-
-🚀 Instalación y ejecución local
 
 Requisitos previos
 
@@ -348,9 +341,9 @@ Su utilización incluyó asistencia en:
 
 Las herramientas utilizadas incluyeron ChatGPT, Claude Code y Antigravity.
 
-La documentación de su participación, los procesos asistidos y las evidencias correspondientes se encuentran en:
+La documentación detallada sobre las herramientas utilizadas, sus intervenciones y las evidencias del proceso se encuentra en:
 
-docs/ia/
+[Consultar documentación de uso de IA](docs/ia/README.md)
 
 ⸻
 
