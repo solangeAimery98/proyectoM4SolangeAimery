@@ -1,12 +1,12 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { SESClient, SendEmailCommand } from '@aws-sdk/client-ses';
-import { adminAuth, adminDb } from './lib/firebaseAdmin';
+import { adminAuth, adminDb } from './lib/firebaseAdmin.js';
 
 import {
   getGardenLevel,
   getGardenStage,
   getLevelProgress,
-} from '../src/features/garden/services/gardenProgression';
+} from '../src/features/garden/services/gardenProgression.js';
 
 // ==========================================
 // CONFIGURACIÓN
